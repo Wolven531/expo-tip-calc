@@ -12,9 +12,10 @@ import LinksScreen from '../screens/LinksScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 
 const config: StackNavigatorConfig = Platform.select({
-	android: { headerMode: 'screen' },
-	default: { headerMode: 'screen' },
-	web: { headerMode: 'screen' }
+	// android: { headerMode: 'screen' },
+	// default: { headerMode: 'screen' },
+	default: {},
+	web: { headerMode: 'screen' },
 })
 
 const HomeStack = createStackNavigator(
@@ -25,6 +26,7 @@ const HomeStack = createStackNavigator(
 );
 
 (HomeStack as any).path = ''
+
 HomeStack.navigationOptions = {
 	tabBarLabel: 'Home',
 	tabBarIcon: ({ focused }) => (
@@ -47,6 +49,7 @@ const LinksStack = createStackNavigator(
 );
 
 (LinksStack as any).path = ''
+
 LinksStack.navigationOptions = {
 	tabBarLabel: 'Links',
 	tabBarIcon: ({ focused }) => (
