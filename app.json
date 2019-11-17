@@ -1,7 +1,7 @@
 {
+	"displayName": "Expo Tip Calc",
 	"expo": {
 		"name": "expoTipCalc",
-		"displayName": "Expo Tip Calc",
 		"slug": "expo-template-bare",
 		"privacy": "public",
 		"sdkVersion": "35.0.0",
