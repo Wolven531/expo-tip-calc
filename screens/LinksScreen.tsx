@@ -1,17 +1,25 @@
 import React from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
-import { ExpoLinksView } from '@expo/samples'
+import {
+	ScrollView,
+	StyleSheet,
+	Text
+} from 'react-native'
+// import { ExpoLinksView } from '@expo/samples'
 
 export default function LinksScreen() {
 	return (
 		<ScrollView style={styles.container}>
-			<ExpoLinksView />
+			{/* <ExpoLinksView /> */}
+			<Text style={{
+				fontSize: 16,
+				textAlign: 'center'
+			}}>People</Text>
 		</ScrollView>
 	)
 }
 
 LinksScreen.navigationOptions = {
-	title: 'Links',
+	title: 'People',
 }
 
 const styles = StyleSheet.create({
