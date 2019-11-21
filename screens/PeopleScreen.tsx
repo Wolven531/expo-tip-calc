@@ -4,7 +4,8 @@ import {
 	ScrollView,
 	StyleSheet,
 	Text,
-	TextInput
+	TextInput,
+	View
 } from 'react-native'
 
 const PeopleScreen: FC<any> = (props) => {
@@ -31,10 +32,12 @@ const PeopleScreen: FC<any> = (props) => {
 					setNewPersonName('')
 				}}
 				title="Add Person">Add Person</Button>
-			{people.length < 1 && <Text style={{ textAlign: 'center' }}>There are no people currently</Text>}
-			{people.map(person => {
-				return <Text>{person}</Text>
-			})}
+			<View style={{ margin: 10, padding: 10 }}>
+				{people.length < 1 && <Text style={{ textAlign: 'center' }}>There are no people currently</Text>}
+				{people.map(person => {
+					return <Text>{person}</Text>
+				})}
+			</View>
 		</ScrollView>
 	)
 };
