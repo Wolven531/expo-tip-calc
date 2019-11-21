@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import {
 	ScrollView,
 	StyleSheet,
@@ -6,7 +6,8 @@ import {
 } from 'react-native'
 // import { ExpoLinksView } from '@expo/samples'
 
-export default function PeopleScreen() {
+const PeopleScreen: FC<any> = (props) => {
+// export default function PeopleScreen() {
 	return (
 		<ScrollView style={styles.container}>
 			{/* <ExpoLinksView /> */}
@@ -16,16 +17,18 @@ export default function PeopleScreen() {
 			}}>People</Text>
 		</ScrollView>
 	)
-}
+};
 
-PeopleScreen.navigationOptions = {
-	title: 'People',
+(PeopleScreen as any).navigationOptions = {
+	title: 'People'
 }
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		paddingTop: 15,
 		backgroundColor: '#fff',
-	},
+		flex: 1,
+		paddingTop: 15
+	}
 })
+
+export { PeopleScreen }
