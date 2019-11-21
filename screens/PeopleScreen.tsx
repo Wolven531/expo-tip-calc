@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import {
 	ScrollView,
 	StyleSheet,
@@ -7,7 +7,8 @@ import {
 // import { ExpoLinksView } from '@expo/samples'
 
 const PeopleScreen: FC<any> = (props) => {
-// export default function PeopleScreen() {
+	const [people, setPeople] = useState([])
+
 	return (
 		<ScrollView style={styles.container}>
 			{/* <ExpoLinksView /> */}
@@ -15,6 +16,10 @@ const PeopleScreen: FC<any> = (props) => {
 				fontSize: 16,
 				textAlign: 'center'
 			}}>People</Text>
+			{people.length < 1 && <Text style={{ textAlign: 'center' }}>There are no people currently</Text>}
+			{people.map(person => {
+				return null
+			})}
 		</ScrollView>
 	)
 };
