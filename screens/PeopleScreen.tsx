@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 // import { ExpoLinksView } from '@expo/samples'
 
-export default function LinksScreen() {
+export default function PeopleScreen() {
 	return (
 		<ScrollView style={styles.container}>
 			{/* <ExpoLinksView /> */}
@@ -18,7 +18,7 @@ export default function LinksScreen() {
 	)
 }
 
-LinksScreen.navigationOptions = {
+PeopleScreen.navigationOptions = {
 	title: 'People',
 }
 
