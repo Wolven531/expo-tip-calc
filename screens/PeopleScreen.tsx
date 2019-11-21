@@ -1,24 +1,39 @@
 import React, { FC, useState } from 'react'
 import {
+	Button,
 	ScrollView,
 	StyleSheet,
-	Text
+	Text,
+	TextInput
 } from 'react-native'
-// import { ExpoLinksView } from '@expo/samples'
 
 const PeopleScreen: FC<any> = (props) => {
+	const [newPersonName, setNewPersonName] = useState('')
 	const [people, setPeople] = useState([])
 
 	return (
 		<ScrollView style={styles.container}>
-			{/* <ExpoLinksView /> */}
 			<Text style={{
 				fontSize: 16,
 				textAlign: 'center'
 			}}>People</Text>
+			<TextInput
+				onChangeText={text => setNewPersonName(text)}
+				placeholder="New person name"
+				// style={{ height: 40 }}
+				value={newPersonName} />
+			<Button
+				onPress={() => {
+					if (newPersonName.length < 1) {
+						return
+					}
+					setPeople(stalePeople => stalePeople.concat(newPersonName))
+					setNewPersonName('')
+				}}
+				title="Add Person">Add Person</Button>
 			{people.length < 1 && <Text style={{ textAlign: 'center' }}>There are no people currently</Text>}
 			{people.map(person => {
-				return null
+				return <Text>{person}</Text>
 			})}
 		</ScrollView>
 	)
