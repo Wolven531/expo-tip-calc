@@ -8,7 +8,7 @@ import {
 
 import TabBarIcon from '../components/TabBarIcon'
 import HomeScreen from '../screens/HomeScreen'
-import LinksScreen from '../screens/LinksScreen'
+import PeopleScreen from '../screens/PeopleScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 
 const config: StackNavigatorConfig = Platform.select({
@@ -20,7 +20,7 @@ const config: StackNavigatorConfig = Platform.select({
 
 const HomeStack = createStackNavigator(
 	{
-		Home: HomeScreen,
+		Home: HomeScreen
 	},
 	config
 );
@@ -38,28 +38,28 @@ HomeStack.navigationOptions = {
 					: 'md-information-circle'
 			}
 		/>
-	),
+	)
 }
 
-const LinksStack = createStackNavigator(
+const PeopleStack = createStackNavigator(
 	{
-		Links: LinksScreen,
+		People: PeopleScreen
 	},
 	config
 );
 
-(LinksStack as any).path = ''
+(PeopleStack as any).path = ''
 
-LinksStack.navigationOptions = {
+PeopleStack.navigationOptions = {
 	tabBarLabel: 'People',
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
-	),
+	)
 }
 
 const SettingsStack = createStackNavigator(
 	{
-		Settings: SettingsScreen,
+		Settings: SettingsScreen
 	},
 	config
 );
@@ -69,13 +69,13 @@ SettingsStack.navigationOptions = {
 	tabBarLabel: 'Settings',
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-	),
+	)
 }
 
 const tabNavigator = createBottomTabNavigator({
 	HomeStack,
-	LinksStack,
-	SettingsStack,
+	PeopleStack,
+	SettingsStack
 });
 
 (tabNavigator as any).path = ''
