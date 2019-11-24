@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import {
 	Platform,
 	StyleSheet,
@@ -6,7 +6,7 @@ import {
 	View
 } from 'react-native'
 
-export default function HomeScreen() {
+const HomeScreen: FC<any> = (props) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.tabBarInfoContainer}>
@@ -14,9 +14,9 @@ export default function HomeScreen() {
 			</View>
 		</View>
 	)
-}
+};
 
-HomeScreen.navigationOptions = {
+(HomeScreen as any).navigationOptions = {
 	header: null
 }
 
@@ -46,3 +46,5 @@ const styles = StyleSheet.create({
 		})
 	}
 })
+
+export { HomeScreen }
