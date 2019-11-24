@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
 		textAlign: 'center'
 	},
 	inputNewPersonName: {
-		border: 1,
+		borderColor: '#333',
+		borderWidth: 1,
 		marginBottom: 10,
 		paddingHorizontal: 5,
 		paddingVertical: 2
