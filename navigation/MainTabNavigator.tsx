@@ -7,9 +7,9 @@ import {
 } from 'react-navigation'
 
 import TabBarIcon from '../components/TabBarIcon'
-import HomeScreen from '../screens/HomeScreen'
+import { HomeScreen } from '../screens/HomeScreen'
 import { PeopleScreen } from '../screens/PeopleScreen'
-import SettingsScreen from '../screens/SettingsScreen'
+import { SettingsScreen } from '../screens/SettingsScreen'
 
 const config: StackNavigatorConfig = Platform.select({
 	// android: { headerMode: 'screen' },
