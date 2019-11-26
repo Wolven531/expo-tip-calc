@@ -1,6 +1,10 @@
-import React, { FC, useState, useEffect } from 'react'
+import React,
+	{
+		FC,
+		useEffect,
+		useState
+	} from 'react'
 import {
-	AsyncStorage,
 	Button,
 	FlatList,
 	ScrollView,
@@ -10,33 +14,17 @@ import {
 	View
 } from 'react-native'
 
+import {
+	persistPeopleData,
+	retrievePeopleData
+} from '../services/PeopleService'
+
 const PeopleScreen: FC<any> = (props) => {
 	const [newPersonName, setNewPersonName] = useState('')
 	const [people, setPeople] = useState<string[]>([])
 
-	const persistPeopleData = async () => {
-		try {
-			await AsyncStorage.setItem('expoTipCalc.people', JSON.stringify(people))
-		} catch (err) {
-			console.error('Problem saving people data', err)
-		}
-	}
-
-	const retrievePeopleData = async () => {
-		try {
-			const peopleStr = await AsyncStorage.getItem('expoTipCalc.people');
-			if (!peopleStr || peopleStr.length < 1) {
-				console.info('[retrievePeopleData] There was no people data, bailing...')
-				return
-			}
-			setPeople(JSON.parse(peopleStr))
-		} catch (err) {
-			console.error('Problem loading people data', err)
-		}
-	}
-
 	useEffect(() => {
-		retrievePeopleData()
+		retrievePeopleData().then(loadedPeople => { setPeople(loadedPeople) })
 	}, [])
 
 	return (
@@ -64,7 +52,7 @@ const PeopleScreen: FC<any> = (props) => {
 				<View style={styles.buttonCell}>
 					<Button
 						color="#3a3"
-						onPress={() => { persistPeopleData() }}
+						onPress={() => { persistPeopleData(people) }}
 						title="Save People" />
 				</View>
 			</View>
