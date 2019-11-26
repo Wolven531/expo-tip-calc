@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
 import {
 	Button,
+	FlatList,
 	ScrollView,
 	StyleSheet,
 	Text,
@@ -10,7 +11,7 @@ import {
 
 const PeopleScreen: FC<any> = (props) => {
 	const [newPersonName, setNewPersonName] = useState('')
-	const [people, setPeople] = useState([])
+	const [people, setPeople] = useState<string[]>([])
 
 	return (
 		<ScrollView style={styles.container}>
@@ -31,9 +32,11 @@ const PeopleScreen: FC<any> = (props) => {
 				title="Add Person">Add Person</Button>
 			<View style={styles.peopleDisplay}>
 				{people.length < 1 && <Text style={{ textAlign: 'center' }}>There are no people currently</Text>}
-				{people.map(person => {
-					return <Text>{person}</Text>
-				})}
+				<FlatList
+					data={people}
+					keyExtractor={(item: string, index: number) => String(index)}
+					renderItem={({ item }) => <Text>{item}</Text>}
+					/>
 			</View>
 		</ScrollView>
 	)
@@ -61,6 +64,8 @@ const styles = StyleSheet.create({
 		paddingVertical: 2
 	},
 	peopleDisplay: {
+		borderColor: '#333',
+		borderWidth: 1,
 		margin: 10,
 		padding: 10
 	}
