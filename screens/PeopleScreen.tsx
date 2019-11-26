@@ -26,7 +26,7 @@ const PeopleScreen: FC<any> = (props) => {
 		try {
 			const peopleStr = await AsyncStorage.getItem('expoTipCalc.people');
 			if (!peopleStr || peopleStr.length < 1) {
-				console.log('[retrievePeopleData] There was no people data, bailing...')
+				console.info('[retrievePeopleData] There was no people data, bailing...')
 				return
 			}
 			setPeople(JSON.parse(peopleStr))
@@ -42,11 +42,13 @@ const PeopleScreen: FC<any> = (props) => {
 	return (
 		<ScrollView style={styles.container}>
 			<Text style={styles.header}>People</Text>
-			<TextInput
-				onChangeText={text => setNewPersonName(text)}
-				placeholder="New person name"
-				style={styles.inputNewPersonName}
-				value={newPersonName} />
+			<View>
+				<TextInput
+					onChangeText={text => setNewPersonName(text)}
+					placeholder="New person name"
+					style={styles.inputNewPersonName}
+					value={newPersonName} />
+			</View>
 			<View style={styles.buttonContainer}>
 				<View style={styles.buttonCell}>
 					<Button
@@ -74,6 +76,10 @@ const PeopleScreen: FC<any> = (props) => {
 					renderItem={({ item }) => <Text>{item}</Text>}
 					/>
 			</View>
+			{people.length > 0 && <Button
+				color="#a33"
+				onPress={() => { setPeople([]) }}
+				title="Clear Current People" />}
 		</ScrollView>
 	)
 };
@@ -87,8 +93,8 @@ const styles = StyleSheet.create({
 		width: '40%'
 	},
 	buttonContainer: {
-		justifyContent: 'space-between',
 		flexDirection: 'row',
+		justifyContent: 'space-between',
 		width: '100%'
 	},
 	container: {
