@@ -7,6 +7,7 @@ import React,
 import {
 	Button,
 	FlatList,
+	Picker,
 	ScrollView,
 	StyleSheet,
 	Text,
@@ -30,12 +31,24 @@ const PeopleScreen: FC<any> = (props) => {
 	return (
 		<ScrollView style={styles.container}>
 			<Text style={styles.header}>People</Text>
-			<View>
+			<View style={styles.newPersonContainer}>
 				<TextInput
 					onChangeText={text => setNewPersonName(text)}
 					placeholder="New person name"
 					style={styles.inputNewPersonName}
 					value={newPersonName} />
+				<Picker
+					onValueChange={(itemValue, itemIndex) => { }}
+					selectedValue={''}
+					style={{ height: 35, width: '48%' }} >
+					<Picker.Item label="Barkeep" value="barkeep" />
+					<Picker.Item label="Buser" value="buser" />
+					<Picker.Item label="Cook" value="cook" />
+					<Picker.Item label="Host" value="host" />
+					<Picker.Item label="Server" value="server" />
+					<Picker.Item label="Valet" value="valet" />
+				</Picker>
+
 			</View>
 			<View style={styles.buttonContainer}>
 				<View style={styles.buttonCell}>
@@ -78,7 +91,7 @@ const PeopleScreen: FC<any> = (props) => {
 
 const styles = StyleSheet.create({
 	buttonCell: {
-		width: '40%'
+		width: '48%'
 	},
 	buttonContainer: {
 		flexDirection: 'row',
@@ -97,9 +110,20 @@ const styles = StyleSheet.create({
 	inputNewPersonName: {
 		borderColor: '#333',
 		borderWidth: 1,
-		marginBottom: 10,
+		height: 35,
 		paddingHorizontal: 5,
-		paddingVertical: 2
+		paddingVertical: 2,
+		width: '48%'
+	},
+	newPersonContainer: {
+		borderColor: '#333',
+		borderWidth: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		marginBottom: 10,
+		marginTop: 10,
+		padding: 5,
+		width: '100%'
 	},
 	peopleDisplay: {
 		borderColor: '#333',
