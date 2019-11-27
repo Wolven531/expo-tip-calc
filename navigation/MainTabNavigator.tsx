@@ -9,7 +9,7 @@ import {
 import TabBarIcon from '../components/TabBarIcon'
 import { HomeScreen } from '../screens/HomeScreen'
 import { PeopleScreen } from '../screens/PeopleScreen'
-import { SettingsScreen } from '../screens/SettingsScreen'
+import { PositionsScreen } from '../screens/PositionsScreen'
 
 const config: StackNavigatorConfig = Platform.select({
 	// android: { headerMode: 'screen' },
@@ -57,16 +57,16 @@ PeopleStack.navigationOptions = {
 	)
 }
 
-const SettingsStack = createStackNavigator(
+const PositionsStack = createStackNavigator(
 	{
-		Settings: SettingsScreen
+		Positions: PositionsScreen
 	},
 	config
 );
 
-(SettingsStack as any).path = ''
-SettingsStack.navigationOptions = {
-	tabBarLabel: 'Settings',
+(PositionsStack as any).path = ''
+PositionsStack.navigationOptions = {
+	tabBarLabel: 'Positions',
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
 	)
@@ -75,7 +75,7 @@ SettingsStack.navigationOptions = {
 const tabNavigator = createBottomTabNavigator({
 	HomeStack,
 	PeopleStack,
-	SettingsStack
+	PositionsStack
 });
 
 (tabNavigator as any).path = ''
