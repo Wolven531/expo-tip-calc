@@ -3,6 +3,8 @@ import {
 	AsyncStorage
 } from 'react-native'
 
+import { Position } from '../models/Position'
+
 const STORAGE_KEY_POSITIONS = 'expoTipCalc.positions'
 
 const persistPositionsData = (positions): Promise<void> => {
@@ -13,7 +15,7 @@ const persistPositionsData = (positions): Promise<void> => {
 		})
 }
 
-const retrievePositionsData = (): Promise<string[]> => {
+const retrievePositionsData = (): Promise<Position[]> => {
 	return AsyncStorage
 		.getItem(STORAGE_KEY_POSITIONS)
 		.then(positionsStr => {
