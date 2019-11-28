@@ -4,6 +4,7 @@ import {
 } from 'react-native'
 
 import { Position } from '../models/Position'
+import defaultPositions from '../models/DefaultPositions.json'
 
 const STORAGE_KEY_POSITIONS = 'expoTipCalc.positions'
 
@@ -20,8 +21,8 @@ const retrievePositionsData = (): Promise<Position[]> => {
 		.getItem(STORAGE_KEY_POSITIONS)
 		.then(positionsStr => {
 			if (!positionsStr || positionsStr.length < 1) {
-				console.info('[retrievePositionsData] There was no positions data, bailing...')
-				return []
+				console.info('[retrievePositionsData] There was no positions data, returning defaults...', defaultPositions)
+				return defaultPositions
 			}
 			return JSON.parse(positionsStr)
 		})
