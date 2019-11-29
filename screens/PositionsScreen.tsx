@@ -25,7 +25,7 @@ const PositionsScreen: FC<any> = (props) => {
 		<ScrollView style={styles.container}>
 			<Text style={styles.header}>Positions</Text>
 			<View style={styles.positionsDisplay}>
-				{positions.length < 1 && <Text style={{ textAlign: 'center' }}>There are no positions currently</Text>}
+				{positions.length < 1 && <Text style={styles.centeredText}>There are no positions currently</Text>}
 				<FlatList
 					data={positions}
 					keyExtractor={(item: Position, index: number) => String(index)}
@@ -53,6 +53,9 @@ const PositionsScreen: FC<any> = (props) => {
 }
 
 const styles = StyleSheet.create({
+	centeredText: {
+		textAlign: 'center'
+	},
 	container: {
 		backgroundColor: '#fff',
 		flex: 1,
