@@ -4,7 +4,9 @@ import {
 	ScrollView,
 	StyleSheet,
 	Text,
-	View
+	View,
+	TextInput,
+	TouchableOpacity
 } from 'react-native'
 
 import { Position } from '../models/Position'
@@ -12,6 +14,7 @@ import { retrievePositionsData } from '../services/PositionsService'
 
 const PositionsScreen: FC<any> = (props) => {
 	const [positions, setPositions] = useState<Position[]>([])
+	const [newPositionName, setNewPositionName] = useState('')
 	const [isAddExpanded, setIsAddExpanded] = useState(false)
 
 	useEffect(() => {
@@ -30,7 +33,16 @@ const PositionsScreen: FC<any> = (props) => {
 					/>
 			</View>
 			<View>
-				<Text>{isAddExpanded ? '-' : '+'}</Text>
+				<TouchableOpacity onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}>
+					<Text>{isAddExpanded ? '-' : '+'}</Text>
+				</TouchableOpacity>
+				{isAddExpanded && <View>
+					<TextInput
+						onChangeText={text => setNewPositionName(text)}
+						placeholder="New position name"
+						// style={styles.inputNewPositionName}
+						value={newPositionName} />
+				</View>}
 			</View>
 		</ScrollView>
 	)
