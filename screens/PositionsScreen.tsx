@@ -25,7 +25,7 @@ const PositionsScreen: FC<any> = (props) => {
 				<FlatList
 					data={positions}
 					keyExtractor={(item: Position, index: number) => String(index)}
-					renderItem={({ item }) => <Text>{item.title}</Text>}
+					renderItem={({ item }) => <Text>{item.title} - {item.points} pts</Text>}
 					/>
 			</View>
 		</ScrollView>
