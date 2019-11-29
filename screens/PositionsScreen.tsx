@@ -12,6 +12,7 @@ import { retrievePositionsData } from '../services/PositionsService'
 
 const PositionsScreen: FC<any> = (props) => {
 	const [positions, setPositions] = useState<Position[]>([])
+	const [isAddExpanded, setIsAddExpanded] = useState(false)
 
 	useEffect(() => {
 		retrievePositionsData().then(loadedPositions => { setPositions(loadedPositions) })
@@ -27,6 +28,9 @@ const PositionsScreen: FC<any> = (props) => {
 					keyExtractor={(item: Position, index: number) => String(index)}
 					renderItem={({ item }) => <Text>{item.title} - {item.points} pts</Text>}
 					/>
+			</View>
+			<View>
+				<Text>{isAddExpanded ? '-' : '+'}</Text>
 			</View>
 		</ScrollView>
 	)
