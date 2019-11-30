@@ -32,15 +32,17 @@ const PositionsScreen: FC<any> = (props) => {
 					renderItem={({ item }) => <Text>{item.title} - {item.points} pts</Text>}
 					/>
 			</View>
-			<View>
-				<TouchableOpacity onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}>
-					<Text>{isAddExpanded ? '-' : '+'}</Text>
+			<View style={styles.newPositionContainer}>
+				<TouchableOpacity
+					onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}
+					style={styles.buttonNewPositionExpander}>
+					<Text>{isAddExpanded ? '-' : '+'} Add New Position</Text>
 				</TouchableOpacity>
 				{isAddExpanded && <View>
 					<TextInput
 						onChangeText={text => setNewPositionName(text)}
 						placeholder="New position name"
-						// style={styles.inputNewPositionName}
+						style={styles.inputNewPositionName}
 						value={newPositionName} />
 				</View>}
 			</View>
@@ -53,6 +55,7 @@ const PositionsScreen: FC<any> = (props) => {
 }
 
 const styles = StyleSheet.create({
+	buttonNewPositionExpander: { },
 	centeredText: {
 		textAlign: 'center'
 	},
@@ -64,6 +67,20 @@ const styles = StyleSheet.create({
 	header: {
 		fontSize: 16,
 		textAlign: 'center'
+	},
+	newPositionContainer: {
+		borderColor: '#333',
+		borderWidth: 1,
+		padding: 10
+	},
+	inputNewPositionName: {
+		borderColor: '#333',
+		borderWidth: 1,
+		height: 35,
+		marginTop: 10,
+		paddingHorizontal: 5,
+		paddingVertical: 2,
+		width: '48%'
 	},
 	positionsDisplay: {
 		borderColor: '#333',
