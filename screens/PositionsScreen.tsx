@@ -6,7 +6,8 @@ import {
 	Text,
 	View,
 	TextInput,
-	TouchableOpacity
+	TouchableOpacity,
+	Button
 } from 'react-native'
 
 import { Position } from '../models/Position'
@@ -14,7 +15,7 @@ import { retrievePositionsData } from '../services/PositionsService'
 
 const PositionsScreen: FC<any> = (props) => {
 	const [positions, setPositions] = useState<Position[]>([])
-	const [newPositionName, setNewPositionName] = useState('')
+	const [newPositionTitle, setNewPositionTitle] = useState('')
 	const [newPositionPoints, setNewPositionPoints] = useState(1)
 	const [isAddExpanded, setIsAddExpanded] = useState(false)
 
@@ -39,17 +40,22 @@ const PositionsScreen: FC<any> = (props) => {
 					style={styles.buttonNewPositionExpander}>
 					<Text>{isAddExpanded ? '-' : '+'} Add New Position</Text>
 				</TouchableOpacity>
-				{isAddExpanded && <View style={styles.newPositionInputContainer}>
-					<TextInput
-						onChangeText={text => setNewPositionName(text)}
-						placeholder="New position name"
-						style={styles.inputNewPositionName}
-						value={newPositionName} />
-					<TextInput
-						onChangeText={text => setNewPositionPoints(parseInt(text, 10))}
-						placeholder="New position points"
-						style={styles.inputNewPositionPoints}
-						value={String(newPositionPoints)} />
+				{isAddExpanded && <View>
+					<View style={styles.newPositionInputContainer}>
+						<TextInput
+							onChangeText={text => setNewPositionTitle(text)}
+							placeholder="New position title"
+							style={styles.inputNewPositionName}
+							value={newPositionTitle} />
+						<TextInput
+							onChangeText={text => setNewPositionPoints(parseInt(text, 10))}
+							placeholder="New position points"
+							style={styles.inputNewPositionPoints}
+							value={String(newPositionPoints)} />
+					</View>
+					<Button
+						onPress={() => { }}
+						title="Add Position" />
 				</View>}
 			</View>
 		</ScrollView>
@@ -74,16 +80,6 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		textAlign: 'center'
 	},
-	newPositionContainer: {
-		borderColor: '#333',
-		borderWidth: 1,
-		padding: 10
-	},
-	newPositionInputContainer: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		width: '100%'
-	},
 	inputNewPositionName: {
 		borderColor: '#333',
 		borderWidth: 1,
@@ -101,6 +97,17 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 5,
 		paddingVertical: 2,
 		width: '18%'
+	},
+	newPositionContainer: {
+		borderColor: '#333',
+		borderWidth: 1,
+		padding: 10
+	},
+	newPositionInputContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		marginBottom: 10,
+		width: '100%'
 	},
 	positionsDisplay: {
 		borderColor: '#333',
