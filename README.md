@@ -11,8 +11,9 @@ You can clone this repository like so: `git clone https://github.com/Wolven531/e
 You can run the project w/ the following commands from the project's parent directory in CMD, PowerShell, or Terminal. (For MacOS, make sure you read the notes section below)
 
 1. `cd expoTipCalc`
-1. `npm run android`
-1. `npm run ios`
+1. `npm run web` - use this to view the project on the machine's default web browser
+1. `npm run android` - use this if an Android device is connected to the machine via USB
+1. `npm run ios` - use this if an Apple device is connected to the machine via USB
 
 ### NOTES
 
