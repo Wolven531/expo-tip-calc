@@ -15,6 +15,7 @@ import { retrievePositionsData } from '../services/PositionsService'
 const PositionsScreen: FC<any> = (props) => {
 	const [positions, setPositions] = useState<Position[]>([])
 	const [newPositionName, setNewPositionName] = useState('')
+	const [newPositionPoints, setNewPositionPoints] = useState(1)
 	const [isAddExpanded, setIsAddExpanded] = useState(false)
 
 	useEffect(() => {
@@ -38,12 +39,17 @@ const PositionsScreen: FC<any> = (props) => {
 					style={styles.buttonNewPositionExpander}>
 					<Text>{isAddExpanded ? '-' : '+'} Add New Position</Text>
 				</TouchableOpacity>
-				{isAddExpanded && <View>
+				{isAddExpanded && <View style={styles.newPositionInputContainer}>
 					<TextInput
 						onChangeText={text => setNewPositionName(text)}
 						placeholder="New position name"
 						style={styles.inputNewPositionName}
 						value={newPositionName} />
+					<TextInput
+						onChangeText={text => setNewPositionPoints(parseInt(text, 10))}
+						placeholder="New position points"
+						style={styles.inputNewPositionPoints}
+						value={String(newPositionPoints)} />
 				</View>}
 			</View>
 		</ScrollView>
@@ -73,6 +79,11 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		padding: 10
 	},
+	newPositionInputContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		width: '100%'
+	},
 	inputNewPositionName: {
 		borderColor: '#333',
 		borderWidth: 1,
@@ -80,7 +91,16 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		paddingHorizontal: 5,
 		paddingVertical: 2,
-		width: '48%'
+		width: '80%'
+	},
+	inputNewPositionPoints: {
+		borderColor: '#333',
+		borderWidth: 1,
+		height: 35,
+		marginTop: 10,
+		paddingHorizontal: 5,
+		paddingVertical: 2,
+		width: '18%'
 	},
 	positionsDisplay: {
 		borderColor: '#333',
