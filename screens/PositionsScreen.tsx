@@ -54,7 +54,12 @@ const PositionsScreen: FC<any> = (props) => {
 							value={String(newPositionPoints)} />
 					</View>
 					<Button
-						onPress={() => { }}
+						onPress={() => {
+							setPositions(stalePositions =>
+								stalePositions.concat(new Position(newPositionTitle, newPositionPoints)))
+							setNewPositionTitle('')
+							setNewPositionPoints(1)
+						}}
 						title="Add Position" />
 				</View>}
 			</View>
