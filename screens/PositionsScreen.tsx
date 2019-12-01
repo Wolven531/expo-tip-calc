@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 
 import { Position } from '../models/Position'
-import { retrievePositionsData } from '../services/PositionsService'
+import { retrievePositionsData, persistPositionsData } from '../services/PositionsService'
 
 const PositionsScreen: FC<any> = (props) => {
 	const [positions, setPositions] = useState<Position[]>([])
@@ -32,7 +32,12 @@ const PositionsScreen: FC<any> = (props) => {
 					data={positions}
 					keyExtractor={(item: Position, index: number) => String(index)}
 					renderItem={({ item }) => <Text>{item.title} - {item.points} pts</Text>}
+					style={styles.positionsList}
 					/>
+				<Button
+					color="#3a3"
+					onPress={() => { persistPositionsData(positions) }}
+					title="Save Positions" />
 			</View>
 			<View style={styles.newPositionContainer}>
 				<TouchableOpacity
@@ -119,6 +124,9 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		margin: 10,
 		padding: 10
+	},
+	positionsList: {
+		marginBottom: 10
 	}
 })
 
