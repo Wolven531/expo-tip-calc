@@ -22,6 +22,7 @@ import {
 	TITLE_PEOPLE_SAVED,
 	MSG_OK
 } from '../constants/Strings'
+import { Person } from '../models/Person'
 import { Position } from '../models/Position'
 import {
 	persistPeopleData,
@@ -31,7 +32,7 @@ import { retrievePositionsData } from '../services/PositionsService'
 
 const PeopleScreen: FC<any> = (props) => {
 	const [newPersonName, setNewPersonName] = useState('')
-	const [people, setPeople] = useState<string[]>([])
+	const [people, setPeople] = useState<Person[]>([])
 	const [positions, setPositions] = useState<Position[]>([])
 
 	useEffect(() => {
@@ -69,7 +70,7 @@ const PeopleScreen: FC<any> = (props) => {
 							if (newPersonName.length < 1) {
 								return
 							}
-							setPeople(stalePeople => stalePeople.concat(newPersonName))
+							setPeople(stalePeople => stalePeople.concat(new Person(newPersonName, new Position('', 0))))
 							setNewPersonName('')
 						}}
 						title="Add Person" />
@@ -107,8 +108,8 @@ const PeopleScreen: FC<any> = (props) => {
 				{people.length < 1 && <Text style={{ textAlign: 'center' }}>There are no people currently</Text>}
 				<FlatList
 					data={people}
-					keyExtractor={(item: string, index: number) => String(index)}
-					renderItem={({ item }) => <Text>{item}</Text>}
+					keyExtractor={(item: Person, index: number) => String(index)}
+					renderItem={({ item }) => <Text>{item.name}</Text>}
 					/>
 			</View>
 			<View style={{ marginBottom: 15 }}>
