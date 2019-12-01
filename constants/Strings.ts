@@ -1,3 +1,6 @@
+export const LBL_POINTS_MULTIPLE = 'pts'
+export const LBL_POINTS_SINGLE = 'pt'
+
 export const MSG_OK = 'OK'
 export const MSG_PEOPLE_SAVED = 'The current people have been saved to device'
 export const MSG_POSITIONS_SAVED = 'The current positions have been saved to device'
