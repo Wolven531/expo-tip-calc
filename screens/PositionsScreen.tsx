@@ -23,7 +23,7 @@ import { retrievePositionsData, persistPositionsData } from '../services/Positio
 const PositionsScreen: FC<any> = (props) => {
 	const [positions, setPositions] = useState<Position[]>([])
 	const [newPositionTitle, setNewPositionTitle] = useState('')
-	const [newPositionPoints, setNewPositionPoints] = useState(1)
+	const [newPositionPoints, setNewPositionPoints] = useState('1')
 	const [isAddExpanded, setIsAddExpanded] = useState(false)
 
 	useEffect(() => {
@@ -88,17 +88,17 @@ const PositionsScreen: FC<any> = (props) => {
 							style={styles.inputNewPositionName}
 							value={newPositionTitle} />
 						<TextInput
-							onChangeText={text => setNewPositionPoints(parseInt(text, 10))}
+							onChangeText={text => setNewPositionPoints(text)}
 							placeholder="New position points"
 							style={styles.inputNewPositionPoints}
-							value={String(newPositionPoints)} />
+							value={newPositionPoints} />
 					</View>
 					<Button
 						onPress={() => {
 							setPositions(stalePositions =>
-								stalePositions.concat(new Position(newPositionTitle, newPositionPoints)))
+								stalePositions.concat(new Position(newPositionTitle, parseInt(newPositionPoints, 10))))
 							setNewPositionTitle('')
-							setNewPositionPoints(1)
+							setNewPositionPoints('1')
 						}}
 						title="Add Position" />
 				</View>}
