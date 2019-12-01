@@ -13,7 +13,9 @@ import {
 } from 'react-native'
 
 import {
+	LBL_ADD_NEW_POSITION,
 	MSG_OK,
+	MSG_POSITIONS_EMPTY,
 	MSG_POSITIONS_SAVED,
 	PLACEHOLDER_NEW_POSITION_POINTS,
 	PLACEHOLDER_NEW_POSITION_TITLE,
@@ -23,7 +25,11 @@ import {
 	TITLE_SAVE_POSITIONS
 } from '../constants/Strings'
 import { Position } from '../models/Position'
-import { retrievePositionsData, persistPositionsData } from '../services/PositionsService'
+import {
+	persistPositionsData,
+	retrievePositionsData
+} from '../services/PositionsService'
+import { getPluralizedPoints } from '../services/utils'
 
 const PositionsScreen: FC<any> = (props) => {
 	const DEFAULT_POINTS = '1'
@@ -39,13 +45,13 @@ const PositionsScreen: FC<any> = (props) => {
 
 	return (
 		<ScrollView style={styles.container}>
-			<Text style={styles.header}>Positions</Text>
+			<Text style={styles.header}>{TITLE_POSITIONS}</Text>
 			<View style={styles.positionsDisplay}>
-				{positions.length < 1 && <Text style={styles.centeredText}>There are no positions currently</Text>}
+				{positions.length < 1 && <Text style={styles.centeredText}>{MSG_POSITIONS_EMPTY}</Text>}
 				<FlatList
 					data={positions}
 					keyExtractor={(item: Position, index: number) => String(index)}
-					renderItem={({ item }) => <Text>{item.title} - {item.points} pt{item.points > 1 ? 's' : ''}</Text>}
+					renderItem={({ item }) => <Text>{item.title} - {getPluralizedPoints(item.points)}</Text>}
 					style={styles.positionsList}
 					/>
 				<Button
@@ -85,7 +91,7 @@ const PositionsScreen: FC<any> = (props) => {
 				<TouchableOpacity
 					onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}
 					style={styles.buttonNewPositionExpander}>
-					<Text>{isAddExpanded ? '-' : '+'} Add New Position</Text>
+					<Text>{isAddExpanded ? '-' : '+'} {LBL_ADD_NEW_POSITION}</Text>
 				</TouchableOpacity>
 				{isAddExpanded && <View>
 					<View style={styles.newPositionInputContainer}>
