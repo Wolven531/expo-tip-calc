@@ -36,13 +36,9 @@ const PeopleScreen: FC<any> = (props) => {
 
 	useEffect(() => {
 		retrievePeopleData()
-			.then(loadedPeople => {
-				setPeople(loadedPeople)
-				return retrievePositionsData()
-			})
-			.then(loadedPositions => {
-				setPositions(loadedPositions)
-			})
+			.then(loadedPeople => { setPeople(loadedPeople) })
+		retrievePositionsData()
+			.then(loadedPositions => { setPositions(loadedPositions) })
 	}, [])
 
 	return (
