@@ -13,9 +13,14 @@ import {
 } from 'react-native'
 
 import {
+	MSG_OK,
 	MSG_POSITIONS_SAVED,
+	PLACEHOLDER_NEW_POSITION_POINTS,
+	PLACEHOLDER_NEW_POSITION_TITLE,
+	TITLE_ADD_POSITION,
+	TITLE_POSITIONS,
 	TITLE_POSITIONS_SAVED,
-	MSG_OK
+	TITLE_SAVE_POSITIONS
 } from '../constants/Strings'
 import { Position } from '../models/Position'
 import { retrievePositionsData, persistPositionsData } from '../services/PositionsService'
@@ -74,7 +79,7 @@ const PositionsScreen: FC<any> = (props) => {
 							}
 						})()
 					}}
-					title="Save Positions" />
+					title={TITLE_SAVE_POSITIONS} />
 			</View>
 			<View style={styles.newPositionContainer}>
 				<TouchableOpacity
@@ -86,12 +91,12 @@ const PositionsScreen: FC<any> = (props) => {
 					<View style={styles.newPositionInputContainer}>
 						<TextInput
 							onChangeText={text => setNewPositionTitle(text)}
-							placeholder="New position title"
+							placeholder={PLACEHOLDER_NEW_POSITION_TITLE}
 							style={styles.inputNewPositionName}
 							value={newPositionTitle} />
 						<TextInput
 							onChangeText={text => setNewPositionPoints(text)}
-							placeholder="New position points"
+							placeholder={PLACEHOLDER_NEW_POSITION_POINTS}
 							style={styles.inputNewPositionPoints}
 							value={newPositionPoints} />
 					</View>
@@ -102,7 +107,7 @@ const PositionsScreen: FC<any> = (props) => {
 							setNewPositionTitle(DEFAULT_TITLE)
 							setNewPositionPoints(DEFAULT_POINTS)
 						}}
-						title="Add Position" />
+						title={TITLE_ADD_POSITION} />
 				</View>}
 			</View>
 		</ScrollView>
@@ -110,7 +115,7 @@ const PositionsScreen: FC<any> = (props) => {
 }
 
 (PositionsScreen as any).navigationOptions = {
-	title: 'Positions'
+	title: TITLE_POSITIONS
 }
 
 const styles = StyleSheet.create({
