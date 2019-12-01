@@ -1,15 +1,15 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import {
 	Alert,
 	Button,
 	FlatList,
+	Platform,
 	ScrollView,
 	StyleSheet,
 	Text,
 	TextInput,
 	TouchableOpacity,
-	View,
-	Platform
+	View
 } from 'react-native'
 
 import {
@@ -21,9 +21,11 @@ import { Position } from '../models/Position'
 import { retrievePositionsData, persistPositionsData } from '../services/PositionsService'
 
 const PositionsScreen: FC<any> = (props) => {
+	const DEFAULT_POINTS = '1'
+	const DEFAULT_TITLE = ''
 	const [positions, setPositions] = useState<Position[]>([])
-	const [newPositionTitle, setNewPositionTitle] = useState('')
-	const [newPositionPoints, setNewPositionPoints] = useState('1')
+	const [newPositionTitle, setNewPositionTitle] = useState(DEFAULT_TITLE)
+	const [newPositionPoints, setNewPositionPoints] = useState(DEFAULT_POINTS)
 	const [isAddExpanded, setIsAddExpanded] = useState(false)
 
 	useEffect(() => {
@@ -97,8 +99,8 @@ const PositionsScreen: FC<any> = (props) => {
 						onPress={() => {
 							setPositions(stalePositions =>
 								stalePositions.concat(new Position(newPositionTitle, parseInt(newPositionPoints, 10))))
-							setNewPositionTitle('')
-							setNewPositionPoints('1')
+							setNewPositionTitle(DEFAULT_TITLE)
+							setNewPositionPoints(DEFAULT_POINTS)
 						}}
 						title="Add Position" />
 				</View>}
