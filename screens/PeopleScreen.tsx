@@ -5,9 +5,11 @@ import React,
 		useState
 	} from 'react'
 import {
+	Alert,
 	Button,
 	FlatList,
 	Picker,
+	Platform,
 	ScrollView,
 	StyleSheet,
 	Text,
@@ -15,6 +17,7 @@ import {
 	View
 } from 'react-native'
 
+import { MSG_PEOPLE_SAVED } from '../constants/Strings'
 import {
 	persistPeopleData,
 	retrievePeopleData
@@ -65,7 +68,29 @@ const PeopleScreen: FC<any> = (props) => {
 				<View style={styles.buttonCell}>
 					<Button
 						color="#3a3"
-						onPress={() => { persistPeopleData(people) }}
+						onPress={() => {
+							persistPeopleData(people)
+							Platform.select({
+								// android: () => {},
+								// ios: () => {}
+								default: () => {
+									Alert.alert(
+										'People Saved',
+										MSG_PEOPLE_SAVED,
+										[
+											{
+												onPress: () => { },
+												text: 'OK'
+											}
+										],
+										{ cancelable: false }
+									)
+								},
+								web: () => {
+									alert(MSG_PEOPLE_SAVED)
+								}
+							})()
+						}}
 						title="Save People" />
 				</View>
 			</View>
