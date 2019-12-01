@@ -17,7 +17,10 @@ import {
 	View
 } from 'react-native'
 
-import { MSG_PEOPLE_SAVED } from '../constants/Strings'
+import {
+	MSG_PEOPLE_SAVED,
+	TITLE_PEOPLE_SAVED
+} from '../constants/Strings'
 import {
 	persistPeopleData,
 	retrievePeopleData
@@ -51,7 +54,6 @@ const PeopleScreen: FC<any> = (props) => {
 					<Picker.Item label="Server" value="server" />
 					<Picker.Item label="Valet" value="valet" />
 				</Picker>
-
 			</View>
 			<View style={styles.buttonContainer}>
 				<View style={styles.buttonCell}>
@@ -75,7 +77,7 @@ const PeopleScreen: FC<any> = (props) => {
 								// ios: () => {}
 								default: () => {
 									Alert.alert(
-										'People Saved',
+										TITLE_PEOPLE_SAVED,
 										MSG_PEOPLE_SAVED,
 										[
 											{

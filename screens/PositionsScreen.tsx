@@ -12,7 +12,10 @@ import {
 	Platform
 } from 'react-native'
 
-import { MSG_POSITIONS_SAVED } from '../constants/Strings'
+import {
+	MSG_POSITIONS_SAVED,
+	TITLE_POSITIONS_SAVED
+} from '../constants/Strings'
 import { Position } from '../models/Position'
 import { retrievePositionsData, persistPositionsData } from '../services/PositionsService'
 
@@ -46,7 +49,7 @@ const PositionsScreen: FC<any> = (props) => {
 							// ios: () => {}
 							default: () => {
 								Alert.alert(
-									'Positions Saved',
+									TITLE_POSITIONS_SAVED,
 									MSG_POSITIONS_SAVED,
 									[
 										// { text: 'Ask me later', onPress: () => { } },
