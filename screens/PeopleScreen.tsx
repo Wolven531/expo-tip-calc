@@ -22,17 +22,27 @@ import {
 	TITLE_PEOPLE_SAVED,
 	MSG_OK
 } from '../constants/Strings'
+import { Position } from '../models/Position'
 import {
 	persistPeopleData,
 	retrievePeopleData
 } from '../services/PeopleService'
+import { retrievePositionsData } from '../services/PositionsService'
 
 const PeopleScreen: FC<any> = (props) => {
 	const [newPersonName, setNewPersonName] = useState('')
 	const [people, setPeople] = useState<string[]>([])
+	const [positions, setPositions] = useState<Position[]>([])
 
 	useEffect(() => {
-		retrievePeopleData().then(loadedPeople => { setPeople(loadedPeople) })
+		retrievePeopleData()
+			.then(loadedPeople => {
+				setPeople(loadedPeople)
+				return retrievePositionsData()
+			})
+			.then(loadedPositions => {
+				setPositions(loadedPositions)
+			})
 	}, [])
 
 	return (
@@ -48,12 +58,12 @@ const PeopleScreen: FC<any> = (props) => {
 					onValueChange={(itemValue, itemIndex) => { }}
 					selectedValue={''}
 					style={{ height: 35, width: '48%' }} >
-					<Picker.Item label="Barkeep" value="barkeep" />
-					<Picker.Item label="Buser" value="buser" />
-					<Picker.Item label="Cook" value="cook" />
-					<Picker.Item label="Host" value="host" />
-					<Picker.Item label="Server" value="server" />
-					<Picker.Item label="Valet" value="valet" />
+					{positions.map(position =>
+						<Picker.Item
+							key={position.title}
+							label={`${position.title} (${position.points} pt${position.points > 1 ? 's' : ''})`}
+							value={position.title.toLowerCase()} />
+					)}
 				</Picker>
 			</View>
 			<View style={styles.buttonContainer}>
