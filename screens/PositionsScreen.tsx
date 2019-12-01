@@ -1,15 +1,18 @@
 import React, { FC, useState, useEffect } from 'react'
 import {
+	Alert,
+	Button,
 	FlatList,
 	ScrollView,
 	StyleSheet,
 	Text,
-	View,
 	TextInput,
 	TouchableOpacity,
-	Button
+	View,
+	Platform
 } from 'react-native'
 
+import { MSG_POSITIONS_SAVED } from '../constants/Strings'
 import { Position } from '../models/Position'
 import { retrievePositionsData, persistPositionsData } from '../services/PositionsService'
 
@@ -36,7 +39,35 @@ const PositionsScreen: FC<any> = (props) => {
 					/>
 				<Button
 					color="#3a3"
-					onPress={() => { persistPositionsData(positions) }}
+					onPress={() => {
+						persistPositionsData(positions)
+						Platform.select({
+							// android: () => {},
+							// ios: () => {}
+							default: () => {
+								Alert.alert(
+									'Positions Saved',
+									MSG_POSITIONS_SAVED,
+									[
+										// { text: 'Ask me later', onPress: () => { } },
+										// {
+										// 	text: 'Cancel',
+										// 	onPress: () => { },
+										// 	style: 'cancel',
+										// },
+										{
+											onPress: () => { },
+											text: 'OK'
+										}
+									],
+									{ cancelable: false }
+								)
+							},
+							web: () => {
+								alert(MSG_POSITIONS_SAVED)
+							}
+						})()
+					}}
 					title="Save Positions" />
 			</View>
 			<View style={styles.newPositionContainer}>
