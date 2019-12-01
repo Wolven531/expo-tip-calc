@@ -1,18 +1,12 @@
-// import React from 'react'
 import {
 	AsyncStorage
 } from 'react-native'
 
+import { Person } from '../models/Person'
+
 const STORAGE_KEY_PEOPLE = 'expoTipCalc.people'
 
-// const persistPeopleData = async () => {
-// 	try {
-// 		await AsyncStorage.setItem('expoTipCalc.people', JSON.stringify(people))
-// 	} catch (err) {
-// 		console.error('Problem saving people data', err)
-// 	}
-// }
-const persistPeopleData = (people): Promise<void> => {
+const persistPeopleData = (people: Person[]): Promise<void> => {
 	return AsyncStorage
 		.setItem(STORAGE_KEY_PEOPLE, JSON.stringify(people))
 		.catch(err => {
@@ -20,19 +14,7 @@ const persistPeopleData = (people): Promise<void> => {
 		})
 }
 
-// const retrievePeopleData = async () => {
-// 	try {
-// 		const peopleStr = await AsyncStorage.getItem('expoTipCalc.people');
-// 		if (!peopleStr || peopleStr.length < 1) {
-// 			console.info('[retrievePeopleData] There was no people data, bailing...')
-// 			return
-// 		}
-// 		setPeople(JSON.parse(peopleStr))
-// 	} catch (err) {
-// 		console.error('Problem loading people data', err)
-// 	}
-// }
-const retrievePeopleData = (): Promise<string[]> => {
+const retrievePeopleData = (): Promise<Person[]> => {
 	return AsyncStorage
 		.getItem(STORAGE_KEY_PEOPLE)
 		.then(peopleStr => {
