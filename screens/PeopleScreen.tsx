@@ -19,7 +19,8 @@ import {
 
 import {
 	MSG_PEOPLE_SAVED,
-	TITLE_PEOPLE_SAVED
+	TITLE_PEOPLE_SAVED,
+	MSG_OK
 } from '../constants/Strings'
 import {
 	persistPeopleData,
@@ -82,7 +83,7 @@ const PeopleScreen: FC<any> = (props) => {
 										[
 											{
 												onPress: () => { },
-												text: 'OK'
+												text: MSG_OK
 											}
 										],
 										{ cancelable: false }

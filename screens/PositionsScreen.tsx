@@ -14,7 +14,8 @@ import {
 
 import {
 	MSG_POSITIONS_SAVED,
-	TITLE_POSITIONS_SAVED
+	TITLE_POSITIONS_SAVED,
+	MSG_OK
 } from '../constants/Strings'
 import { Position } from '../models/Position'
 import { retrievePositionsData, persistPositionsData } from '../services/PositionsService'
@@ -60,7 +61,7 @@ const PositionsScreen: FC<any> = (props) => {
 										// },
 										{
 											onPress: () => { },
-											text: 'OK'
+											text: MSG_OK
 										}
 									],
 									{ cancelable: false }
