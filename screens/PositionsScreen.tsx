@@ -52,7 +52,15 @@ const PositionsScreen: FC<any> = (props) => {
 				<FlatList
 					data={positions}
 					keyExtractor={(item: Position, index: number) => String(index)}
-					renderItem={({ item }) => <RoleDisplay role={item} />}
+					renderItem={({ item }) =>
+						<RoleDisplay
+							onDelete={(role: Position) => {
+								setPositions(staleRoles =>
+									staleRoles.filter(staleRole =>
+											staleRole.title !== role.title
+											&& staleRole.points !== role.points))
+							}}
+							role={item} />}
 					style={styles.positionsList}
 					/>
 				<Button

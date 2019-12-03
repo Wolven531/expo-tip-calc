@@ -1,37 +1,24 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import {
-// 	Alert,
-// 	Button,
-// 	FlatList,
-// 	Platform,
-// 	ScrollView,
+	Alert,
+	Platform,
 	StyleSheet,
 	Text,
-// 	TextInput,
 	TouchableOpacity,
 	View
 } from 'react-native'
 
-// import {
-// 	LBL_ADD_NEW_POSITION,
-// 	MSG_OK,
-// 	MSG_POSITIONS_EMPTY,
-// 	MSG_POSITIONS_SAVED,
-// 	PLACEHOLDER_NEW_POSITION_POINTS,
-// 	PLACEHOLDER_NEW_POSITION_TITLE,
-// 	TITLE_ADD_POSITION,
-// 	TITLE_POSITIONS,
-// 	TITLE_POSITIONS_SAVED,
-// 	TITLE_SAVE_POSITIONS
-// } from '../constants/Strings'
+import {
+	MSG_CANCEL,
+	MSG_CONFIRM_ROLE_DELETE,
+	MSG_OK,
+	TITLE_CONFIRM_ROLE_DELETE
+} from '../constants/Strings'
 import { Position } from '../models/Position'
-// import {
-// 	persistPositionsData,
-// 	retrievePositionsData
-// } from '../services/PositionsService'
 import { getPluralizedPoints } from '../services/utils'
 
 export interface IRoleDisplayProps {
+	onDelete: (role: Position) => void
 	role: Position
 }
 
@@ -45,7 +32,37 @@ const RoleDisplay: FC<IRoleDisplayProps> = (props) => {
 			</Text>
 			<TouchableOpacity
 				onPress={() => {
-
+					Platform.select({
+						// android: () => {},
+						// ios: () => {}
+						default: () => {
+							Alert.alert(
+								TITLE_CONFIRM_ROLE_DELETE,
+								MSG_CONFIRM_ROLE_DELETE,
+								[
+									{
+										onPress: () => { },
+										style: 'cancel',
+										text: MSG_CANCEL
+									},
+									{
+										onPress: () => {
+											props.onDelete(props.role)
+										},
+										style: 'destructive',
+										text: MSG_OK
+									}
+								],
+								{ cancelable: false }
+							)
+						},
+						web: () => {
+							if (!confirm(MSG_CONFIRM_ROLE_DELETE)) {
+								return
+							}
+							props.onDelete(props.role)
+						}
+					})()
 				}}
 				style={styles.btnDelete}>
 				<Text style={styles.btnDeleteLabel}>Delete</Text>
