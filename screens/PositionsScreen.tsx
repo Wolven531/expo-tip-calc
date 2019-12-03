@@ -29,7 +29,8 @@ import {
 	persistPositionsData,
 	retrievePositionsData
 } from '../services/PositionsService'
-import { getPluralizedPoints } from '../services/utils'
+
+import { RoleDisplay } from '../components/RoleDisplay'
 
 const PositionsScreen: FC<any> = (props) => {
 	const DEFAULT_POINTS = '1'
@@ -51,7 +52,7 @@ const PositionsScreen: FC<any> = (props) => {
 				<FlatList
 					data={positions}
 					keyExtractor={(item: Position, index: number) => String(index)}
-					renderItem={({ item }) => <Text>{item.title} - {getPluralizedPoints(item.points)}</Text>}
+					renderItem={({ item }) => <RoleDisplay role={item} />}
 					style={styles.positionsList}
 					/>
 				<Button
