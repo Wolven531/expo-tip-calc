@@ -8,7 +8,7 @@ import {
 	StyleSheet,
 	Text,
 // 	TextInput,
-// 	TouchableOpacity,
+	TouchableOpacity,
 	View
 } from 'react-native'
 
@@ -43,15 +43,46 @@ const RoleDisplay: FC<IRoleDisplayProps> = (props) => {
 				<Text style={styles.fontSpacer}> - </Text>
 				<Text style={styles.fontValue}>{getPluralizedPoints(props.role.points)}</Text>
 			</Text>
+			<TouchableOpacity
+				onPress={() => {
+
+				}}
+				style={styles.btnDelete}>
+				<Text style={styles.btnDeleteLabel}>Delete</Text>
+			</TouchableOpacity>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
+	btnDelete: {
+		backgroundColor: '#f33',
+		borderRadius: 10,
+		padding: 10,
+		shadowColor: '#333',
+		shadowOffset: {
+			height: 3,
+			width: 2
+		},
+		shadowRadius: 2
+	},
+	btnDeleteLabel: {
+		color: '#ff0',
+		fontWeight: 'bold',
+		textShadowColor: '#333',
+		textShadowOffset: {
+			height: 3,
+			width: 2
+		},
+		textShadowRadius: 2
+	},
 	container: {
+		alignItems: 'center',
 		borderColor: '#333',
 		borderRadius: 10,
 		borderWidth: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
 		marginVertical: 5,
 		padding: 10
 	},
