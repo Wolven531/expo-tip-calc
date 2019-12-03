@@ -24,8 +24,6 @@ const DeleteButton: FC<IDeleteButtonProps> = (props) => {
 		<TouchableOpacity
 			onPress={() => {
 				Platform.select({
-					// android: () => {},
-					// ios: () => {}
 					default: () => {
 						Alert.alert(
 							TITLE_CONFIRM_ROLE_DELETE,

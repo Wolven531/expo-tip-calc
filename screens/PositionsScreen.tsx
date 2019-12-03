@@ -33,7 +33,7 @@ import {
 import { RoleDisplay } from '../components/RoleDisplay'
 
 const PositionsScreen: FC<any> = (props) => {
-	const DEFAULT_POINTS = '1'
+	const DEFAULT_POINTS = ''
 	const DEFAULT_TITLE = ''
 	const [positions, setPositions] = useState<Position[]>([])
 	const [newPositionTitle, setNewPositionTitle] = useState(DEFAULT_TITLE)
@@ -64,24 +64,45 @@ const PositionsScreen: FC<any> = (props) => {
 							role={item} />}
 					style={styles.positionsList}
 					/>
+				<View style={styles.newPositionContainer}>
+					<TouchableOpacity
+						onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}
+						style={styles.buttonNewPositionExpander}>
+						<Text style={styles.expanderText}>{isAddExpanded ? '-' : '+'} {LBL_ADD_NEW_POSITION}</Text>
+					</TouchableOpacity>
+					{isAddExpanded && <View>
+						<View style={styles.newPositionInputContainer}>
+							<TextInput
+								onChangeText={text => setNewPositionTitle(text)}
+								placeholder={PLACEHOLDER_NEW_POSITION_TITLE}
+								style={styles.inputNewPositionName}
+								value={newPositionTitle} />
+							<TextInput
+								onChangeText={text => setNewPositionPoints(text)}
+								placeholder={PLACEHOLDER_NEW_POSITION_POINTS}
+								style={styles.inputNewPositionPoints}
+								value={newPositionPoints} />
+						</View>
+						<Button
+							onPress={() => {
+								setPositions(stalePositions =>
+									stalePositions.concat(new Position(newPositionTitle, parseInt(newPositionPoints, 10))))
+								setNewPositionTitle(DEFAULT_TITLE)
+								setNewPositionPoints(DEFAULT_POINTS)
+							}}
+							title={TITLE_ADD_POSITION} />
+					</View>}
+				</View>
 				<Button
 					color="#3a3"
 					onPress={() => {
 						persistPositionsData(positions)
 						Platform.select({
-							// android: () => {},
-							// ios: () => {}
 							default: () => {
 								Alert.alert(
 									TITLE_POSITIONS_SAVED,
 									MSG_POSITIONS_SAVED,
 									[
-										// { text: 'Ask me later', onPress: () => { } },
-										// {
-										// 	text: 'Cancel',
-										// 	onPress: () => { },
-										// 	style: 'cancel',
-										// },
 										{
 											onPress: () => { },
 											text: MSG_OK
@@ -96,35 +117,6 @@ const PositionsScreen: FC<any> = (props) => {
 						})()
 					}}
 					title={TITLE_SAVE_POSITIONS} />
-			</View>
-			<View style={styles.newPositionContainer}>
-				<TouchableOpacity
-					onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}
-					style={styles.buttonNewPositionExpander}>
-					<Text>{isAddExpanded ? '-' : '+'} {LBL_ADD_NEW_POSITION}</Text>
-				</TouchableOpacity>
-				{isAddExpanded && <View>
-					<View style={styles.newPositionInputContainer}>
-						<TextInput
-							onChangeText={text => setNewPositionTitle(text)}
-							placeholder={PLACEHOLDER_NEW_POSITION_TITLE}
-							style={styles.inputNewPositionName}
-							value={newPositionTitle} />
-						<TextInput
-							onChangeText={text => setNewPositionPoints(text)}
-							placeholder={PLACEHOLDER_NEW_POSITION_POINTS}
-							style={styles.inputNewPositionPoints}
-							value={newPositionPoints} />
-					</View>
-					<Button
-						onPress={() => {
-							setPositions(stalePositions =>
-								stalePositions.concat(new Position(newPositionTitle, parseInt(newPositionPoints, 10))))
-							setNewPositionTitle(DEFAULT_TITLE)
-							setNewPositionPoints(DEFAULT_POINTS)
-						}}
-						title={TITLE_ADD_POSITION} />
-				</View>}
 			</View>
 		</ScrollView>
 	)
@@ -143,6 +135,10 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		flex: 1,
 		padding: 15
+	},
+	expanderText: {
+		fontSize: 16,
+		fontWeight: 'bold'
 	},
 	header: {
 		fontSize: 16,
@@ -169,6 +165,8 @@ const styles = StyleSheet.create({
 	newPositionContainer: {
 		borderColor: '#333',
 		borderWidth: 1,
+		marginBottom: 10,
+		marginTop: 20,
 		padding: 10
 	},
 	newPositionInputContainer: {
