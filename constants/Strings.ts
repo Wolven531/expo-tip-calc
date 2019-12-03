@@ -1,4 +1,5 @@
 export const LBL_ADD_NEW_POSITION = 'Add New Position'
+export const LBL_DELETE_ROLE = 'Delete'
 export const LBL_POINTS_MULTIPLE = 'pts'
 export const LBL_POINTS_SINGLE = 'pt'
 

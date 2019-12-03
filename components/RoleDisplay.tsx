@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 
 import {
+	LBL_DELETE_ROLE,
 	MSG_CANCEL,
 	MSG_CONFIRM_ROLE_DELETE,
 	MSG_OK,
@@ -65,7 +66,7 @@ const RoleDisplay: FC<IRoleDisplayProps> = (props) => {
 					})()
 				}}
 				style={styles.btnDelete}>
-				<Text style={styles.btnDeleteLabel}>Delete</Text>
+				<Text style={styles.btnDeleteLabel}>{LBL_DELETE_ROLE}</Text>
 			</TouchableOpacity>
 		</View>
 	)
