@@ -56,9 +56,10 @@ const PositionsScreen: FC<any> = (props) => {
 						<RoleDisplay
 							onDelete={(role: Position) => {
 								setPositions(staleRoles =>
-									staleRoles.filter(staleRole =>
-											staleRole.title !== role.title
-											&& staleRole.points !== role.points))
+									staleRoles.filter(staleRole => // TODO: change this comparison to ID based
+										staleRole.points !== role.points || staleRole.title !== role.title
+									)
+								)
 							}}
 							role={item} />}
 					style={styles.positionsList}
