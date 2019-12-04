@@ -1,11 +1,21 @@
+// import { ConnectedRouter } from 'connected-react-router'
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
+// import { createBrowserHistory } from 'history'
 import React, { useState } from 'react'
-import { Platform, StatusBar, StyleSheet, View } from 'react-native'
+import {
+	Platform,
+	StatusBar,
+	StyleSheet,
+	View
+} from 'react-native'
+import { Provider } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
 
 import AppNavigator from './navigation/AppNavigator'
+
+import { configureStore } from './redux/store/configureStore'
 
 export default function App(props) {
 	const [isLoadingComplete, setLoadingComplete] = useState(false)
@@ -19,11 +29,21 @@ export default function App(props) {
 			/>
 		)
 	}
+
+	// const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href')
+	// const history = createBrowserHistory({ basename: baseUrl })
+	// const store = configureStore(history)
+	const store = configureStore({})
+
 	return (
-		<View style={styles.container}>
-			{Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-			<AppNavigator />
-		</View>
+		<Provider store={store}>
+			{/* <ConnectedRouter history={history}> */}
+				<View style={styles.container}>
+					{Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+					<AppNavigator />
+				</View>
+			{/* </ConnectedRouter> */}
+		</Provider>
 	)
 }
 
