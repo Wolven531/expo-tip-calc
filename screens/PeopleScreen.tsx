@@ -16,6 +16,9 @@ import {
 	TextInput,
 	View
 } from 'react-native'
+import { connect } from 'react-redux'
+
+import { IRolesReducerProps } from '../redux/reducers/rolesReducer'
 
 import {
 	MSG_PEOPLE_SAVED,
@@ -30,7 +33,11 @@ import {
 } from '../services/PeopleService'
 import { retrievePositionsData } from '../services/PositionsService'
 
-const PeopleScreen: FC<any> = (props) => {
+interface IPeopleScreenProps {
+	roles: Position[]
+}
+
+const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 	const [newPersonName, setNewPersonName] = useState('')
 	const [people, setPeople] = useState<Person[]>([])
 	const [positions, setPositions] = useState<Position[]>([])
@@ -122,7 +129,7 @@ const PeopleScreen: FC<any> = (props) => {
 	)
 };
 
-(PeopleScreen as any).navigationOptions = {
+(PeopleScreenDC as any).navigationOptions = {
 	title: 'People'
 }
 
@@ -169,5 +176,15 @@ const styles = StyleSheet.create({
 		padding: 10
 	}
 })
+
+const mapDispatchToProps = { }
+
+const mapStateToProps = (combinedReducers) => {
+	const rolesReducer: IRolesReducerProps = combinedReducers.rolesReducer
+
+	return { roles: rolesReducer.roles }
+}
+
+const PeopleScreen = connect(mapStateToProps, mapDispatchToProps)(PeopleScreenDC)
 
 export { PeopleScreen }
