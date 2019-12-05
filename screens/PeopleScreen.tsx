@@ -18,6 +18,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
+import { setRoles } from '../redux/actions/rolesActions'
 import { IRolesReducerProps } from '../redux/reducers/rolesReducer'
 
 import {
@@ -31,22 +32,22 @@ import {
 	persistPeopleData,
 	retrievePeopleData
 } from '../services/PeopleService'
-// import { retrievePositionsData } from '../services/PositionsService'
+import { retrievePositionsData } from '../services/PositionsService'
 
 interface IPeopleScreenProps {
 	roles: Position[]
+	setRoles: (roles: Position[]) => any
 }
 
 const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 	const [newPersonName, setNewPersonName] = useState('')
 	const [people, setPeople] = useState<Person[]>([])
-	// const [positions, setPositions] = useState<Position[]>([])
 
 	useEffect(() => {
 		retrievePeopleData()
 			.then(loadedPeople => { setPeople(loadedPeople) })
-		// retrievePositionsData()
-		// 	.then(loadedPositions => { setPositions(loadedPositions) })
+		retrievePositionsData()
+			.then(loadedPositions => { props.setRoles(loadedPositions) })
 	}, [])
 
 	return (
@@ -177,7 +178,9 @@ const styles = StyleSheet.create({
 	}
 })
 
-const mapDispatchToProps = { }
+const mapDispatchToProps = {
+	setRoles
+}
 
 const mapStateToProps = (combinedReducers) => {
 	const rolesReducer: IRolesReducerProps = combinedReducers.rolesReducer
