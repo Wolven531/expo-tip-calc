@@ -1,27 +1,25 @@
 import { Position } from '../../models/Position'
 
-import { retrievePositionsData } from '../../services/PositionsService'
+import { SET_ROLES } from '../actionTypes'
 
 export interface IRolesReducerProps {
 	roles: Position[]
 }
 
-let rolesReducer: any
-let loadedRoles: Position[] = [];
+const initialState: IRolesReducerProps = {
+	roles: []
+}
 
-(async () => {
-	loadedRoles = await retrievePositionsData()
-
-	const initialState: IRolesReducerProps = {
-		roles: loadedRoles
+const rolesReducer = (state = initialState, action) => {
+	switch (action.type) {
+		case SET_ROLES:
+			return {
+				...state,
+				roles: action.payload
+			}
+		default:
+			return state
 	}
-
-	rolesReducer = (state = initialState, action) => {
-		switch (action.type) {
-			default:
-				return state
-		}
-	}
-})()
+}
 
 export { rolesReducer }
