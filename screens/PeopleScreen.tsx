@@ -31,7 +31,7 @@ import {
 	persistPeopleData,
 	retrievePeopleData
 } from '../services/PeopleService'
-import { retrievePositionsData } from '../services/PositionsService'
+// import { retrievePositionsData } from '../services/PositionsService'
 
 interface IPeopleScreenProps {
 	roles: Position[]
@@ -40,13 +40,13 @@ interface IPeopleScreenProps {
 const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 	const [newPersonName, setNewPersonName] = useState('')
 	const [people, setPeople] = useState<Person[]>([])
-	const [positions, setPositions] = useState<Position[]>([])
+	// const [positions, setPositions] = useState<Position[]>([])
 
 	useEffect(() => {
 		retrievePeopleData()
 			.then(loadedPeople => { setPeople(loadedPeople) })
-		retrievePositionsData()
-			.then(loadedPositions => { setPositions(loadedPositions) })
+		// retrievePositionsData()
+		// 	.then(loadedPositions => { setPositions(loadedPositions) })
 	}, [])
 
 	return (
@@ -62,11 +62,11 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 					onValueChange={(itemValue, itemIndex) => { }}
 					selectedValue={''}
 					style={{ height: 35, width: '48%' }} >
-					{positions.map(position =>
+					{props.roles.map(role =>
 						<Picker.Item
-							key={position.title}
-							label={`${position.title} (${position.points} pt${position.points > 1 ? 's' : ''})`}
-							value={position.title.toLowerCase()} />
+							key={role.title}
+							label={`${role.title} (${role.points} pt${role.points > 1 ? 's' : ''})`}
+							value={role.title.toLowerCase()} />
 					)}
 				</Picker>
 			</View>
