@@ -11,6 +11,10 @@ import {
 	TouchableOpacity,
 	View
 } from 'react-native'
+import { connect } from 'react-redux'
+
+import { setRoles } from '../redux/actions/rolesActions'
+import { IRolesReducerProps } from '../redux/reducers/rolesReducer'
 
 import {
 	LBL_ADD_NEW_POSITION,
@@ -32,34 +36,39 @@ import {
 
 import { RoleDisplay } from '../components/RoleDisplay'
 
-const PositionsScreen: FC<any> = (props) => {
+interface IPositionsScreen {
+	roles: Position[]
+	setRoles: (roles: Position[]) => any
+}
+
+const PositionsScreenDC: FC<IPositionsScreen> = (props) => {
 	const DEFAULT_POINTS = ''
 	const DEFAULT_TITLE = ''
-	const [positions, setPositions] = useState<Position[]>([])
 	const [newPositionTitle, setNewPositionTitle] = useState(DEFAULT_TITLE)
 	const [newPositionPoints, setNewPositionPoints] = useState(DEFAULT_POINTS)
 	const [isAddExpanded, setIsAddExpanded] = useState(false)
 
 	useEffect(() => {
-		retrievePositionsData().then(loadedPositions => { setPositions(loadedPositions) })
+		retrievePositionsData()
+			.then(loadedRoles => { props.setRoles(loadedRoles) })
 	}, [])
 
 	return (
 		<ScrollView style={styles.container}>
 			<Text style={styles.header}>{TITLE_POSITIONS}</Text>
 			<View style={styles.positionsDisplay}>
-				{positions.length < 1 && <Text style={styles.centeredText}>{MSG_POSITIONS_EMPTY}</Text>}
+				{props.roles.length < 1 && <Text style={styles.centeredText}>{MSG_POSITIONS_EMPTY}</Text>}
 				<FlatList
-					data={positions}
+					data={props.roles}
 					keyExtractor={(item: Position, index: number) => String(index)}
 					renderItem={({ item }) =>
 						<RoleDisplay
 							onDelete={(role: Position) => {
-								setPositions(staleRoles =>
-									staleRoles.filter(staleRole => // TODO: change this comparison to ID based
-										staleRole.points !== role.points || staleRole.title !== role.title
-									)
-								)
+								// setPositions(staleRoles =>
+								// 	staleRoles.filter(staleRole => // TODO: change this comparison to ID based
+								// 		staleRole.points !== role.points || staleRole.title !== role.title
+								// 	)
+								// )
 							}}
 							role={item} />}
 					style={styles.positionsList}
@@ -85,8 +94,8 @@ const PositionsScreen: FC<any> = (props) => {
 						</View>
 						<Button
 							onPress={() => {
-								setPositions(stalePositions =>
-									stalePositions.concat(new Position(newPositionTitle, parseInt(newPositionPoints, 10))))
+								// setPositions(stalePositions =>
+								// 	stalePositions.concat(new Position(newPositionTitle, parseInt(newPositionPoints, 10))))
 								setNewPositionTitle(DEFAULT_TITLE)
 								setNewPositionPoints(DEFAULT_POINTS)
 							}}
@@ -96,7 +105,7 @@ const PositionsScreen: FC<any> = (props) => {
 				<Button
 					color="#3a3"
 					onPress={() => {
-						persistPositionsData(positions)
+						persistPositionsData(props.roles)
 						Platform.select({
 							default: () => {
 								Alert.alert(
@@ -122,7 +131,7 @@ const PositionsScreen: FC<any> = (props) => {
 	)
 }
 
-(PositionsScreen as any).navigationOptions = {
+(PositionsScreenDC as any).navigationOptions = {
 	title: TITLE_POSITIONS
 }
 
@@ -185,5 +194,17 @@ const styles = StyleSheet.create({
 		marginBottom: 10
 	}
 })
+
+const mapDispatchToProps = {
+	setRoles
+}
+
+const mapStateToProps = (combinedReducers) => {
+	const rolesReducer: IRolesReducerProps = combinedReducers.rolesReducer
+
+	return { roles: rolesReducer.roles }
+}
+
+const PositionsScreen = connect(mapStateToProps, mapDispatchToProps)(PositionsScreenDC)
 
 export { PositionsScreen }
