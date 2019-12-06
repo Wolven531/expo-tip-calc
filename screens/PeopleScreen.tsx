@@ -1,9 +1,4 @@
-import React,
-	{
-		FC,
-		useEffect,
-		useState
-	} from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import {
 	Alert,
 	Button,
@@ -22,9 +17,9 @@ import { setRoles } from '../redux/actions/rolesActions'
 import { IRolesReducerProps } from '../redux/reducers/rolesReducer'
 
 import {
+	MSG_OK,
 	MSG_PEOPLE_SAVED,
-	TITLE_PEOPLE_SAVED,
-	MSG_OK
+	TITLE_PEOPLE_SAVED
 } from '../constants/Strings'
 import { Person } from '../models/Person'
 import { Position } from '../models/Position'
@@ -47,7 +42,7 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 		retrievePeopleData()
 			.then(loadedPeople => { setPeople(loadedPeople) })
 		retrievePositionsData()
-			.then(loadedPositions => { props.setRoles(loadedPositions) })
+			.then(loadedRoles => { props.setRoles(loadedRoles) })
 	}, [])
 
 	return (
