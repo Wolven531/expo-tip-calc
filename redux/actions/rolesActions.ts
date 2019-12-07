@@ -1,10 +1,21 @@
 import { Position } from '../../models/Position'
 
-import { SET_ROLES } from '../actionTypes'
+import {
+	ADD_ROLE,
+	SET_ROLES
+} from '../actionTypes'
+
+const addRole = (newRole: Position) => ({
+	payload: newRole,
+	type: ADD_ROLE
+})
 
 const setRoles = (roles: Position[]) => ({
 	payload: roles,
 	type: SET_ROLES
 })
 
-export { setRoles }
+export {
+	addRole,
+	setRoles
+}
