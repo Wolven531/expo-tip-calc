@@ -13,7 +13,10 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
-import { setRoles } from '../redux/actions/rolesActions'
+import {
+	addRole,
+	setRoles
+} from '../redux/actions/rolesActions'
 import { IRolesReducerProps } from '../redux/reducers/rolesReducer'
 
 import {
@@ -37,6 +40,7 @@ import {
 import { RoleDisplay } from '../components/RoleDisplay'
 
 interface IPositionsScreen {
+	addRole: (newRole: Position) => any
 	roles: Position[]
 	setRoles: (roles: Position[]) => any
 }
@@ -94,8 +98,7 @@ const PositionsScreenDC: FC<IPositionsScreen> = (props) => {
 						</View>
 						<Button
 							onPress={() => {
-								// setPositions(stalePositions =>
-								// 	stalePositions.concat(new Position(newPositionTitle, parseInt(newPositionPoints, 10))))
+								props.addRole(new Position(newPositionTitle, parseInt(newPositionPoints, 10)))
 								setNewPositionTitle(DEFAULT_TITLE)
 								setNewPositionPoints(DEFAULT_POINTS)
 							}}
@@ -196,6 +199,7 @@ const styles = StyleSheet.create({
 })
 
 const mapDispatchToProps = {
+	addRole,
 	setRoles
 }
 
