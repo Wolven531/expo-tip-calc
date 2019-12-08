@@ -29,6 +29,8 @@ import {
 } from '../services/PeopleService'
 import { retrievePositionsData } from '../services/PositionsService'
 
+import { DeleteButton } from '../components/DeleteButton'
+
 interface IPeopleScreenProps {
 	roles: Position[]
 	setRoles: (roles: Position[]) => any
@@ -112,7 +114,12 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 				<FlatList
 					data={people}
 					keyExtractor={(item: Person, index: number) => String(index)}
-					renderItem={({ item }) => <Text>{item.name}</Text>}
+					renderItem={({ item }) => { return (
+						<View style={styles.personContainer}>
+							<Text>{item.name}</Text>
+							<DeleteButton onDelete={() => { /*props.onDelete(props.role)*/ }} />
+						</View>
+					)}}
 					/>
 			</View>
 		</ScrollView>
@@ -163,6 +170,16 @@ const styles = StyleSheet.create({
 		borderColor: '#333',
 		borderWidth: 1,
 		margin: 10,
+		padding: 10
+	},
+	personContainer: {
+		alignItems: 'center',
+		borderColor: '#333',
+		borderRadius: 10,
+		borderWidth: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		marginVertical: 5,
 		padding: 10
 	}
 })
