@@ -21,7 +21,7 @@ const PersonDisplay: FC<IPersonDisplayProps> = (props) => {
 			<Text style={styles.fontTitle}>
 				{props.person.name}
 				<Text style={styles.fontSpacer}> - </Text>
-				<Text style={styles.fontValue}>{getPluralizedPoints(props.person.position.points)}</Text>
+				<Text style={styles.fontValue}>{props.person.position.title}</Text>
 			</Text>
 			<DeleteButton onDelete={() => { props.onDelete(props.person) }} />
 		</View>
