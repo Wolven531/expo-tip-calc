@@ -29,7 +29,7 @@ import {
 } from '../services/PeopleService'
 import { retrievePositionsData } from '../services/PositionsService'
 
-import { DeleteButton } from '../components/DeleteButton'
+import { PersonDisplay } from '../components/PersonDisplay'
 
 interface IPeopleScreenProps {
 	roles: Position[]
@@ -114,12 +114,10 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 				<FlatList
 					data={people}
 					keyExtractor={(item: Person, index: number) => String(index)}
-					renderItem={({ item }) => { return (
-						<View style={styles.personContainer}>
-							<Text>{item.name}</Text>
-							<DeleteButton onDelete={() => { /*props.onDelete(props.role)*/ }} />
-						</View>
-					)}}
+					renderItem={({ item }) =>
+						<PersonDisplay
+							onDelete={() => {}}
+						 	person={item} />}
 					/>
 			</View>
 		</ScrollView>
