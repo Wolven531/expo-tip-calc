@@ -115,12 +115,6 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 					renderItem={({ item }) => <Text>{item.name}</Text>}
 					/>
 			</View>
-			<View style={{ marginBottom: 15 }}>
-				{people.length > 0 && <Button
-					color="#a33"
-					onPress={() => { setPeople([]) }}
-					title="Clear Current People" />}
-			</View>
 		</ScrollView>
 	)
 };
