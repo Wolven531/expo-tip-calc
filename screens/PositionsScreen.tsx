@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 
 import {
 	addRole,
+	deleteRole,
 	setRoles
 } from '../redux/actions/rolesActions'
 import { IRolesReducerProps } from '../redux/reducers/rolesReducer'
@@ -41,6 +42,7 @@ import { RoleDisplay } from '../components/RoleDisplay'
 
 interface IPositionsScreen {
 	addRole: (newRole: Position) => any
+	deleteRole: (roleToBeDeleted: Position) => any
 	roles: Position[]
 	setRoles: (roles: Position[]) => any
 }
@@ -67,13 +69,7 @@ const PositionsScreenDC: FC<IPositionsScreen> = (props) => {
 					keyExtractor={(item: Position, index: number) => String(index)}
 					renderItem={({ item }) =>
 						<RoleDisplay
-							onDelete={(role: Position) => {
-								// setPositions(staleRoles =>
-								// 	staleRoles.filter(staleRole => // TODO: change this comparison to ID based
-								// 		staleRole.points !== role.points || staleRole.title !== role.title
-								// 	)
-								// )
-							}}
+							onDelete={(role: Position) => { props.deleteRole(role) }}
 							role={item} />}
 					style={styles.positionsList}
 					/>
@@ -200,6 +196,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = {
 	addRole,
+	deleteRole,
 	setRoles
 }
 
