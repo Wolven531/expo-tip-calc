@@ -6,7 +6,6 @@ import {
 } from 'react-native'
 
 import { Person } from '../models/Person'
-import { getPluralizedPoints } from '../services/utils'
 
 import { DeleteButton } from './DeleteButton'
 
