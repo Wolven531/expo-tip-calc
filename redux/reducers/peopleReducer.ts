@@ -17,22 +17,22 @@ const initialState: IPeopleReducerProps = {
 const peopleReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_PERSON:
-			// return {
-			// 	...state,
-			// 	roles: state.roles.concat(action.payload)
-			// }
+			return {
+				...state,
+				people: state.people.concat(action.payload)
+			}
 		case DELETE_PERSON:
-			// const roleToBeDeleted: Position = action.payload
-			// return {
-			// 	...state,
-			// 	roles: state.roles.filter(staleRole => staleRole.points !== roleToBeDeleted.points ||
-			// 											staleRole.title !== roleToBeDeleted.title)
-			// }
+			const personToBeDeleted: Person = action.payload
+			return {
+				...state,
+				people: state.people.filter(stalePerson => stalePerson.name !== personToBeDeleted.name ||
+														stalePerson.position !== personToBeDeleted.position)
+			}
 		case SET_PEOPLE:
-			// return {
-			// 	...state,
-			// 	roles: action.payload
-			// }
+			return {
+				...state,
+				people: action.payload
+			}
 		default:
 			return state
 	}
