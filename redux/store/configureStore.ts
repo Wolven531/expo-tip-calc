@@ -9,6 +9,7 @@ import {
 import thunk from 'redux-thunk'
 
 // import { IApplicationState, reducers } from './'
+import { peopleReducer } from '../reducers/peopleReducer'
 import { rolesReducer } from '../reducers/rolesReducer'
 
 // const configureStore = (history: History, initialState?: any) => {
@@ -19,6 +20,7 @@ const configureStore = (history: any, initialState?: any) => {
 	]
 
 	const rootReducer = combineReducers({
+		peopleReducer,
 		rolesReducer
 		// ...reducers,
 		// router: connectRouter(history)
