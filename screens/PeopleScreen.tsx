@@ -13,7 +13,10 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
-import { setPeople } from '../redux/actions/peopleActions'
+import {
+	addPerson,
+	setPeople
+} from '../redux/actions/peopleActions'
 import { setRoles } from '../redux/actions/rolesActions'
 import { IPeopleReducerProps } from '../redux/reducers/peopleReducer'
 import { IRolesReducerProps } from '../redux/reducers/rolesReducer'
@@ -34,10 +37,11 @@ import { retrievePositionsData } from '../services/PositionsService'
 import { PersonDisplay } from '../components/PersonDisplay'
 
 interface IPeopleScreenProps {
+	addPerson: (newPerson: Person) => any
 	people: Person[]
 	roles: Position[]
-	setRoles: (roles: Position[]) => any
 	setPeople: (people: Person[]) => any
+	setRoles: (roles: Position[]) => any
 }
 
 const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
@@ -78,7 +82,7 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 							if (newPersonName.length < 1) {
 								return
 							}
-							// setPeople(stalePeople => stalePeople.concat(new Person(newPersonName, new Position('', 0))))
+							props.addPerson(new Person(newPersonName, new Position('', 0)))
 							setNewPersonName('')
 						}}
 						title="Add Person" />
@@ -184,6 +188,7 @@ const styles = StyleSheet.create({
 })
 
 const mapDispatchToProps = {
+	addPerson,
 	setPeople,
 	setRoles
 }
