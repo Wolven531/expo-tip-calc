@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 
 import {
 	addPerson,
+	deletePerson,
 	setPeople
 } from '../redux/actions/peopleActions'
 import { setRoles } from '../redux/actions/rolesActions'
@@ -38,6 +39,7 @@ import { PersonDisplay } from '../components/PersonDisplay'
 
 interface IPeopleScreenProps {
 	addPerson: (newPerson: Person) => any
+	deletePerson: (personToRemove: Person) => any
 	people: Person[]
 	roles: Position[]
 	setPeople: (people: Person[]) => any
@@ -121,7 +123,7 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 					keyExtractor={(item: Person, index: number) => String(index)}
 					renderItem={({ item }) =>
 						<PersonDisplay
-							onDelete={() => {}}
+							onDelete={() => { props.deletePerson(item) }}
 						 	person={item} />}
 					/>
 			</View>
@@ -189,6 +191,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = {
 	addPerson,
+	deletePerson,
 	setPeople,
 	setRoles
 }
