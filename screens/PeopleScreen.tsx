@@ -48,6 +48,7 @@ interface IPeopleScreenProps {
 
 const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 	const [newPersonName, setNewPersonName] = useState('')
+	const [newPersonRoleIndex, setNewPersonRoleIndex] = useState(0)
 
 	useEffect(() => {
 		retrievePeopleData()
@@ -66,7 +67,7 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 					style={styles.inputNewPersonName}
 					value={newPersonName} />
 				<Picker
-					onValueChange={(itemValue, itemIndex) => { }}
+					onValueChange={(itemValue, itemIndex) => { setNewPersonRoleIndex(itemIndex) }}
 					selectedValue={''}
 					style={{ height: 35, width: '48%' }} >
 					{props.roles.map(role =>
@@ -84,7 +85,7 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 							if (newPersonName.length < 1) {
 								return
 							}
-							props.addPerson(new Person(newPersonName, new Position('', 0)))
+							props.addPerson(new Person(newPersonName, props.roles[newPersonRoleIndex]))
 							setNewPersonName('')
 						}}
 						title="Add Person" />
