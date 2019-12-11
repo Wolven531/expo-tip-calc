@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 
 import { setPeople } from '../redux/actions/peopleActions'
 import { setRoles } from '../redux/actions/rolesActions'
+import { IPeopleReducerProps } from '../redux/reducers/peopleReducer'
 import { IRolesReducerProps } from '../redux/reducers/rolesReducer'
 
 import {
@@ -188,9 +189,13 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (combinedReducers) => {
+	const peopleReducer: IPeopleReducerProps = combinedReducers.peopleReducer
 	const rolesReducer: IRolesReducerProps = combinedReducers.rolesReducer
 
-	return { roles: rolesReducer.roles }
+	return {
+		people: peopleReducer.people,
+		roles: rolesReducer.roles
+	}
 }
 
 const PeopleScreen = connect(mapStateToProps, mapDispatchToProps)(PeopleScreenDC)
