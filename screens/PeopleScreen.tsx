@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 
+import { setPeople } from '../redux/actions/peopleActions'
 import { setRoles } from '../redux/actions/rolesActions'
 import { IRolesReducerProps } from '../redux/reducers/rolesReducer'
 
@@ -32,17 +33,18 @@ import { retrievePositionsData } from '../services/PositionsService'
 import { PersonDisplay } from '../components/PersonDisplay'
 
 interface IPeopleScreenProps {
+	people: Person[]
 	roles: Position[]
 	setRoles: (roles: Position[]) => any
+	setPeople: (people: Person[]) => any
 }
 
 const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 	const [newPersonName, setNewPersonName] = useState('')
-	const [people, setPeople] = useState<Person[]>([])
 
 	useEffect(() => {
 		retrievePeopleData()
-			.then(loadedPeople => { setPeople(loadedPeople) })
+			.then(loadedPeople => { props.setPeople(loadedPeople) })
 		retrievePositionsData()
 			.then(loadedRoles => { props.setRoles(loadedRoles) })
 	}, [])
@@ -75,7 +77,7 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 							if (newPersonName.length < 1) {
 								return
 							}
-							setPeople(stalePeople => stalePeople.concat(new Person(newPersonName, new Position('', 0))))
+							// setPeople(stalePeople => stalePeople.concat(new Person(newPersonName, new Position('', 0))))
 							setNewPersonName('')
 						}}
 						title="Add Person" />
@@ -84,10 +86,8 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 					<Button
 						color="#3a3"
 						onPress={() => {
-							persistPeopleData(people)
+							persistPeopleData(props.people)
 							Platform.select({
-								// android: () => {},
-								// ios: () => {}
 								default: () => {
 									Alert.alert(
 										TITLE_PEOPLE_SAVED,
@@ -110,9 +110,9 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 				</View>
 			</View>
 			<View style={styles.peopleDisplay}>
-				{people.length < 1 && <Text style={{ textAlign: 'center' }}>There are no people currently</Text>}
+				{props.people.length < 1 && <Text style={{ textAlign: 'center' }}>There are no people currently</Text>}
 				<FlatList
-					data={people}
+					data={props.people}
 					keyExtractor={(item: Person, index: number) => String(index)}
 					renderItem={({ item }) =>
 						<PersonDisplay
@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
 })
 
 const mapDispatchToProps = {
+	setPeople,
 	setRoles
 }
 
