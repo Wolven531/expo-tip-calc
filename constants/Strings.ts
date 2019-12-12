@@ -1,3 +1,4 @@
+export const LBL_ADD_NEW_PERSON = 'Add New Person'
 export const LBL_ADD_NEW_POSITION = 'Add New Position'
 export const LBL_DELETE_ROLE = 'Delete'
 export const LBL_POINTS_MULTIPLE = 'pts'
@@ -10,9 +11,11 @@ export const MSG_PEOPLE_SAVED = 'The current people have been saved to device'
 export const MSG_POSITIONS_EMPTY = 'There are no positions currently'
 export const MSG_POSITIONS_SAVED = 'The current positions have been saved to device'
 
+export const PLACEHOLDER_NEW_PERSON_NAME = 'New person name'
 export const PLACEHOLDER_NEW_POSITION_POINTS = 'New position points'
 export const PLACEHOLDER_NEW_POSITION_TITLE = 'New position title'
 
+export const TITLE_ADD_PERSON = 'Add Person'
 export const TITLE_ADD_POSITION = 'Add Position'
 export const TITLE_CONFIRM_ROLE_DELETE = 'Confirm Role Deletion'
 export const TITLE_PEOPLE_SAVED = 'People Saved'
