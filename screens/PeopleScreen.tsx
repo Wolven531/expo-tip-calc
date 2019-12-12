@@ -93,7 +93,7 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 							<Picker
 								onValueChange={(itemValue, itemIndex) => { setNewPersonRoleIndex(itemIndex) }}
 								selectedValue={''}
-								style={{ height: 35, width: '48%' }} >
+								style={styles.rolePicker} >
 								{props.roles.map(role =>
 									<Picker.Item
 										key={role.title}
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		paddingHorizontal: 5,
 		paddingVertical: 2,
-		width: '80%'
+		width: '50%'
 	},
 	newPersonContainer: {
 		borderColor: '#333',
@@ -186,6 +186,11 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		margin: 10,
 		padding: 10
+	},
+	rolePicker: {
+		height: 35,
+		marginTop: 10,
+		width: '48%'
 	}
 })
 
