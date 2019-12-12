@@ -78,22 +78,6 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 						 	person={item} />}
 					/>
 				<View style={styles.newPersonContainer}>
-					<TextInput
-						onChangeText={text => setNewPersonName(text)}
-						placeholder="New person name"
-						style={styles.inputNewPersonName}
-						value={newPersonName} />
-					<Picker
-						onValueChange={(itemValue, itemIndex) => { setNewPersonRoleIndex(itemIndex) }}
-						selectedValue={''}
-						style={{ height: 35, width: '48%' }} >
-						{props.roles.map(role =>
-							<Picker.Item
-								key={role.title}
-								label={`${role.title} (${role.points} pt${role.points > 1 ? 's' : ''})`}
-								value={role.title.toLowerCase()} />
-						)}
-					</Picker>
 					<TouchableOpacity
 						onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}
 						style={styles.buttonNewPositionExpander}>
@@ -106,6 +90,17 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 								placeholder={PLACEHOLDER_NEW_PERSON_NAME}
 								style={styles.inputNewPersonName}
 								value={newPersonName} />
+							<Picker
+								onValueChange={(itemValue, itemIndex) => { setNewPersonRoleIndex(itemIndex) }}
+								selectedValue={''}
+								style={{ height: 35, width: '48%' }} >
+								{props.roles.map(role =>
+									<Picker.Item
+										key={role.title}
+										label={`${role.title} (${role.points} pt${role.points > 1 ? 's' : ''})`}
+										value={role.title.toLowerCase()} />
+								)}
+							</Picker>
 						</View>
 						<Button
 							onPress={() => {
@@ -184,12 +179,9 @@ const styles = StyleSheet.create({
 	newPersonContainer: {
 		borderColor: '#333',
 		borderWidth: 1,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
 		marginBottom: 10,
-		marginTop: 10,
-		padding: 5,
-		width: '100%'
+		marginTop: 20,
+		padding: 10
 	},
 	newPersonInputContainer: {
 		flexDirection: 'row',
