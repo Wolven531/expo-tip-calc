@@ -145,14 +145,6 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 }
 
 const styles = StyleSheet.create({
-	buttonCell: {
-		width: '48%'
-	},
-	buttonContainer: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		width: '100%'
-	},
 	buttonNewPositionExpander: { },
 	container: {
 		backgroundColor: '#fff',
@@ -193,16 +185,6 @@ const styles = StyleSheet.create({
 		borderColor: '#333',
 		borderWidth: 1,
 		margin: 10,
-		padding: 10
-	},
-	personContainer: {
-		alignItems: 'center',
-		borderColor: '#333',
-		borderRadius: 10,
-		borderWidth: 1,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		marginVertical: 5,
 		padding: 10
 	}
 })
