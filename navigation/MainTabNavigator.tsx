@@ -1,12 +1,13 @@
 import React from 'react'
 import { Platform } from 'react-native'
 import {
-	createStackNavigator,
 	createBottomTabNavigator,
+	createStackNavigator,
 	StackNavigatorConfig
 } from 'react-navigation'
 
 import TabBarIcon from '../components/TabBarIcon'
+import { CalculationsScreen } from '../screens/CalculationsScreen'
 import { HomeScreen } from '../screens/HomeScreen'
 import { PeopleScreen } from '../screens/PeopleScreen'
 import { PositionsScreen } from '../screens/PositionsScreen'
@@ -72,10 +73,26 @@ PositionsStack.navigationOptions = {
 	)
 }
 
+const CalculationsStack = createStackNavigator(
+	{
+		Calculations: CalculationsScreen
+	},
+	config
+);
+
+(CalculationsStack as any).path = ''
+CalculationsStack.navigationOptions = {
+	tabBarLabel: 'Calculations',
+	tabBarIcon: ({ focused }) => (
+		<TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+	)
+}
+
 const tabNavigator = createBottomTabNavigator({
 	HomeStack,
 	PeopleStack,
-	PositionsStack
+	PositionsStack,
+	CalculationsStack
 });
 
 (tabNavigator as any).path = ''
