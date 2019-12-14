@@ -8,23 +8,29 @@ import {
 import { connect } from 'react-redux'
 
 import { IPeopleReducerProps } from '../redux/reducers/peopleReducer'
+import { IRolesReducerProps } from '../redux/reducers/rolesReducer'
 import { setPeople } from '../redux/actions/peopleActions'
+import { setRoles } from '../redux/actions/rolesActions'
 
 import { Person } from '../models/Person'
+import { Position } from '../models/Position'
 
 import { retrievePeopleData } from '../services/PeopleService'
+import { retrievePositionsData } from '../services/PositionsService'
 
 interface IHomeScreenProps {
 	people: Person[]
+	roles: Person[]
 	setPeople: (people: Person[]) => any
+	setRoles: (roles: Position[]) => any
 }
 
 const HomeScreenDC: FC<IHomeScreenProps> = (props) => {
 	useEffect(() => {
 		retrievePeopleData()
 			.then(loadedPeople => { props.setPeople(loadedPeople) })
-		// retrievePositionsData()
-		// 	.then(loadedRoles => { props.setRoles(loadedRoles) })
+		retrievePositionsData()
+			.then(loadedRoles => { props.setRoles(loadedRoles) })
 	}, [])
 
 	return (
@@ -68,14 +74,17 @@ const styles = StyleSheet.create({
 })
 
 const mapDispatchToProps = {
-	setPeople
+	setPeople,
+	setRoles
 }
 
 const mapStateToProps = (combinedReducers) => {
 	const peopleReducer: IPeopleReducerProps = combinedReducers.peopleReducer
+	const rolesReducer: IRolesReducerProps = combinedReducers.rolesReducer
 
 	return {
-		people: peopleReducer.people
+		people: peopleReducer.people,
+		roles: rolesReducer.roles
 	}
 }
 
