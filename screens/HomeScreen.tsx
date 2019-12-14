@@ -36,7 +36,10 @@ const HomeScreenDC: FC<IHomeScreenProps> = (props) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.tabBarInfoContainer}>
-				<Text>Hello. The system currently holds {props.people.length} people.</Text>
+				<Text>Hello</Text>
+				<Text>The system currently holds</Text>
+				<Text>{props.people.length} people</Text>
+				<Text>{props.roles.length} roles</Text>
 			</View>
 		</View>
 	)
