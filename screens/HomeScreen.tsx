@@ -1,22 +1,42 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import {
 	Platform,
 	StyleSheet,
 	Text,
 	View
 } from 'react-native'
+import { connect } from 'react-redux'
 
-const HomeScreen: FC<any> = (props) => {
+import { IPeopleReducerProps } from '../redux/reducers/peopleReducer'
+import { setPeople } from '../redux/actions/peopleActions'
+
+import { Person } from '../models/Person'
+
+import { retrievePeopleData } from '../services/PeopleService'
+
+interface IHomeScreenProps {
+	people: Person[]
+	setPeople: (people: Person[]) => any
+}
+
+const HomeScreenDC: FC<IHomeScreenProps> = (props) => {
+	useEffect(() => {
+		retrievePeopleData()
+			.then(loadedPeople => { props.setPeople(loadedPeople) })
+		// retrievePositionsData()
+		// 	.then(loadedRoles => { props.setRoles(loadedRoles) })
+	}, [])
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.tabBarInfoContainer}>
-				<Text>Hello</Text>
+				<Text>Hello.</Text>
 			</View>
 		</View>
 	)
 };
 
-(HomeScreen as any).navigationOptions = {
+(HomeScreenDC as any).navigationOptions = {
 	header: null
 }
 
@@ -46,5 +66,19 @@ const styles = StyleSheet.create({
 		})
 	}
 })
+
+const mapDispatchToProps = {
+	setPeople
+}
+
+const mapStateToProps = (combinedReducers) => {
+	const peopleReducer: IPeopleReducerProps = combinedReducers.peopleReducer
+
+	return {
+		people: peopleReducer.people
+	}
+}
+
+const HomeScreen = connect(mapStateToProps, mapDispatchToProps)(HomeScreenDC)
 
 export { HomeScreen }
