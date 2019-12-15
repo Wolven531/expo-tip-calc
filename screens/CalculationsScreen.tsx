@@ -5,12 +5,23 @@ import {
 	Text,
 	View
 } from 'react-native'
+// NOTE: requires more work: https://github.com/react-native-community/react-native-datetimepicker
+// import DateTimePicker from '@react-native-community/datetimepicker'
 
 const CalculationsScreen: FC<any> = (props) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.tabBarInfoContainer}>
 				<Text>Hello</Text>
+				{/*
+				<DateTimePicker
+					value={new Date()}
+					mode={'date'} // 'date' | ???
+					is24Hour={false}
+					display={'default'} // 'calendar' | 'clock' | 'spinner'
+					onChange={() => { return }}
+					/>
+				*/}
 			</View>
 		</View>
 	)
