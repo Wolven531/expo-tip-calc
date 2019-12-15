@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import {
 	Platform,
@@ -9,15 +9,30 @@ import {
 // NOTE: requires more work: https://github.com/react-native-community/react-native-datetimepicker
 // import DateTimePicker from '@react-native-community/datetimepicker'
 import CustomMultiPicker from 'react-native-multiple-select-list'
+
+// redux
+import { setPeople } from '../redux/actions/peopleActions'
 import { IPeopleReducerProps } from '../redux/reducers/peopleReducer'
 
+// models
 import { Person } from '../models/Person'
+
+// services
+import { retrievePeopleData } from '../services/PeopleService'
 
 interface ICalculationsScreenProps {
 	people: Person[]
+	setPeople: (people: Person[]) => any
 }
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
+	useEffect(() => {
+		retrievePeopleData()
+			.then(loadedPeople => { props.setPeople(loadedPeople) })
+		// retrievePositionsData()
+		// 	.then(loadedRoles => { props.setRoles(loadedRoles) })
+	}, [])
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.tabBarInfoContainer}>
@@ -92,7 +107,9 @@ const styles = StyleSheet.create({
 	}
 })
 
-const mapDispatchToProps = { }
+const mapDispatchToProps = {
+	setPeople
+}
 
 const mapStateToProps = (combinedReducers) => {
 	const peopleReducer: IPeopleReducerProps = combinedReducers.peopleReducer
