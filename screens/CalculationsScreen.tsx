@@ -1,15 +1,23 @@
 import React, { FC } from 'react'
+import { connect } from 'react-redux'
 import {
 	Platform,
 	StyleSheet,
-	Text,
+	// Text,
 	View
 } from 'react-native'
 // NOTE: requires more work: https://github.com/react-native-community/react-native-datetimepicker
 // import DateTimePicker from '@react-native-community/datetimepicker'
 import CustomMultiPicker from 'react-native-multiple-select-list'
+import { IPeopleReducerProps } from '../redux/reducers/peopleReducer'
 
-const CalculationsScreen: FC<any> = (props) => {
+import { Person } from '../models/Person'
+
+interface ICalculationsScreenProps {
+	people: Person[]
+}
+
+const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.tabBarInfoContainer}>
@@ -31,14 +39,14 @@ const CalculationsScreen: FC<any> = (props) => {
 					iconSize={20}
 					multiple={true} //
 					// options={userList}
-					options={['amy', 'bob']}
+					options={props.people.map(person => person.name)}
 					// placeholder={'Search'}
 					// placeholderTextColor={'#757575'}
 					returnValue={'label'} // 'label' | 'value'
 					rowBackgroundColor={'#eee'}
 					rowHeight={50}
 					rowRadius={15}
-					scrollViewHeight={150}
+					// scrollViewHeight={150}
 					// search={true} // show search bar
 					selectedIconName={Platform.OS === 'ios'
 						? 'ios-checkmark-circle-outline'
@@ -53,7 +61,7 @@ const CalculationsScreen: FC<any> = (props) => {
 	)
 };
 
-(CalculationsScreen as any).navigationOptions = {
+(CalculationsScreenDC as any).navigationOptions = {
 	header: null
 }
 
@@ -83,5 +91,17 @@ const styles = StyleSheet.create({
 		})
 	}
 })
+
+const mapDispatchToProps = { }
+
+const mapStateToProps = (combinedReducers) => {
+	const peopleReducer: IPeopleReducerProps = combinedReducers.peopleReducer
+
+	return {
+		people: peopleReducer.people
+	}
+}
+
+const CalculationsScreen = connect(mapStateToProps, mapDispatchToProps)(CalculationsScreenDC)
 
 export { CalculationsScreen }
