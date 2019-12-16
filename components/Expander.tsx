@@ -6,11 +6,11 @@ import {
 	View
 } from 'react-native'
 
-import {
-	LBL_ADD_NEW_PERSON
-} from '../constants/Strings'
+interface IExpanderProps {
+	label: string
+}
 
-const Expander: FC<any> = (props) => {
+const Expander: FC<IExpanderProps> = (props) => {
 	const [isAddExpanded, setIsAddExpanded] = useState(false)
 
 	return (
@@ -18,7 +18,7 @@ const Expander: FC<any> = (props) => {
 			<TouchableOpacity
 				onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}
 				style={styles.buttonExpander}>
-				<Text style={styles.expanderText}>{isAddExpanded ? '-' : '+'} {LBL_ADD_NEW_PERSON}</Text>
+				<Text style={styles.expanderText}>{isAddExpanded ? '-' : '+'} {props.label}</Text>
 			</TouchableOpacity>
 			{isAddExpanded && <View>
 				{props.children}
