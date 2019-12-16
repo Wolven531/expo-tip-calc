@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, memo, useState } from 'react'
 import {
 	StyleSheet,
 	Text,
@@ -12,7 +12,7 @@ interface IExpanderProps {
 	symbolExpand?: string
 }
 
-const Expander: FC<IExpanderProps> = (props) => {
+const Expander: FC<IExpanderProps> = memo((props) => {
 	const [isAddExpanded, setIsAddExpanded] = useState(false)
 	const symCol = props.symbolCollapse === undefined
 		? '-'
@@ -33,7 +33,7 @@ const Expander: FC<IExpanderProps> = (props) => {
 			</View>}
 		</View>
 	)
-}
+})
 
 const styles = StyleSheet.create({
 	buttonExpander: { },
