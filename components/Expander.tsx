@@ -8,17 +8,25 @@ import {
 
 interface IExpanderProps {
 	label: string
+	symbolCollapse?: string
+	symbolExpand?: string
 }
 
 const Expander: FC<IExpanderProps> = (props) => {
 	const [isAddExpanded, setIsAddExpanded] = useState(false)
+	const symCol = props.symbolCollapse === undefined
+		? '-'
+		: props.symbolCollapse
+	const symExp = props.symbolExpand === undefined
+		? '+'
+		: props.symbolExpand
 
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity
 				onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}
 				style={styles.buttonExpander}>
-				<Text style={styles.expanderText}>{isAddExpanded ? '-' : '+'} {props.label}</Text>
+				<Text style={styles.expanderText}>{isAddExpanded ? symCol : symExp} {props.label}</Text>
 			</TouchableOpacity>
 			{isAddExpanded && <View>
 				{props.children}
