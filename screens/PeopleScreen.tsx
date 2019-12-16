@@ -9,7 +9,6 @@ import {
 	StyleSheet,
 	Text,
 	TextInput,
-	TouchableOpacity,
 	View
 } from 'react-native'
 import { connect } from 'react-redux'
@@ -39,6 +38,7 @@ import {
 } from '../services/PeopleService'
 import { retrievePositionsData } from '../services/PositionsService'
 
+import { Expander } from '../components/Expander'
 import { PersonDisplay } from '../components/PersonDisplay'
 
 interface IPeopleScreenProps {
@@ -55,7 +55,6 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 	const DEFAULT_ROLE_INDEX = 0
 	const [newPersonName, setNewPersonName] = useState(DEFAULT_NAME)
 	const [newPersonRoleIndex, setNewPersonRoleIndex] = useState(DEFAULT_ROLE_INDEX)
-	const [isAddExpanded, setIsAddExpanded] = useState(false)
 
 	useEffect(() => {
 		retrievePeopleData()
@@ -78,12 +77,7 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 						 	person={item} />}
 					/>
 				<View style={styles.newPersonContainer}>
-					<TouchableOpacity
-						onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}
-						style={styles.buttonNewPositionExpander}>
-						<Text style={styles.expanderText}>{isAddExpanded ? '-' : '+'} {LBL_ADD_NEW_PERSON}</Text>
-					</TouchableOpacity>
-					{isAddExpanded && <View>
+					<Expander label={LBL_ADD_NEW_PERSON}>
 						<View style={styles.newPersonInputContainer}>
 							<TextInput
 								onChangeText={setNewPersonName}
@@ -109,7 +103,7 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 								setNewPersonRoleIndex(DEFAULT_ROLE_INDEX)
 							}}
 							title={TITLE_ADD_PERSON} />
-					</View>}
+					</Expander>
 				</View>
 				<Button
 					color="#3a3"
