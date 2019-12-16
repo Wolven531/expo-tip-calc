@@ -139,15 +139,10 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 }
 
 const styles = StyleSheet.create({
-	buttonNewPositionExpander: { },
 	container: {
 		backgroundColor: '#fff',
 		flex: 1,
 		padding: 15
-	},
-	expanderText: {
-		fontSize: 16,
-		fontWeight: 'bold'
 	},
 	header: {
 		fontSize: 16,
