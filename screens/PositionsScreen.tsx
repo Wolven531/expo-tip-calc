@@ -8,7 +8,6 @@ import {
 	StyleSheet,
 	Text,
 	TextInput,
-	TouchableOpacity,
 	View
 } from 'react-native'
 import { connect } from 'react-redux'
@@ -38,6 +37,7 @@ import {
 	retrievePositionsData
 } from '../services/PositionsService'
 
+import { Expander } from '../components/Expander'
 import { RoleDisplay } from '../components/RoleDisplay'
 
 interface IPositionsScreen {
@@ -52,7 +52,6 @@ const PositionsScreenDC: FC<IPositionsScreen> = (props) => {
 	const DEFAULT_TITLE = ''
 	const [newPositionTitle, setNewPositionTitle] = useState(DEFAULT_TITLE)
 	const [newPositionPoints, setNewPositionPoints] = useState(DEFAULT_POINTS)
-	const [isAddExpanded, setIsAddExpanded] = useState(false)
 
 	useEffect(() => {
 		retrievePositionsData()
@@ -74,12 +73,7 @@ const PositionsScreenDC: FC<IPositionsScreen> = (props) => {
 					style={styles.positionsList}
 					/>
 				<View style={styles.newPositionContainer}>
-					<TouchableOpacity
-						onPress={() => setIsAddExpanded(staleExpanded => !staleExpanded)}
-						style={styles.buttonNewPositionExpander}>
-						<Text style={styles.expanderText}>{isAddExpanded ? '-' : '+'} {LBL_ADD_NEW_POSITION}</Text>
-					</TouchableOpacity>
-					{isAddExpanded && <View>
+					<Expander label={LBL_ADD_NEW_POSITION}>
 						<View style={styles.newPositionInputContainer}>
 							<TextInput
 								onChangeText={text => setNewPositionTitle(text)}
@@ -99,7 +93,7 @@ const PositionsScreenDC: FC<IPositionsScreen> = (props) => {
 								setNewPositionPoints(DEFAULT_POINTS)
 							}}
 							title={TITLE_ADD_POSITION} />
-					</View>}
+					</Expander>
 				</View>
 				<Button
 					color="#3a3"
@@ -135,7 +129,6 @@ const PositionsScreenDC: FC<IPositionsScreen> = (props) => {
 }
 
 const styles = StyleSheet.create({
-	buttonNewPositionExpander: { },
 	centeredText: {
 		textAlign: 'center'
 	},
@@ -143,10 +136,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		flex: 1,
 		padding: 15
-	},
-	expanderText: {
-		fontSize: 16,
-		fontWeight: 'bold'
 	},
 	header: {
 		fontSize: 16,
