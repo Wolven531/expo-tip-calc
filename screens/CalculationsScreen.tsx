@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import {
 	Platform,
@@ -26,6 +26,8 @@ interface ICalculationsScreenProps {
 }
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
+	const [selectedPeopleIndices, setSelectedPeopleIndices] = useState([])
+
 	useEffect(() => {
 		retrievePeopleData()
 			.then(loadedPeople => { props.setPeople(loadedPeople) })
@@ -47,8 +49,13 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					/>
 				*/}
 				<CustomMultiPicker
-					callback={(res) => {
-						console.log(res)
+					callback={(res: any[]) => {
+						// if (res.length === 0) { // one value means everything is deselected
+						// 	setSelectedPeopleIndices([])
+						// 	return
+						// }
+
+						setSelectedPeopleIndices(res)
 					}} // callback, array of selected items
 					iconColor={'#00a2dd'}
 					iconSize={20}
@@ -57,7 +64,8 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					options={props.people.map(person => person.name)}
 					// placeholder={'Search'}
 					// placeholderTextColor={'#757575'}
-					returnValue={'label'} // 'label' | 'value'
+					// returnValue={'label'} // 'label' | 'value'
+					returnValue={'value'} // 'label' | 'value'
 					rowBackgroundColor={'#eee'}
 					rowHeight={50}
 					rowRadius={15}
@@ -70,6 +78,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						? 'ios-radio-button-off'
 						: 'md-radio-button-off'}
 					// selected={[1,2]} // list of options which are selected by default
+					selected={selectedPeopleIndices}
 				/>
 			</View>
 		</View>
