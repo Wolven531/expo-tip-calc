@@ -86,13 +86,14 @@ const PeopleScreenDC: FC<IPeopleScreenProps> = (props) => {
 								value={newPersonName} />
 							<Picker
 								onValueChange={(itemValue, itemIndex) => { setNewPersonRoleIndex(itemIndex) }}
-								selectedValue={''}
-								style={styles.rolePicker} >
+								selectedValue={props.roles.length > 0 ? props.roles[newPersonRoleIndex].title : ''}
+								style={styles.rolePicker}
+							>
 								{props.roles.map(role =>
 									<Picker.Item
 										key={role.title}
 										label={`${role.title} (${role.points} pt${role.points > 1 ? 's' : ''})`}
-										value={role.title.toLowerCase()} />
+										value={role.title} />
 								)}
 							</Picker>
 						</View>
