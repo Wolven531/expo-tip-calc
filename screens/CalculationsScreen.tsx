@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import {
 	Platform,
+	ScrollView,
 	StyleSheet,
 	Text,
 	View
@@ -21,7 +22,10 @@ import { Person } from '../models/Person'
 import { retrievePeopleData } from '../services/PeopleService'
 
 // constants
-import { HEADER_SELECT_PEOPLE } from '../constants/Strings'
+import {
+	HEADER_ENTER_HOURS,
+	HEADER_SELECT_PEOPLE
+} from '../constants/Strings'
 
 interface ICalculationsScreenProps {
 	people: Person[]
@@ -39,7 +43,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	}, [])
 
 	return (
-		<View style={styles.container}>
+		<ScrollView style={styles.container}>
 			<View style={styles.headerTextSelectPeople}>
 				<Text style={styles.headerText}>{HEADER_SELECT_PEOPLE}</Text>
 			</View>
@@ -77,7 +81,10 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 				// selected={[1,2]} // list of options which are selected by default
 				selected={selectedPeopleIndices}
 			/>
-		</View>
+			<View style={styles.headerTextSelectPeople}>
+				<Text style={styles.headerText}>{HEADER_ENTER_HOURS}</Text>
+			</View>
+		</ScrollView>
 	)
 };
 

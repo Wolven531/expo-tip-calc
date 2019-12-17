@@ -1,3 +1,4 @@
+export const HEADER_ENTER_HOURS = 'Enter Hours Worked'
 export const HEADER_SELECT_PEOPLE = 'Select People'
 
 export const LBL_ADD_NEW_PERSON = 'Add New Person'
