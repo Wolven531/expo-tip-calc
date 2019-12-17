@@ -1,3 +1,5 @@
+export const HEADER_SELECT_PEOPLE = 'Select People'
+
 export const LBL_ADD_NEW_PERSON = 'Add New Person'
 export const LBL_ADD_NEW_POSITION = 'Add New Position'
 export const LBL_DELETE_ROLE = 'Delete'

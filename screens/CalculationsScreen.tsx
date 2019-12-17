@@ -6,9 +6,9 @@ import {
 	Text,
 	View
 } from 'react-native'
+import CustomMultiPicker from 'react-native-multiple-select-list'
 // NOTE: requires more work: https://github.com/react-native-community/react-native-datetimepicker
 // import DateTimePicker from '@react-native-community/datetimepicker'
-import CustomMultiPicker from 'react-native-multiple-select-list'
 
 // redux
 import { setPeople } from '../redux/actions/peopleActions'
@@ -19,6 +19,9 @@ import { Person } from '../models/Person'
 
 // services
 import { retrievePeopleData } from '../services/PeopleService'
+
+// constants
+import { HEADER_SELECT_PEOPLE } from '../constants/Strings'
 
 interface ICalculationsScreenProps {
 	people: Person[]
@@ -38,7 +41,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.headerTextSelectPeople}>
-				<Text style={styles.headerText}>Select Workers</Text>
+				<Text style={styles.headerText}>{HEADER_SELECT_PEOPLE}</Text>
 			</View>
 			{/*
 			<DateTimePicker
