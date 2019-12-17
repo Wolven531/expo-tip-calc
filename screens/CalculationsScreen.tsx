@@ -33,7 +33,8 @@ interface ICalculationsScreenProps {
 }
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
-	const [selectedPeopleIndices, setSelectedPeopleIndices] = useState([])
+	const simpleNumberSort = (a: number, b: number) => a < b ? -1 : (a > b ? 1 : 0)
+	const [selectedPeopleIndices, setSelectedPeopleIndices] = useState<number[]>([])
 
 	useEffect(() => {
 		retrievePeopleData()
@@ -57,15 +58,17 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 				/>
 			*/}
 			<CustomMultiPicker
-				callback={setSelectedPeopleIndices} // callback, array of selected items
+				callback={(selectedIndexStrings: string[]) => {
+					const indexNums = selectedIndexStrings.map(ind => parseInt(ind, 10))
+					indexNums.sort(simpleNumberSort)
+					setSelectedPeopleIndices(indexNums)
+				}}
 				iconColor={'#00a2dd'}
 				iconSize={20}
-				multiple={true} //
-				// options={userList}
+				multiple={true}
 				options={props.people.map(person => person.name)}
 				// placeholder={'Search'}
 				// placeholderTextColor={'#757575'}
-				// returnValue={'label'} // 'label' | 'value'
 				returnValue={'value'} // 'label' | 'value'
 				rowBackgroundColor={'#eee'}
 				rowHeight={50}
@@ -78,12 +81,13 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 				unselectedIconName={Platform.OS === 'ios'
 					? 'ios-radio-button-off'
 					: 'md-radio-button-off'}
-				// selected={[1,2]} // list of options which are selected by default
 				selected={selectedPeopleIndices}
 			/>
-			<View style={styles.headerTextSelectPeople}>
-				<Text style={styles.headerText}>{HEADER_ENTER_HOURS}</Text>
-			</View>
+			{selectedPeopleIndices.length > 0 && <View>
+				<View style={styles.headerTextSelectPeople}>
+					<Text style={styles.headerText}>{HEADER_ENTER_HOURS}</Text>
+				</View>
+			</View>}
 		</ScrollView>
 	)
 };
