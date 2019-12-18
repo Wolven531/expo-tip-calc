@@ -45,9 +45,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 
 	return (
 		<ScrollView style={styles.container}>
-			<View style={styles.headerTextSelectPeople}>
-				<Text style={styles.headerText}>{HEADER_SELECT_PEOPLE}</Text>
-			</View>
+			
 			{/*
 			<DateTimePicker
 				value={new Date()}
@@ -57,36 +55,41 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 				onChange={() => { return }}
 				/>
 			*/}
-			<CustomMultiPicker
-				callback={(selectedIndexStrings: string[]) => {
-					const indexNums = selectedIndexStrings.map(ind => parseInt(ind, 10))
-					indexNums.sort(simpleNumberSort)
-					setSelectedPeopleIndices(indexNums)
-				}}
-				iconColor={'#00a2dd'}
-				iconSize={20}
-				multiple={true}
-				options={props.people.map(person => person.name)}
-				// placeholder={'Search'}
-				// placeholderTextColor={'#757575'}
-				returnValue={'value'} // 'label' | 'value'
-				rowBackgroundColor={'#eee'}
-				rowHeight={50}
-				rowRadius={15}
-				// scrollViewHeight={150}
-				// search={true} // show search bar
-				selectedIconName={Platform.OS === 'ios'
-					? 'ios-checkmark-circle-outline'
-					: 'md-checkmark-circle-outline'}
-				unselectedIconName={Platform.OS === 'ios'
-					? 'ios-radio-button-off'
-					: 'md-radio-button-off'}
-				selected={selectedPeopleIndices}
-			/>
-			{selectedPeopleIndices.length > 0 && <View>
+			{props.people.length > 0 && <View>
 				<View style={styles.headerTextSelectPeople}>
-					<Text style={styles.headerText}>{HEADER_ENTER_HOURS}</Text>
+					<Text style={styles.headerText}>{HEADER_SELECT_PEOPLE}</Text>
 				</View>
+				<CustomMultiPicker
+					callback={(selectedIndexStrings: string[]) => {
+						const indexNums = selectedIndexStrings.map(ind => parseInt(ind, 10))
+						indexNums.sort(simpleNumberSort)
+						setSelectedPeopleIndices(indexNums)
+					}}
+					iconColor={'#00a2dd'}
+					iconSize={20}
+					multiple={true}
+					options={props.people.map(person => person.name)}
+					// placeholder={'Search'}
+					// placeholderTextColor={'#757575'}
+					returnValue={'value'} // 'label' | 'value'
+					rowBackgroundColor={'#eee'}
+					rowHeight={50}
+					rowRadius={15}
+					// scrollViewHeight={150}
+					// search={true} // show search bar
+					selectedIconName={Platform.OS === 'ios'
+						? 'ios-checkmark-circle-outline'
+						: 'md-checkmark-circle-outline'}
+					unselectedIconName={Platform.OS === 'ios'
+						? 'ios-radio-button-off'
+						: 'md-radio-button-off'}
+					selected={selectedPeopleIndices}
+				/>
+				{selectedPeopleIndices.length > 0 && <View>
+					<View style={styles.headerTextSelectPeople}>
+						<Text style={styles.headerText}>{HEADER_ENTER_HOURS}</Text>
+					</View>
+				</View>}
 			</View>}
 		</ScrollView>
 	)
