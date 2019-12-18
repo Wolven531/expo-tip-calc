@@ -1,4 +1,5 @@
 export const HEADER_ENTER_HOURS = 'Enter Hours Worked'
+export const HEADER_NO_PEOPLE = 'Add People Via the "People" Tab'
 export const HEADER_SELECT_PEOPLE = 'Select People'
 
 export const LBL_ADD_NEW_PERSON = 'Add New Person'

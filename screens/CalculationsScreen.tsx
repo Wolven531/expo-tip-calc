@@ -24,6 +24,7 @@ import { retrievePeopleData } from '../services/PeopleService'
 // constants
 import {
 	HEADER_ENTER_HOURS,
+	HEADER_NO_PEOPLE,
 	HEADER_SELECT_PEOPLE
 } from '../constants/Strings'
 
@@ -55,6 +56,9 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 				onChange={() => { return }}
 				/>
 			*/}
+			{props.people.length === 0 && <View style={styles.headerTextSelectPeople}>
+				<Text style={styles.headerText}>{HEADER_NO_PEOPLE}</Text>
+			</View>}
 			{props.people.length > 0 && <View>
 				<View style={styles.headerTextSelectPeople}>
 					<Text style={styles.headerText}>{HEADER_SELECT_PEOPLE}</Text>
