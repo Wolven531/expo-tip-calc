@@ -97,21 +97,9 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							const selectedPerson = props.people[ind]
 
 							return (
-								<View key={ind} style={{
-									// alignContent: 'center',
-									alignItems: 'center',
-									borderColor: '#333',
-									borderWidth: 1,
-									flexDirection: 'row',
-									padding: 5,
-									paddingLeft: 15
-									}}>
-									<Text style={{ flexGrow: 2 }}>{selectedPerson.name}</Text>
-									<TextInput placeholder={"Hours"} style={{
-										borderColor: '#333',
-										borderWidth: 1,
-										padding: 5
-									}} />
+								<View key={ind} style={styles.hoursContainer}>
+									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
+									<TextInput placeholder={"Hours"} style={styles.hoursInput} />
 								</View>
 							)
 						})}
@@ -138,6 +126,23 @@ const styles = StyleSheet.create({
 	},
 	headerTextSelectPeople: {
 		padding: 15
+	},
+	hoursContainer: {
+		// alignContent: 'center',
+		alignItems: 'center',
+		borderColor: '#333',
+		borderWidth: 1,
+		flexDirection: 'row',
+		padding: 5,
+		paddingLeft: 15
+	},
+	hoursInput: {
+		borderColor: '#333',
+		borderWidth: 1,
+		padding: 5
+	},
+	hoursLabel: {
+		flexGrow: 2
 	}
 })
 
