@@ -15,6 +15,7 @@ export const MSG_PEOPLE_SAVED = 'The current people have been saved to device'
 export const MSG_POSITIONS_EMPTY = 'There are no positions currently'
 export const MSG_POSITIONS_SAVED = 'The current positions have been saved to device'
 
+export const PLACEHOLDER_HOURS = 'Hours'
 export const PLACEHOLDER_NEW_PERSON_NAME = 'New person name'
 export const PLACEHOLDER_NEW_POSITION_POINTS = 'New position points'
 export const PLACEHOLDER_NEW_POSITION_TITLE = 'New position title'

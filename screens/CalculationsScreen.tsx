@@ -26,7 +26,8 @@ import { retrievePeopleData } from '../services/PeopleService'
 import {
 	HEADER_ENTER_HOURS,
 	HEADER_NO_PEOPLE,
-	HEADER_SELECT_PEOPLE
+	HEADER_SELECT_PEOPLE,
+	PLACEHOLDER_HOURS
 } from '../constants/Strings'
 
 interface ICalculationsScreenProps {
@@ -99,7 +100,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							return (
 								<View key={ind} style={styles.hoursContainer}>
 									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
-									<TextInput placeholder={"Hours"} style={styles.hoursInput} />
+									<TextInput placeholder={PLACEHOLDER_HOURS} style={styles.hoursInput} />
 								</View>
 							)
 						})}
@@ -128,7 +129,6 @@ const styles = StyleSheet.create({
 		padding: 15
 	},
 	hoursContainer: {
-		// alignContent: 'center',
 		alignItems: 'center',
 		borderColor: '#333',
 		borderWidth: 1,
