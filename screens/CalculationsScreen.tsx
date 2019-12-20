@@ -47,7 +47,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	//     hours: number
 	//     index: number
 	// }
-	const [selectedPeopleIndices, setSelectedPeopleIndices] = useState<any[]>([])
+	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<any[]>([])
 
 	useEffect(() => {
 		retrievePeopleData()
@@ -78,13 +78,13 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					callback={(selectedIndexStrings: string[]) => {
 						const indexNums = selectedIndexStrings.map(ind => parseInt(ind, 10))
 						indexNums.sort(simpleNumberSort)
-						const newSelectedPeople = indexNums.map(num => {
+						const newSelectedPeopleInfo = indexNums.map(num => {
 							return {
 								hours: 0,
 								index: num
 							}
 						})
-						setSelectedPeopleIndices(newSelectedPeople)
+						setSelectedPeopleInfo(newSelectedPeopleInfo)
 					}}
 					iconColor={'#00a2dd'}
 					iconSize={20}
@@ -104,32 +104,32 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					unselectedIconName={Platform.OS === 'ios'
 						? `ios-${ICON_UNSELECTED_BASE}`
 						: `md-${ICON_UNSELECTED_BASE}`}
-					selected={selectedPeopleIndices.map(selected => selected.index)}
+					selected={selectedPeopleInfo.map(selectedInfo => selectedInfo.index)}
 				/>
-				{selectedPeopleIndices.length > 0 && <View>
+				{selectedPeopleInfo.length > 0 && <View>
 					<View style={styles.headerTextSelectPeople}>
 						<Text style={styles.headerText}>{HEADER_ENTER_HOURS}</Text>
-						{selectedPeopleIndices.map(selected => {
-							const selectedPerson = props.people[selected.index]
+						{selectedPeopleInfo.map(selectedInfo => {
+							const selectedPerson = props.people[selectedInfo.index]
 
 							return (
-								<View key={selected.index} style={styles.hoursContainer}>
+								<View key={selectedInfo.index} style={styles.hoursContainer}>
 									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
 									<TextInput
 										onChangeText={(newVal: string) => {
-											const newSelectedPeople = selectedPeopleIndices.map(staleSelected => {
+											const newSelectedPeopleInfo = selectedPeopleInfo.map(staleSelectedInfo => {
 												return {
-													hours: staleSelected.index === selected.index
+													hours: staleSelectedInfo.index === selectedInfo.index
 														? parseInt(newVal, 10)
-														: selected.hours,
-													index: selected.index
+														: staleSelectedInfo.hours,
+													index: staleSelectedInfo.index
 												}
 											})
-											setSelectedPeopleIndices(newSelectedPeople)
+											setSelectedPeopleInfo(newSelectedPeopleInfo)
 										}}
 										placeholder={PLACEHOLDER_HOURS}
 										style={styles.hoursInput}
-										value={selected.hours}
+										value={selectedInfo.hours}
 										/>
 								</View>
 							)
