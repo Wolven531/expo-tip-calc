@@ -30,13 +30,15 @@ import {
 	PLACEHOLDER_HOURS
 } from '../constants/Strings'
 
+// services
+import { simpleNumberSort } from '../services/utils'
+
 interface ICalculationsScreenProps {
 	people: Person[]
 	setPeople: (people: Person[]) => any
 }
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
-	const simpleNumberSort = (a: number, b: number) => a < b ? -1 : (a > b ? 1 : 0)
 	const [selectedPeopleIndices, setSelectedPeopleIndices] = useState<number[]>([])
 
 	useEffect(() => {
@@ -100,7 +102,9 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							return (
 								<View key={ind} style={styles.hoursContainer}>
 									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
-									<TextInput placeholder={PLACEHOLDER_HOURS} style={styles.hoursInput} />
+									<TextInput
+										placeholder={PLACEHOLDER_HOURS}
+										style={styles.hoursInput} />
 								</View>
 							)
 						})}
