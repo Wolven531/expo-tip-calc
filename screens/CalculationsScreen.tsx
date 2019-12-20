@@ -116,9 +116,21 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 								<View key={selected.index} style={styles.hoursContainer}>
 									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
 									<TextInput
+										onChangeText={(newVal: string) => {
+											const newSelectedPeople = selectedPeopleIndices.map(staleSelected => {
+												return {
+													hours: staleSelected.index === selected.index
+														? parseInt(newVal, 10)
+														: selected.hours,
+													index: selected.index
+												}
+											})
+											setSelectedPeopleIndices(newSelectedPeople)
+										}}
 										placeholder={PLACEHOLDER_HOURS}
 										style={styles.hoursInput}
-										value={selected.hours} />
+										value={selected.hours}
+										/>
 								</View>
 							)
 						})}
