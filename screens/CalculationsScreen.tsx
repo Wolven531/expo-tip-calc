@@ -42,7 +42,12 @@ const ICON_SELECTED_BASE = 'checkmark-circle-outline'
 const ICON_UNSELECTED_BASE = 'radio-button-off'
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
-	const [selectedPeopleIndices, setSelectedPeopleIndices] = useState<number[]>([])
+	// const [selectedPeopleIndices, setSelectedPeopleIndices] = useState<number[]>([])
+	// {
+	//     hours: number
+	//     index: number
+	// }
+	const [selectedPeopleIndices, setSelectedPeopleIndices] = useState<any[]>([])
 
 	useEffect(() => {
 		retrievePeopleData()
@@ -73,7 +78,13 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					callback={(selectedIndexStrings: string[]) => {
 						const indexNums = selectedIndexStrings.map(ind => parseInt(ind, 10))
 						indexNums.sort(simpleNumberSort)
-						setSelectedPeopleIndices(indexNums)
+						const newSelectedPeople = indexNums.map(num => {
+							return {
+								hours: 0,
+								index: num
+							}
+						})
+						setSelectedPeopleIndices(newSelectedPeople)
 					}}
 					iconColor={'#00a2dd'}
 					iconSize={20}
@@ -93,20 +104,21 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					unselectedIconName={Platform.OS === 'ios'
 						? `ios-${ICON_UNSELECTED_BASE}`
 						: `md-${ICON_UNSELECTED_BASE}`}
-					selected={selectedPeopleIndices}
+					selected={selectedPeopleIndices.map(selected => selected.index)}
 				/>
 				{selectedPeopleIndices.length > 0 && <View>
 					<View style={styles.headerTextSelectPeople}>
 						<Text style={styles.headerText}>{HEADER_ENTER_HOURS}</Text>
-						{selectedPeopleIndices.map(ind => {
-							const selectedPerson = props.people[ind]
+						{selectedPeopleIndices.map(selected => {
+							const selectedPerson = props.people[selected.index]
 
 							return (
-								<View key={ind} style={styles.hoursContainer}>
+								<View key={selected.index} style={styles.hoursContainer}>
 									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
 									<TextInput
 										placeholder={PLACEHOLDER_HOURS}
-										style={styles.hoursInput} />
+										style={styles.hoursInput}
+										value={selected.hours} />
 								</View>
 							)
 						})}
