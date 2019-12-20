@@ -38,6 +38,9 @@ interface ICalculationsScreenProps {
 	setPeople: (people: Person[]) => any
 }
 
+const ICON_SELECTED_BASE = 'checkmark-circle-outline'
+const ICON_UNSELECTED_BASE = 'radio-button-off'
+
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	const [selectedPeopleIndices, setSelectedPeopleIndices] = useState<number[]>([])
 
@@ -85,11 +88,11 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					// scrollViewHeight={150}
 					// search={true} // show search bar
 					selectedIconName={Platform.OS === 'ios'
-						? 'ios-checkmark-circle-outline'
-						: 'md-checkmark-circle-outline'}
+						? `ios-${ICON_SELECTED_BASE}`
+						: `md-${ICON_SELECTED_BASE}`}
 					unselectedIconName={Platform.OS === 'ios'
-						? 'ios-radio-button-off'
-						: 'md-radio-button-off'}
+						? `ios-${ICON_UNSELECTED_BASE}`
+						: `md-${ICON_UNSELECTED_BASE}`}
 					selected={selectedPeopleIndices}
 				/>
 				{selectedPeopleIndices.length > 0 && <View>
