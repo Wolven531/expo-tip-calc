@@ -14,7 +14,7 @@ import CustomMultiPicker from 'react-native-multiple-select-list'
 
 // redux
 import { setPeople } from '../redux/actions/peopleActions'
-import { IPeopleReducerProps } from '../redux/reducers/peopleReducer'
+import { selectPeople } from '../redux/selectors/peopleSelectors'
 
 // models
 import { Person } from '../models/Person'
@@ -50,7 +50,6 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 
 	return (
 		<ScrollView style={styles.container}>
-			
 			{/*
 			<DateTimePicker
 				value={new Date()}
@@ -155,10 +154,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (combinedReducers) => {
-	const peopleReducer: IPeopleReducerProps = combinedReducers.peopleReducer
-
 	return {
-		people: peopleReducer.people
+		people: selectPeople(combinedReducers)
 	}
 }
 
