@@ -117,10 +117,16 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
 									<TextInput
 										onChangeText={(newVal: string) => {
+											let parsedNum = parseInt(newVal, 10)
+
+											if (isNaN(parsedNum)) {
+												parsedNum = 0
+											}
+
 											const newSelectedPeopleInfo = selectedPeopleInfo.map(staleSelectedInfo => {
 												return {
 													hours: staleSelectedInfo.index === selectedInfo.index
-														? parseInt(newVal, 10)
+														? parsedNum
 														: staleSelectedInfo.hours,
 													index: staleSelectedInfo.index
 												}
