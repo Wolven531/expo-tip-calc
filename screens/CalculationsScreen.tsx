@@ -129,11 +129,16 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 										}}
 										placeholder={PLACEHOLDER_HOURS}
 										style={styles.hoursInput}
-										value={selectedInfo.hours}
+										value={String(selectedInfo.hours)}
 										/>
 								</View>
 							)
 						})}
+						<View>
+							<Text>
+								Total hours: {selectedPeopleInfo.reduce((accumulator, { hours }) => accumulator + hours, 0)}
+							</Text>
+						</View>
 					</View>
 				</View>}
 			</View>}
