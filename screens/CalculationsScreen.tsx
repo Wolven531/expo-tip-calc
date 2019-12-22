@@ -76,7 +76,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 				</View>
 				<CustomMultiPicker
 					callback={(selectedIndexStrings: string[]) => {
-						const indexNums = selectedIndexStrings.map(ind => parseInt(ind, 10))
+						const indexNums = selectedIndexStrings.map(ind => parseFloat(ind))
 						indexNums.sort(simpleNumberSort)
 						const newSelectedPeopleInfo = indexNums.map(num => {
 							return {
@@ -122,7 +122,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 											}
 											let parsedNum = newVal.length === 0
 												? 0
-												: parseInt(newVal, 10)
+												: parseFloat(newVal)
 
 											if (isNaN(parsedNum)) {
 												parsedNum = 0
