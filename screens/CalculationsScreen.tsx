@@ -48,6 +48,9 @@ const ICON_UNSELECTED_BASE = 'radio-button-off'
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
+	const calcTotalHours = (selectedPeople: IHoursInfo[]) =>
+		selectedPeople.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
+	const totalHoursDisplay = calcTotalHours(selectedPeopleInfo)
 
 	useEffect(() => {
 		retrievePeopleData()
@@ -147,9 +150,9 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							)
 						})}
 						<View>
-							<Text>
-								Total hours: {selectedPeopleInfo.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)}
-							</Text>
+							{isNaN(totalHoursDisplay)
+								? <Text>Error calculating total - is there a typo?</Text>
+								: <Text>Total hours: {totalHoursDisplay}</Text>}
 						</View>
 					</View>
 				</View>}
