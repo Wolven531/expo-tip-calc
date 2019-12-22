@@ -119,7 +119,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 								<View key={selectedInfo.index} style={styles.hoursContainer}>
 									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
 									<TextInput
-										onChangeText={(newVal: string) => {
+										onChangeText={newVal => {
 											const newSelectedPeopleInfo = selectedPeopleInfo.map(staleSelectedInfo => {
 												return {
 													hours: staleSelectedInfo.index === selectedInfo.index
@@ -137,10 +137,10 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 								</View>
 							)
 						})}
-						<View>
+						<View style={styles.hoursTotalContainer}>
 							{isNaN(totalHoursDisplay)
-								? <Text>Error calculating total - is there a typo?</Text>
-								: <Text>Total hours: {totalHoursDisplay}</Text>}
+								? <Text style={styles.hoursTotalError}>Error calculating total - is there a typo?</Text>
+								: <Text style={styles.hoursTotalLabel}>Total hours: {totalHoursDisplay}</Text>}
 						</View>
 					</View>
 				</View>}
@@ -181,6 +181,23 @@ const styles = StyleSheet.create({
 	},
 	hoursLabel: {
 		flexGrow: 2
+	},
+	hoursTotalContainer: {
+		padding: 5,
+		marginTop: 10
+	},
+	hoursTotalError: {
+		backgroundColor: '#faa',
+		color: '#f00',
+		fontSize: 16,
+		fontWeight: 'bold',
+		letterSpacing: 2,
+		textAlign: 'center'
+	},
+	hoursTotalLabel: {
+		fontSize: 18,
+		fontWeight: 'bold',
+		textAlign: 'right'
 	}
 })
 
