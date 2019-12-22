@@ -38,16 +38,16 @@ interface ICalculationsScreenProps {
 	setPeople: (people: Person[]) => any
 }
 
+interface IHoursInfo {
+	hours: string
+	index: number
+}
+
 const ICON_SELECTED_BASE = 'checkmark-circle-outline'
 const ICON_UNSELECTED_BASE = 'radio-button-off'
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
-	// const [selectedPeopleIndices, setSelectedPeopleIndices] = useState<number[]>([])
-	// {
-	//     hours: number
-	//     index: number
-	// }
-	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<any[]>([])
+	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
 
 	useEffect(() => {
 		retrievePeopleData()
@@ -80,7 +80,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						indexNums.sort(simpleNumberSort)
 						const newSelectedPeopleInfo = indexNums.map(num => {
 							return {
-								hours: 0,
+								hours: '0',
 								index: num
 							}
 						})
@@ -117,21 +117,22 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
 									<TextInput
 										onChangeText={(newVal: string) => {
-											if (newVal.length > 0 && newVal[newVal.length - 1] === '.') {
-												newVal = `${newVal}0`
-											}
-											let parsedNum = newVal.length === 0
-												? 0
-												: parseFloat(newVal)
+											// if (newVal.length > 0 && newVal[newVal.length - 1] === '.') {
+											// 	newVal = `${newVal}0`
+											// }
+											// let parsedNum = newVal.length === 0
+											// 	? 0
+											// 	: parseFloat(newVal)
 
-											if (isNaN(parsedNum)) {
-												parsedNum = 0
-											}
+											// if (isNaN(parsedNum)) {
+											// 	parsedNum = 0
+											// }
 
 											const newSelectedPeopleInfo = selectedPeopleInfo.map(staleSelectedInfo => {
 												return {
 													hours: staleSelectedInfo.index === selectedInfo.index
-														? parsedNum
+														// ? parsedNum
+														? newVal
 														: staleSelectedInfo.hours,
 													index: staleSelectedInfo.index
 												}
@@ -140,14 +141,14 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 										}}
 										placeholder={PLACEHOLDER_HOURS}
 										style={styles.hoursInput}
-										value={String(selectedInfo.hours)}
+										value={selectedInfo.hours}
 										/>
 								</View>
 							)
 						})}
 						<View>
 							<Text>
-								Total hours: {selectedPeopleInfo.reduce((accumulator, { hours }) => accumulator + hours, 0)}
+								Total hours: {selectedPeopleInfo.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)}
 							</Text>
 						</View>
 					</View>
