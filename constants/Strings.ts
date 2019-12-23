@@ -10,6 +10,7 @@ export const LBL_POINTS_SINGLE = 'pt'
 
 export const MSG_CANCEL = 'Cancel'
 export const MSG_CONFIRM_ROLE_DELETE = 'Are you sure you want to delete this role?'
+export const MSG_HOURS_INPUT_ERROR = 'Error calculating total - is there a typo?'
 export const MSG_OK = 'OK'
 export const MSG_PEOPLE_SAVED = 'The current people have been saved to device'
 export const MSG_POSITIONS_EMPTY = 'There are no positions currently'

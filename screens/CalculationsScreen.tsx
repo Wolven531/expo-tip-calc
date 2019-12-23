@@ -27,6 +27,7 @@ import {
 	HEADER_ENTER_HOURS,
 	HEADER_NO_PEOPLE,
 	HEADER_SELECT_PEOPLE,
+	MSG_HOURS_INPUT_ERROR,
 	PLACEHOLDER_HOURS
 } from '../constants/Strings'
 
@@ -140,7 +141,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						})}
 						<View style={styles.hoursTotalContainer}>
 							{isNaN(totalHoursDisplay)
-								? <Text style={styles.hoursTotalError}>Error calculating total - is there a typo?</Text>
+								? <Text style={styles.hoursTotalError}>{MSG_HOURS_INPUT_ERROR}</Text>
 								: <Text style={styles.hoursTotalLabel}>Total hours: {totalHoursDisplay}</Text>}
 						</View>
 						<View style={styles.tipTotalContainer}>
