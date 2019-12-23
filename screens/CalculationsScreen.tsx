@@ -147,15 +147,8 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							<Text style={styles.tipTotalLabel}>Total tip: {totalTip}</Text>
 							<TextInput
 								onChangeText={newVal => {
-									// const newSelectedPeopleInfo = selectedPeopleInfo.map(staleSelectedInfo => {
-									// 	return {
-									// 		hours: staleSelectedInfo.index === selectedInfo.index
-									// 			? newVal.replace(/[^0-9\.]/gi, '')
-									// 			: staleSelectedInfo.hours,
-									// 		index: staleSelectedInfo.index
-									// 	}
-									// })
-									// setSelectedPeopleInfo(newSelectedPeopleInfo)
+									newVal = newVal.replace(/[^0-9\.]/gi, '')
+									setTotalTip(parseFloat(newVal))
 								}}
 								placeholder={'Tip total'}
 								style={styles.tipInput}
@@ -220,7 +213,7 @@ const styles = StyleSheet.create({
 		textAlign: 'right'
 	},
 	tipInput: {
-		
+
 	},
 	tipTotalContainer: {
 
