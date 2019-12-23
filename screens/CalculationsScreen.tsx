@@ -47,6 +47,7 @@ const ICON_SELECTED_BASE = 'checkmark-circle-outline'
 const ICON_UNSELECTED_BASE = 'radio-button-off'
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
+	const [totalTip, setTotalTip] = useState(0)
 	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
 	const calcTotalHours = (selectedPeople: IHoursInfo[]) =>
 		selectedPeople.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
@@ -142,6 +143,9 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 								? <Text style={styles.hoursTotalError}>Error calculating total - is there a typo?</Text>
 								: <Text style={styles.hoursTotalLabel}>Total hours: {totalHoursDisplay}</Text>}
 						</View>
+						<View style={styles.tipTotalContainer}>
+							<Text style={styles.tipTotalLabel}>Total tip: {totalTip}</Text>
+						</View>
 					</View>
 				</View>}
 			</View>}
@@ -198,6 +202,12 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		fontWeight: 'bold',
 		textAlign: 'right'
+	},
+	tipTotalContainer: {
+
+	},
+	tipTotalLabel: {
+		
 	}
 })
 
