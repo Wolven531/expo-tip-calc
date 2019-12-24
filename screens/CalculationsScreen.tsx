@@ -53,14 +53,15 @@ const ICON_UNSELECTED_BASE = 'radio-button-off'
 // const OS_ANDROID = 'android'
 const OS_APPLE = 'ios'
 
+const calcTotalHours = (selectedPeople: IHoursInfo[]) =>
+	selectedPeople.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
+const prettifyMoney = (num: number) =>
+	new Intl.NumberFormat('en-US', { currency: 'USD', style: 'currency' }).format(num)
+
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
-	const [totalTip, setTotalTip] = useState(0)
 	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
-	const calcTotalHours = (selectedPeople: IHoursInfo[]) =>
-		selectedPeople.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
+	const [totalTip, setTotalTip] = useState(0)
 	const totalHoursDisplay = calcTotalHours(selectedPeopleInfo)
-	const prettifyMoney = (num: number) =>
-		new Intl.NumberFormat('en-US', { currency: 'USD', style: 'currency' }).format(num)
 
 	useEffect(() => {
 		retrievePeopleData()
