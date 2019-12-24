@@ -50,6 +50,9 @@ interface IHoursInfo {
 const ICON_SELECTED_BASE = 'checkmark-circle-outline'
 const ICON_UNSELECTED_BASE = 'radio-button-off'
 
+// const OS_ANDROID = 'android'
+const OS_APPLE = 'ios'
+
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	const [totalTip, setTotalTip] = useState(0)
 	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
@@ -108,10 +111,10 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					rowRadius={15}
 					// scrollViewHeight={150}
 					// search={true} // show search bar
-					selectedIconName={Platform.OS === 'ios'
+					selectedIconName={Platform.OS === OS_APPLE
 						? `ios-${ICON_SELECTED_BASE}`
 						: `md-${ICON_SELECTED_BASE}`}
-					unselectedIconName={Platform.OS === 'ios'
+					unselectedIconName={Platform.OS === OS_APPLE
 						? `ios-${ICON_UNSELECTED_BASE}`
 						: `md-${ICON_UNSELECTED_BASE}`}
 					selected={selectedPeopleInfo.map(selectedInfo => selectedInfo.index)}
