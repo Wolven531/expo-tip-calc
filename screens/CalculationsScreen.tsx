@@ -53,6 +53,8 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	const calcTotalHours = (selectedPeople: IHoursInfo[]) =>
 		selectedPeople.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
 	const totalHoursDisplay = calcTotalHours(selectedPeopleInfo)
+	const prettifyMoney = (num: number) =>
+		new Intl.NumberFormat('en-US', { currency: 'USD', style: 'currency' }).format(num)
 
 	useEffect(() => {
 		retrievePeopleData()
