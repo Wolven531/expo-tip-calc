@@ -156,7 +156,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 								style={styles.tipInput}
 								value={String(totalTip)}
 								/>
-							<Text style={styles.tipTotalLabel}>Total tip: {totalTip}</Text>
+							<Text style={styles.tipTotalLabel}>Total tip: {prettifyMoney(totalTip)}</Text>
 						</View>
 					</View>
 				</View>}
