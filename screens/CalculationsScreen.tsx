@@ -5,8 +5,8 @@ import {
 	ScrollView,
 	StyleSheet,
 	Text,
-	View,
-	TextInput
+	TextInput,
+	View
 } from 'react-native'
 import CustomMultiPicker from 'react-native-multiple-select-list'
 // NOTE: requires more work: https://github.com/react-native-community/react-native-datetimepicker
@@ -21,6 +21,7 @@ import { Person } from '../models/Person'
 
 // services
 import { retrievePeopleData } from '../services/PeopleService'
+import { simpleNumberSort } from '../services/utils'
 
 // constants
 import {
@@ -33,9 +34,6 @@ import {
 	PLACEHOLDER_HOURS,
 	PLACEHOLDER_TIP_TOTAL
 } from '../constants/Strings'
-
-// services
-import { simpleNumberSort } from '../services/utils'
 
 interface ICalculationsScreenProps {
 	people: Person[]
