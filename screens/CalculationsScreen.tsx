@@ -145,7 +145,6 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 								: <Text style={styles.hoursTotalLabel}>Total hours: {totalHoursDisplay}</Text>}
 						</View>
 						<View style={styles.tipTotalContainer}>
-							<Text style={styles.tipTotalLabel}>Total tip: {totalTip}</Text>
 							<TextInput
 								onChangeText={newVal => {
 									newVal = newVal.replace(/[^0-9\.]/gi, '')
@@ -155,6 +154,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 								style={styles.tipInput}
 								value={String(totalTip)}
 								/>
+							<Text style={styles.tipTotalLabel}>Total tip: {totalTip}</Text>
 						</View>
 					</View>
 				</View>}
@@ -214,13 +214,21 @@ const styles = StyleSheet.create({
 		textAlign: 'right'
 	},
 	tipInput: {
-
+		alignSelf: 'flex-end',
+		borderColor: '#333',
+		borderWidth: 1,
+		padding: 5,
+		// textAlign: 'right',
+		width: '20%'
 	},
 	tipTotalContainer: {
-
+		// flexDirection: 'row'
 	},
 	tipTotalLabel: {
-
+		fontSize: 18,
+		fontWeight: 'bold',
+		textAlign: 'right'
+		// width: '73%'
 	}
 })
 
