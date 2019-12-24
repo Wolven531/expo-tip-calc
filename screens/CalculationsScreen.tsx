@@ -27,8 +27,11 @@ import {
 	HEADER_ENTER_HOURS,
 	HEADER_NO_PEOPLE,
 	HEADER_SELECT_PEOPLE,
+	LBL_TOTAL_HOURS,
+	LBL_TOTAL_TIP,
 	MSG_HOURS_INPUT_ERROR,
-	PLACEHOLDER_HOURS
+	PLACEHOLDER_HOURS,
+	PLACEHOLDER_TIP_TOTAL
 } from '../constants/Strings'
 
 // services
@@ -144,7 +147,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						<View style={styles.hoursTotalContainer}>
 							{isNaN(totalHoursDisplay)
 								? <Text style={styles.hoursTotalError}>{MSG_HOURS_INPUT_ERROR}</Text>
-								: <Text style={styles.hoursTotalLabel}>Total hours: {totalHoursDisplay}</Text>}
+								: <Text style={styles.hoursTotalLabel}>{LBL_TOTAL_HOURS}: {totalHoursDisplay}</Text>}
 						</View>
 						<View style={styles.tipTotalContainer}>
 							<TextInput
@@ -152,11 +155,11 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 									newVal = newVal.replace(/[^0-9\.]/gi, '')
 									setTotalTip(parseFloat(newVal))
 								}}
-								placeholder={'Tip total'}
+								placeholder={PLACEHOLDER_TIP_TOTAL}
 								style={styles.tipInput}
 								value={String(totalTip)}
 								/>
-							<Text style={styles.tipTotalLabel}>Total tip: {prettifyMoney(totalTip)}</Text>
+							<Text style={styles.tipTotalLabel}>{LBL_TOTAL_TIP}: {prettifyMoney(totalTip)}</Text>
 						</View>
 					</View>
 				</View>}
