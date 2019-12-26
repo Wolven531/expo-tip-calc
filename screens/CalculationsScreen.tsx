@@ -27,6 +27,7 @@ import { simpleNumberSort } from '../services/utils'
 import {
 	HEADER_ENTER_HOURS,
 	HEADER_NO_PEOPLE,
+	HEADER_NO_SELECTED_PEOPLE,
 	HEADER_SELECT_PEOPLE,
 	LBL_TOTAL_HOURS,
 	LBL_TOTAL_TIP,
@@ -116,6 +117,9 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						: `md-${ICON_UNSELECTED_BASE}`}
 					selected={selectedPeopleInfo.map(selectedInfo => selectedInfo.index)}
 				/>
+				{selectedPeopleInfo.length === 0 && <View style={styles.headerTextSelectPeople}>
+					<Text style={styles.headerText}>{HEADER_NO_SELECTED_PEOPLE}</Text>
+				</View>}
 				{selectedPeopleInfo.length > 0 && <View>
 					<View style={styles.headerTextSelectPeople}>
 						<Text style={styles.headerText}>{HEADER_ENTER_HOURS}</Text>
