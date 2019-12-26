@@ -47,14 +47,12 @@ interface IHoursInfo {
 
 const ICON_SELECTED_BASE = 'checkmark-circle-outline'
 const ICON_UNSELECTED_BASE = 'radio-button-off'
-
-// const OS_ANDROID = 'android'
 const OS_APPLE = 'ios'
 
+const usdFormatter = new Intl.NumberFormat('en-US', { currency: 'USD', style: 'currency' })
 const calcTotalHours = (selectedPeople: IHoursInfo[]) =>
 	selectedPeople.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
-const prettifyMoney = (num: number) =>
-	new Intl.NumberFormat('en-US', { currency: 'USD', style: 'currency' }).format(num)
+const prettifyMoney = (num: number) => usdFormatter.format(num)
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
