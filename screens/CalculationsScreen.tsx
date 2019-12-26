@@ -65,7 +65,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 			.then(loadedPeople => { props.setPeople(loadedPeople) })
 		// retrievePositionsData()
 		// 	.then(loadedRoles => { props.setRoles(loadedRoles) })
-	}, [])
+	}, [props.people])
 
 	return (
 		<ScrollView style={styles.container}>
