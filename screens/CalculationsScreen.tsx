@@ -169,6 +169,9 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 								/>
 							<Text style={styles.tipTotalLabel}>{LBL_TOTAL_TIP}: {prettifyMoney(totalTip)}</Text>
 						</View>
+						<View>
+							<Text style={styles.headerText}>Select Calculation Method</Text>
+						</View>
 					</View>
 				</View>}
 			</View>}
