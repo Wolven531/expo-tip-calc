@@ -53,11 +53,15 @@ const OS_APPLE = 'ios'
 const usdFormatter = new Intl.NumberFormat('en-US', { currency: 'USD', style: 'currency' })
 const calcTotalHours = (selectedPeople: IHoursInfo[]) =>
 	selectedPeople.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
-const prettifyMoney = (num: number) => usdFormatter.format(num)
+const prettifyMoney = (numStr: string) => {
+	const num = parseFloat(numStr)
+
+	return usdFormatter.format(num)
+}
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
-	const [totalTip, setTotalTip] = useState(0)
+	const [totalTip, setTotalTip] = useState('0')
 	const totalHoursDisplay = calcTotalHours(selectedPeopleInfo)
 
 	useEffect(() => {
@@ -157,7 +161,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							<TextInput
 								onChangeText={newVal => {
 									newVal = newVal.replace(/[^0-9\.]/gi, '')
-									setTotalTip(parseFloat(newVal))
+									setTotalTip(newVal)
 								}}
 								placeholder={PLACEHOLDER_TIP_TOTAL}
 								style={styles.tipInput}
