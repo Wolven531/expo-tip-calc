@@ -28,6 +28,7 @@ import {
 	HEADER_ENTER_HOURS,
 	HEADER_NO_PEOPLE,
 	HEADER_NO_SELECTED_PEOPLE,
+	HEADER_SELECT_CALCULATION,
 	HEADER_SELECT_PEOPLE,
 	LBL_TOTAL_HOURS,
 	LBL_TOTAL_TIP,
@@ -170,7 +171,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							<Text style={styles.tipTotalLabel}>{LBL_TOTAL_TIP}: {prettifyMoney(totalTip)}</Text>
 						</View>
 						<View>
-							<Text style={styles.headerText}>Select Calculation Method</Text>
+							<Text style={styles.headerText}>{HEADER_SELECT_CALCULATION}</Text>
 						</View>
 					</View>
 				</View>}
