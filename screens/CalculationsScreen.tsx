@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import {
+	Picker,
 	Platform,
 	ScrollView,
 	StyleSheet,
@@ -172,6 +173,18 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						</View>
 						<View>
 							<Text style={styles.headerText}>{HEADER_SELECT_CALCULATION}</Text>
+							<Picker
+								onValueChange={(itemValue, itemIndex) => { }}
+								selectedValue={''}
+								style={styles.calcPicker}
+							>
+								{['Communist', 'Hour Weighted', 'Role Centric'].map(calcMethod =>
+									<Picker.Item
+										key={calcMethod}
+										label={calcMethod}
+										value={calcMethod} />
+								)}
+							</Picker>
 						</View>
 					</View>
 				</View>}
@@ -185,6 +198,10 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 }
 
 const styles = StyleSheet.create({
+	calcPicker: {
+		height: 35,
+		marginTop: 10
+	},
 	container: {
 		backgroundColor: '#fff',
 		flex: 1
