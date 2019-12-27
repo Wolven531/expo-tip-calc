@@ -66,6 +66,7 @@ const prettifyMoney = (numStr: string) => {
 }
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
+	const [selectedCalcIndex, setSelectedCalcIndex] = useState(0)
 	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
 	const [totalTip, setTotalTip] = useState('0')
 	const totalHoursDisplay = calcTotalHours(selectedPeopleInfo)
@@ -178,8 +179,8 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						<View>
 							<Text style={styles.headerText}>{HEADER_SELECT_CALCULATION}</Text>
 							<Picker
-								onValueChange={(itemValue, itemIndex) => { }}
-								selectedValue={''}
+								onValueChange={(itemValue, itemIndex) => { setSelectedCalcIndex(itemIndex) }}
+								selectedValue={METHODS_FOR_CALCULATION[selectedCalcIndex]}
 								style={styles.calcPicker}
 							>
 								{METHODS_FOR_CALCULATION.map(calcMethod =>
