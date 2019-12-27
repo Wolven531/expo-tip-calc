@@ -50,6 +50,10 @@ interface IHoursInfo {
 
 const ICON_SELECTED_BASE = 'checkmark-circle-outline'
 const ICON_UNSELECTED_BASE = 'radio-button-off'
+const METHOD_COMMUNIST = 'Communist'
+const METHOD_HOUR_WEIGHTED = 'Hour Weighted'
+const METHOD_ROLE_CENTRIC = 'Role-centric'
+const METHODS_FOR_CALCULATION = [ METHOD_COMMUNIST, METHOD_HOUR_WEIGHTED, METHOD_ROLE_CENTRIC ]
 const OS_APPLE = 'ios'
 
 const usdFormatter = new Intl.NumberFormat('en-US', { currency: 'USD', style: 'currency' })
@@ -178,7 +182,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 								selectedValue={''}
 								style={styles.calcPicker}
 							>
-								{['Communist', 'Hour Weighted', 'Role Centric'].map(calcMethod =>
+								{METHODS_FOR_CALCULATION.map(calcMethod =>
 									<Picker.Item
 										key={calcMethod}
 										label={calcMethod}
