@@ -59,6 +59,7 @@ const METHOD_HOUR_WEIGHTED = 'Hour Weighted'
 const METHOD_ROLE_CENTRIC = 'Role-centric'
 const METHODS_FOR_CALCULATION = [ METHOD_COMMUNIST, METHOD_HOUR_WEIGHTED, METHOD_ROLE_CENTRIC ]
 const OS_APPLE = 'ios'
+const REGEX_NUMERIC_IMPERFECT = /[^0-9\.]/gi
 
 const usdFormatter = new Intl.NumberFormat('en-US', { currency: 'USD', style: 'currency' })
 const calcTotalHours = (selectedPeople: IHoursInfo[]) =>
@@ -149,7 +150,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 											const newSelectedPeopleInfo = selectedPeopleInfo.map(staleSelectedInfo => {
 												return {
 													hours: staleSelectedInfo.index === selectedInfo.index
-														? newVal.replace(/[^0-9\.]/gi, '')
+														? newVal.replace(REGEX_NUMERIC_IMPERFECT, '')
 														: staleSelectedInfo.hours,
 													index: staleSelectedInfo.index
 												}
@@ -171,7 +172,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						<View style={styles.tipTotalContainer}>
 							<TextInput
 								onChangeText={newVal => {
-									newVal = newVal.replace(/[^0-9\.]/gi, '')
+									newVal = newVal.replace(REGEX_NUMERIC_IMPERFECT, '')
 									setTotalTip(newVal)
 								}}
 								placeholder={PLACEHOLDER_TIP_TOTAL}
