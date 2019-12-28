@@ -50,6 +50,8 @@ interface IHoursInfo {
 	index: number
 }
 
+const DEFAULT_HOURS = '0'
+const DEFAULT_TIP_TOTAL = '0'
 const ICON_SELECTED_BASE = 'checkmark-circle-outline'
 const ICON_UNSELECTED_BASE = 'radio-button-off'
 const METHOD_COMMUNIST = 'Communist'
@@ -70,7 +72,7 @@ const prettifyMoney = (numStr: string) => {
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	const [selectedCalcIndex, setSelectedCalcIndex] = useState(0)
 	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
-	const [totalTip, setTotalTip] = useState('0')
+	const [totalTip, setTotalTip] = useState(DEFAULT_TIP_TOTAL)
 	const totalHoursDisplay = calcTotalHours(selectedPeopleInfo)
 
 	useEffect(() => {
@@ -104,7 +106,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						indexNums.sort(simpleNumberSort)
 						const newSelectedPeopleInfo = indexNums.map(num => {
 							return {
-								hours: '0',
+								hours: DEFAULT_HOURS,
 								index: num
 							}
 						})
