@@ -105,12 +105,12 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					callback={(selectedIndexStrings: string[]) => {
 						const indexNums = selectedIndexStrings.map(ind => parseFloat(ind))
 						indexNums.sort(simpleNumberSort)
-						const newSelectedPeopleInfo = indexNums.map(num => {
-							return {
+						const newSelectedPeopleInfo = indexNums.map(num =>
+							({
 								hours: DEFAULT_HOURS,
 								index: num
-							}
-						})
+							})
+						)
 						setSelectedPeopleInfo(newSelectedPeopleInfo)
 					}}
 					iconColor={'#00a2dd'}
@@ -147,14 +147,14 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
 									<TextInput
 										onChangeText={newVal => {
-											const newSelectedPeopleInfo = selectedPeopleInfo.map(staleSelectedInfo => {
-												return {
+											const newSelectedPeopleInfo = selectedPeopleInfo.map(staleSelectedInfo =>
+												({
 													hours: staleSelectedInfo.index === selectedInfo.index
 														? newVal.replace(REGEX_NUMERIC_IMPERFECT, '')
 														: staleSelectedInfo.hours,
 													index: staleSelectedInfo.index
-												}
-											})
+												})
+											)
 											setSelectedPeopleInfo(newSelectedPeopleInfo)
 										}}
 										placeholder={PLACEHOLDER_HOURS}
