@@ -1,3 +1,5 @@
+import Intl from 'intl'
+require('intl/locale-data/jsonp/en.js')
 import React, { FC, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import {
