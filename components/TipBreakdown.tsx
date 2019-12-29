@@ -13,7 +13,11 @@ import {
 	METHOD_ROLE_CENTRIC
 } from '../constants/Strings'
 
+// models
 import { Person } from '../models/Person'
+
+// components
+import { HeaderLabel } from './HeaderLabel'
 
 interface ITipBreakdownProps {
 	calculationMethod: string // 'Communist' | 'Hour Weighted' | 'Role-centric'
@@ -38,21 +42,14 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.headerText}>{HEADER_BREAKDOWN}</Text>
+			<HeaderLabel text={HEADER_BREAKDOWN} />
 			<Text style={{}}>Total Per Person: {totalPerPerson}</Text>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
-	container: {
-
-	},
-	headerText: {
-		fontSize: 18,
-		fontWeight: 'bold',
-		textAlign: 'center'
-	}
+	container: {}
 })
 
 export { TipBreakdown }

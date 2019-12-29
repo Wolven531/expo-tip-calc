@@ -46,6 +46,7 @@ import {
 } from '../constants/Strings'
 
 // components
+import { HeaderLabel } from '../components/HeaderLabel'
 import { TipBreakdown } from '../components/TipBreakdown'
 
 interface ICalculationsScreenProps {
@@ -101,11 +102,11 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 				/>
 			*/}
 			{props.people.length === 0 && <View style={styles.headerTextSelectPeople}>
-				<Text style={styles.headerText}>{HEADER_NO_PEOPLE}</Text>
+				<HeaderLabel text={HEADER_NO_PEOPLE} />
 			</View>}
 			{props.people.length > 0 && <View>
 				<View style={styles.headerTextSelectPeople}>
-					<Text style={styles.headerText}>{HEADER_SELECT_PEOPLE}</Text>
+					<HeaderLabel text={HEADER_SELECT_PEOPLE} />
 				</View>
 				<CustomMultiPicker
 					callback={(selectedIndexStrings: string[]) => {
@@ -140,11 +141,11 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					selected={selectedPeopleInfo.map(selectedInfo => selectedInfo.index)}
 				/>
 				{selectedPeopleInfo.length === 0 && <View style={styles.headerTextSelectPeople}>
-					<Text style={styles.headerText}>{HEADER_NO_SELECTED_PEOPLE}</Text>
+					<HeaderLabel text={HEADER_NO_SELECTED_PEOPLE} />
 				</View>}
 				{selectedPeopleInfo.length > 0 && <View>
 					<View style={styles.headerTextSelectPeople}>
-						<Text style={styles.headerText}>{HEADER_ENTER_HOURS}</Text>
+						<HeaderLabel text={HEADER_ENTER_HOURS}/>
 						{selectedPeopleInfo.map(selectedInfo => {
 							const selectedPerson = props.people[selectedInfo.index]
 
@@ -188,7 +189,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							<Text style={styles.tipTotalLabel}>{LBL_TOTAL_TIP}: {prettifyMoney(totalTip)}</Text>
 						</View>
 						<View>
-							<Text style={styles.headerText}>{HEADER_SELECT_CALCULATION}</Text>
+							<HeaderLabel text={HEADER_SELECT_CALCULATION}/>
 							<Picker
 								onValueChange={(itemValue, itemIndex) => { setSelectedCalcIndex(itemIndex) }}
 								selectedValue={METHODS_FOR_CALCULATION[selectedCalcIndex]}
@@ -242,11 +243,6 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: '#fff',
 		flex: 1
-	},
-	headerText: {
-		fontSize: 18,
-		fontWeight: 'bold',
-		textAlign: 'center'
 	},
 	headerTextSelectPeople: {
 		padding: 15
