@@ -1,3 +1,4 @@
+export const HEADER_BREAKDOWN = 'Tip Breakdown'
 export const HEADER_ENTER_HOURS = 'Enter Hours Worked'
 export const HEADER_NO_PEOPLE = 'Add People Via the "People" Tab'
 export const HEADER_NO_SELECTED_PEOPLE = 'There are no selected people'

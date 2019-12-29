@@ -29,6 +29,7 @@ import { simpleNumberSort } from '../services/utils'
 
 // constants
 import {
+	HEADER_BREAKDOWN,
 	HEADER_ENTER_HOURS,
 	HEADER_NO_PEOPLE,
 	HEADER_NO_SELECTED_PEOPLE,
@@ -77,6 +78,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
 	const [totalTip, setTotalTip] = useState(DEFAULT_TIP_TOTAL)
 	const totalHoursDisplay = calcTotalHours(selectedPeopleInfo)
+	const [shouldShowBreakdown, setShouldShowBreakdown] = useState(false)
 
 	useEffect(() => {
 		retrievePeopleData()
@@ -200,9 +202,12 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							<View style={{ marginTop: 15 }}>
 								<Button
 									onPress={() => {
-
+										setShouldShowBreakdown(true)
 									}}
 									title={TITLE_CALCULATE} />
+								{shouldShowBreakdown && <View style={styles.breakdownContainer}>
+									<Text style={styles.headerText}>{HEADER_BREAKDOWN}</Text>
+								</View>}
 							</View>
 						</View>
 					</View>
@@ -217,6 +222,13 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 }
 
 const styles = StyleSheet.create({
+	breakdownContainer: {
+		borderColor: '#333',
+		borderWidth: 1,
+		// height: 50,
+		marginTop: 15,
+		paddingVertical: 10
+	},
 	calcPicker: {
 		height: 35,
 		marginTop: 10
