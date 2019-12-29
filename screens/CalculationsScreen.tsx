@@ -36,6 +36,9 @@ import {
 	HEADER_SELECT_PEOPLE,
 	LBL_TOTAL_HOURS,
 	LBL_TOTAL_TIP,
+	METHOD_COMMUNIST,
+	METHOD_HOUR_WEIGHTED,
+	METHOD_ROLE_CENTRIC,
 	MSG_HOURS_INPUT_ERROR,
 	PLACEHOLDER_HOURS,
 	PLACEHOLDER_TIP_TOTAL,
@@ -59,9 +62,6 @@ const DEFAULT_HOURS = '0'
 const DEFAULT_TIP_TOTAL = '0'
 const ICON_SELECTED_BASE = 'checkmark-circle-outline'
 const ICON_UNSELECTED_BASE = 'radio-button-off'
-const METHOD_COMMUNIST = 'Communist'
-const METHOD_HOUR_WEIGHTED = 'Hour Weighted'
-const METHOD_ROLE_CENTRIC = 'Role-centric'
 const METHODS_FOR_CALCULATION = [ METHOD_COMMUNIST, METHOD_HOUR_WEIGHTED, METHOD_ROLE_CENTRIC ]
 const OS_APPLE = 'ios'
 const REGEX_NUMERIC_IMPERFECT = /[^0-9\.]/gi
@@ -208,7 +208,11 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 									}}
 									title={TITLE_CALCULATE} />
 								{shouldShowBreakdown && <View style={styles.breakdownContainer}>
-									<TipBreakdown />
+									<TipBreakdown
+										calculationMethod={METHODS_FOR_CALCULATION[selectedCalcIndex]}
+										people={selectedPeopleInfo.map(selectedInfo => props.people[selectedInfo.index])}
+										totalTip={parseFloat(totalTip)}
+										/>
 								</View>}
 							</View>
 						</View>
