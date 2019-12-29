@@ -29,7 +29,6 @@ import { simpleNumberSort } from '../services/utils'
 
 // constants
 import {
-	HEADER_BREAKDOWN,
 	HEADER_ENTER_HOURS,
 	HEADER_NO_PEOPLE,
 	HEADER_NO_SELECTED_PEOPLE,
@@ -42,6 +41,9 @@ import {
 	PLACEHOLDER_TIP_TOTAL,
 	TITLE_CALCULATE
 } from '../constants/Strings'
+
+// components
+import { TipBreakdown } from '../components/TipBreakdown'
 
 interface ICalculationsScreenProps {
 	people: Person[]
@@ -206,7 +208,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 									}}
 									title={TITLE_CALCULATE} />
 								{shouldShowBreakdown && <View style={styles.breakdownContainer}>
-									<Text style={styles.headerText}>{HEADER_BREAKDOWN}</Text>
+									<TipBreakdown />
 								</View>}
 							</View>
 						</View>
