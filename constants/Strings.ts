@@ -28,6 +28,7 @@ export const PLACEHOLDER_TIP_TOTAL = 'Tip total'
 
 export const TITLE_ADD_PERSON = 'Add Person'
 export const TITLE_ADD_POSITION = 'Add Position'
+export const TITLE_CALCULATE = 'Calculate'
 export const TITLE_CONFIRM_ROLE_DELETE = 'Confirm Role Deletion'
 export const TITLE_PEOPLE_SAVED = 'People Saved'
 export const TITLE_POSITIONS = 'Positions'

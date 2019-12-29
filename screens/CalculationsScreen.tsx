@@ -3,6 +3,7 @@ require('intl/locale-data/jsonp/en.js')
 import React, { FC, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import {
+	Button,
 	Picker,
 	Platform,
 	ScrollView,
@@ -37,7 +38,8 @@ import {
 	LBL_TOTAL_TIP,
 	MSG_HOURS_INPUT_ERROR,
 	PLACEHOLDER_HOURS,
-	PLACEHOLDER_TIP_TOTAL
+	PLACEHOLDER_TIP_TOTAL,
+	TITLE_CALCULATE
 } from '../constants/Strings'
 
 interface ICalculationsScreenProps {
@@ -195,6 +197,13 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 										value={calcMethod} />
 								)}
 							</Picker>
+							<View style={{ marginTop: 15 }}>
+								<Button
+									onPress={() => {
+
+									}}
+									title={TITLE_CALCULATE} />
+							</View>
 						</View>
 					</View>
 				</View>}
