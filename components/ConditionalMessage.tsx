@@ -8,8 +8,8 @@ import {
 interface IConditionalMessageProps {
 	collection: any[] | null | undefined
 	message: string
-	styleContainer: any | undefined
-	styleText: any | undefined
+	styleContainer?: any
+	styleText?: any
 }
 
 /**
@@ -22,7 +22,7 @@ interface IConditionalMessageProps {
  * @param styleContainer @type any | undefined
  * @param styleText @type any | undefined
  */
-const ConditionalMessage: FC<IConditionalMessageProps> = (props) => {
+const ConditionalMessage: FC<IConditionalMessageProps> = memo((props) => {
 	const shouldDisplayMessage = props.collection === null
 		|| props.collection === undefined
 		|| props.collection.length === 0
@@ -33,7 +33,7 @@ const ConditionalMessage: FC<IConditionalMessageProps> = (props) => {
 			{!shouldDisplayMessage && props.children}
 		</View>
 	)
-}
+})
 
 const styles = StyleSheet.create({
 	container: {
