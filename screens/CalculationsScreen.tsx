@@ -141,87 +141,82 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						: `md-${ICON_UNSELECTED_BASE}`}
 					selected={selectedPeopleInfo.map(selectedInfo => selectedInfo.index)}
 				/>
-				{/*
-				{selectedPeopleInfo.length === 0 && <View style={styles.headerTextSelectPeople}>
-					<HeaderLabel text={HEADER_NO_SELECTED_PEOPLE} />
-				</View>}
-				*/}
 				<ConditionalMessage
 					collection={selectedPeopleInfo}
 					message={HEADER_NO_SELECTED_PEOPLE}
+					styleContainer={styles.headerTextSelectPeople}
+					useHeader={true}
 					>
-					<View style={styles.headerTextSelectPeople}>
-						<HeaderLabel text={HEADER_ENTER_HOURS}/>
-						{selectedPeopleInfo.map(selectedInfo => {
-							const selectedPerson = props.people[selectedInfo.index]
+					<HeaderLabel text={HEADER_ENTER_HOURS}/>
+					{selectedPeopleInfo.map(selectedInfo => {
+						const selectedPerson = props.people[selectedInfo.index]
 
-							return (
-								<View key={selectedInfo.index} style={styles.hoursContainer}>
-									<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
-									<TextInput
-										onChangeText={newVal => {
-											const newSelectedPeopleInfo = selectedPeopleInfo.map(staleSelectedInfo =>
-												({
-													hours: staleSelectedInfo.index === selectedInfo.index
-														? newVal.replace(REGEX_NUMERIC_IMPERFECT, '')
-														: staleSelectedInfo.hours,
-													index: staleSelectedInfo.index
-												})
-											)
-											setSelectedPeopleInfo(newSelectedPeopleInfo)
-										}}
-										placeholder={PLACEHOLDER_HOURS}
-										style={styles.hoursInput}
-										value={selectedInfo.hours}
-										/>
-								</View>
-							)
-						})}
-						<View style={styles.hoursTotalContainer}>
-							{isNaN(totalHoursDisplay)
-								? <Text style={styles.hoursTotalError}>{MSG_HOURS_INPUT_ERROR}</Text>
-								: <Text style={styles.hoursTotalLabel}>{LBL_TOTAL_HOURS}: {totalHoursDisplay}</Text>}
-						</View>
-						<View style={styles.tipTotalContainer}>
-							<TextInput
-								onChangeText={newVal => {
-									newVal = newVal.replace(REGEX_NUMERIC_IMPERFECT, '')
-									setTotalTip(newVal)
-								}}
-								placeholder={PLACEHOLDER_TIP_TOTAL}
-								style={styles.tipInput}
-								value={String(totalTip)}
-								/>
-							<Text style={styles.tipTotalLabel}>{LBL_TOTAL_TIP}: {prettifyMoney(totalTip)}</Text>
-						</View>
-						<View>
-							<HeaderLabel text={HEADER_SELECT_CALCULATION}/>
-							<Picker
-								onValueChange={(itemValue, itemIndex) => { setSelectedCalcIndex(itemIndex) }}
-								selectedValue={METHODS_FOR_CALCULATION[selectedCalcIndex]}
-								style={styles.calcPicker}
-							>
-								{METHODS_FOR_CALCULATION.map(calcMethod =>
-									<Picker.Item
-										key={calcMethod}
-										label={calcMethod}
-										value={calcMethod} />
-								)}
-							</Picker>
-							<View style={{ marginTop: 15 }}>
-								<Button
-									onPress={() => {
-										setShouldShowBreakdown(true)
+						return (
+							<View key={selectedInfo.index} style={styles.hoursContainer}>
+								<Text style={styles.hoursLabel}>{selectedPerson.name}</Text>
+								<TextInput
+									onChangeText={newVal => {
+										const newSelectedPeopleInfo = selectedPeopleInfo.map(staleSelectedInfo =>
+											({
+												hours: staleSelectedInfo.index === selectedInfo.index
+													? newVal.replace(REGEX_NUMERIC_IMPERFECT, '')
+													: staleSelectedInfo.hours,
+												index: staleSelectedInfo.index
+											})
+										)
+										setSelectedPeopleInfo(newSelectedPeopleInfo)
 									}}
-									title={TITLE_CALCULATE} />
-								{shouldShowBreakdown && <View style={styles.breakdownContainer}>
-									<TipBreakdown
-										calculationMethod={METHODS_FOR_CALCULATION[selectedCalcIndex]}
-										people={selectedPeopleInfo.map(selectedInfo => props.people[selectedInfo.index])}
-										totalTip={parseFloat(totalTip)}
-										/>
-								</View>}
+									placeholder={PLACEHOLDER_HOURS}
+									style={styles.hoursInput}
+									value={selectedInfo.hours}
+									/>
 							</View>
+						)
+					})}
+					<View style={styles.hoursTotalContainer}>
+						{isNaN(totalHoursDisplay)
+							? <Text style={styles.hoursTotalError}>{MSG_HOURS_INPUT_ERROR}</Text>
+							: <Text style={styles.hoursTotalLabel}>{LBL_TOTAL_HOURS}: {totalHoursDisplay}</Text>}
+					</View>
+					<View style={styles.tipTotalContainer}>
+						<TextInput
+							onChangeText={newVal => {
+								newVal = newVal.replace(REGEX_NUMERIC_IMPERFECT, '')
+								setTotalTip(newVal)
+							}}
+							placeholder={PLACEHOLDER_TIP_TOTAL}
+							style={styles.tipInput}
+							value={String(totalTip)}
+							/>
+						<Text style={styles.tipTotalLabel}>{LBL_TOTAL_TIP}: {prettifyMoney(totalTip)}</Text>
+					</View>
+					<View>
+						<HeaderLabel text={HEADER_SELECT_CALCULATION}/>
+						<Picker
+							onValueChange={(itemValue, itemIndex) => { setSelectedCalcIndex(itemIndex) }}
+							selectedValue={METHODS_FOR_CALCULATION[selectedCalcIndex]}
+							style={styles.calcPicker}
+						>
+							{METHODS_FOR_CALCULATION.map(calcMethod =>
+								<Picker.Item
+									key={calcMethod}
+									label={calcMethod}
+									value={calcMethod} />
+							)}
+						</Picker>
+						<View style={{ marginTop: 15 }}>
+							<Button
+								onPress={() => {
+									setShouldShowBreakdown(true)
+								}}
+								title={TITLE_CALCULATE} />
+							{shouldShowBreakdown && <View style={styles.breakdownContainer}>
+								<TipBreakdown
+									calculationMethod={METHODS_FOR_CALCULATION[selectedCalcIndex]}
+									people={selectedPeopleInfo.map(selectedInfo => props.people[selectedInfo.index])}
+									totalTip={parseFloat(totalTip)}
+									/>
+							</View>}
 						</View>
 					</View>
 				</ConditionalMessage>
