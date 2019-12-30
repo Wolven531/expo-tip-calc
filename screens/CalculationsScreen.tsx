@@ -103,10 +103,12 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 				onChange={() => { return }}
 				/>
 			*/}
-			{props.people.length === 0 && <View style={styles.padded}>
-				<HeaderLabel text={HEADER_NO_PEOPLE} />
-			</View>}
-			{props.people.length > 0 && <View style={styles.padded}>
+			<ConditionalMessage
+				collection={props.people}
+				message={HEADER_NO_PEOPLE}
+				styleContainer={styles.padded}
+				useHeader={true}
+				>
 				<View style={styles.padded}>
 					<HeaderLabel text={HEADER_SELECT_PEOPLE} />
 				</View>
@@ -148,7 +150,9 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 					styleContainer={styles.padded}
 					useHeader={true}
 					>
-					<HeaderLabel text={HEADER_ENTER_HOURS}/>
+					<View style={styles.padded}>
+						<HeaderLabel text={HEADER_ENTER_HOURS}/>
+					</View>
 					{selectedPeopleInfo.map(selectedInfo => {
 						const selectedPerson = props.people[selectedInfo.index]
 
@@ -221,7 +225,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						</View>
 					</View>
 				</ConditionalMessage>
-			</View>}
+			</ConditionalMessage>
 		</ScrollView>
 	)
 };
