@@ -80,9 +80,10 @@ const prettifyMoney = (numStr: string) => {
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	const [selectedCalcIndex, setSelectedCalcIndex] = useState(0)
 	const [selectedPeopleInfo, setSelectedPeopleInfo] = useState<IHoursInfo[]>([])
-	const [totalTip, setTotalTip] = useState(DEFAULT_TIP_TOTAL)
-	const totalHoursDisplay = calcTotalHours(selectedPeopleInfo)
 	const [shouldShowBreakdown, setShouldShowBreakdown] = useState(false)
+	const [totalTip, setTotalTip] = useState(DEFAULT_TIP_TOTAL)
+
+	const totalHoursDisplay = calcTotalHours(selectedPeopleInfo)
 
 	useEffect(() => {
 		retrievePeopleData()
@@ -102,11 +103,11 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 				onChange={() => { return }}
 				/>
 			*/}
-			{props.people.length === 0 && <View style={styles.headerTextSelectPeople}>
+			{props.people.length === 0 && <View style={styles.padded}>
 				<HeaderLabel text={HEADER_NO_PEOPLE} />
 			</View>}
-			{props.people.length > 0 && <View>
-				<View style={styles.headerTextSelectPeople}>
+			{props.people.length > 0 && <View style={styles.padded}>
+				<View style={styles.padded}>
 					<HeaderLabel text={HEADER_SELECT_PEOPLE} />
 				</View>
 				<CustomMultiPicker
@@ -144,7 +145,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 				<ConditionalMessage
 					collection={selectedPeopleInfo}
 					message={HEADER_NO_SELECTED_PEOPLE}
-					styleContainer={styles.headerTextSelectPeople}
+					styleContainer={styles.padded}
 					useHeader={true}
 					>
 					<HeaderLabel text={HEADER_ENTER_HOURS}/>
@@ -245,9 +246,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		flex: 1
 	},
-	headerTextSelectPeople: {
-		padding: 15
-	},
 	hoursContainer: {
 		alignItems: 'center',
 		borderColor: '#333',
@@ -280,6 +278,9 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		fontWeight: 'bold',
 		textAlign: 'right'
+	},
+	padded: {
+		padding: 15
 	},
 	tipInput: {
 		alignSelf: 'flex-end',
