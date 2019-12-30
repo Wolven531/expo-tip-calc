@@ -46,6 +46,7 @@ import {
 } from '../constants/Strings'
 
 // components
+import { ConditionalMessage } from '../components/ConditionalMessage'
 import { HeaderLabel } from '../components/HeaderLabel'
 import { TipBreakdown } from '../components/TipBreakdown'
 
@@ -140,10 +141,15 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						: `md-${ICON_UNSELECTED_BASE}`}
 					selected={selectedPeopleInfo.map(selectedInfo => selectedInfo.index)}
 				/>
+				{/*
 				{selectedPeopleInfo.length === 0 && <View style={styles.headerTextSelectPeople}>
 					<HeaderLabel text={HEADER_NO_SELECTED_PEOPLE} />
 				</View>}
-				{selectedPeopleInfo.length > 0 && <View>
+				*/}
+				<ConditionalMessage
+					collection={selectedPeopleInfo}
+					message={HEADER_NO_SELECTED_PEOPLE}
+					>
 					<View style={styles.headerTextSelectPeople}>
 						<HeaderLabel text={HEADER_ENTER_HOURS}/>
 						{selectedPeopleInfo.map(selectedInfo => {
@@ -218,7 +224,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							</View>
 						</View>
 					</View>
-				</View>}
+				</ConditionalMessage>
 			</View>}
 		</ScrollView>
 	)
