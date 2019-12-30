@@ -5,11 +5,15 @@ import {
 	View
 } from 'react-native'
 
+// components
+import { HeaderLabel } from './HeaderLabel'
+
 interface IConditionalMessageProps {
 	collection: any[] | null | undefined
 	message: string
 	styleContainer?: any
 	styleText?: any
+	useHeader?: boolean
 }
 
 /**
@@ -21,15 +25,21 @@ interface IConditionalMessageProps {
  * @param message @type string
  * @param styleContainer @type any | undefined
  * @param styleText @type any | undefined
+ * @param useHeader @type boolean | undefined Whether or not to use a HeaderLabel for the message
  */
 const ConditionalMessage: FC<IConditionalMessageProps> = memo((props) => {
 	const shouldDisplayMessage = props.collection === null
 		|| props.collection === undefined
 		|| props.collection.length === 0
+	const useHeader = props.useHeader || false
 
 	return (
 		<View style={props.styleContainer ? props.styleContainer : styles.container}>
-			{shouldDisplayMessage && <Text style={props.styleText ? props.styleText : styles.text}>{props.message}</Text>}
+			{shouldDisplayMessage &&
+				(useHeader
+					? <Text style={props.styleText ? props.styleText : styles.text}>{props.message}</Text>
+					: <HeaderLabel text={props.message} />
+			)}
 			{!shouldDisplayMessage && props.children}
 		</View>
 	)
