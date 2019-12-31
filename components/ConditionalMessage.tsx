@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react'
+import React, { FC } from 'react'
 import {
 	StyleSheet,
 	Text,
@@ -27,7 +27,7 @@ interface IConditionalMessageProps {
  * @param styleText @type any | undefined
  * @param useHeader @type boolean | undefined Whether or not to use a HeaderLabel for the message
  */
-const ConditionalMessage: FC<IConditionalMessageProps> = memo((props) => {
+const ConditionalMessage: FC<IConditionalMessageProps> = (props) => { // NOTE: use of memo() here causes crash
 	const shouldDisplayMessage = props.collection === null
 		|| props.collection === undefined
 		|| props.collection.length === 0
@@ -42,7 +42,7 @@ const ConditionalMessage: FC<IConditionalMessageProps> = memo((props) => {
 			{!shouldDisplayMessage && props.children}
 		</View>
 	)
-})
+}
 
 const styles = StyleSheet.create({
 	container: {
