@@ -32,14 +32,13 @@ const ConditionalMessage: FC<IConditionalMessageProps> = memo((props) => {
 		|| props.collection === undefined
 		|| props.collection.length === 0
 	const useHeader = props.useHeader || false
+	const shouldDisplayHeader = shouldDisplayMessage && useHeader
+	const shouldDisplayText = shouldDisplayMessage && !shouldDisplayHeader
 
 	return (
 		<View style={props.styleContainer ? props.styleContainer : styles.container}>
-			{shouldDisplayMessage &&
-				(useHeader
-					? <Text style={props.styleText ? props.styleText : styles.text}>{props.message}</Text>
-					: <HeaderLabel text={props.message} />
-			)}
+			{shouldDisplayHeader && <HeaderLabel text={props.message} />}
+			{shouldDisplayText && <Text style={props.styleText ? props.styleText : styles.text}>{props.message}</Text>}
 			{!shouldDisplayMessage && props.children}
 		</View>
 	)
