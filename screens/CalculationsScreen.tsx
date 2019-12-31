@@ -44,6 +44,7 @@ import {
 	PLACEHOLDER_TIP_TOTAL,
 	TITLE_CALCULATE
 } from '../constants/Strings'
+import { IHoursInfo } from '../constants/Types'
 
 // components
 import { ConditionalMessage } from '../components/ConditionalMessage'
@@ -53,11 +54,6 @@ import { TipBreakdown } from '../components/TipBreakdown'
 interface ICalculationsScreenProps {
 	people: Person[]
 	setPeople: (people: Person[]) => any
-}
-
-interface IHoursInfo {
-	hours: string
-	index: number
 }
 
 const DEFAULT_HOURS = '0'
@@ -119,7 +115,8 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 						const newSelectedPeopleInfo = indexNums.map(num =>
 							({
 								hours: DEFAULT_HOURS,
-								index: num
+								index: num,
+								person: props.people[num]
 							})
 						)
 						setSelectedPeopleInfo(newSelectedPeopleInfo)
@@ -166,7 +163,8 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 												hours: staleSelectedInfo.index === selectedInfo.index
 													? newVal.replace(REGEX_NUMERIC_IMPERFECT, '')
 													: staleSelectedInfo.hours,
-												index: staleSelectedInfo.index
+												index: staleSelectedInfo.index,
+												person: staleSelectedInfo.person
 											})
 										)
 										setSelectedPeopleInfo(newSelectedPeopleInfo)
@@ -218,7 +216,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							{shouldShowBreakdown && <View style={styles.breakdownContainer}>
 								<TipBreakdown
 									calculationMethod={METHODS_FOR_CALCULATION[selectedCalcIndex]}
-									people={selectedPeopleInfo.map(selectedInfo => props.people[selectedInfo.index])}
+									people={selectedPeopleInfo}
 									totalTip={parseFloat(totalTip)}
 									/>
 							</View>}
