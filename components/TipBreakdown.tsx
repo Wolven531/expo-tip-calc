@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import {
+	ScrollView,
 	StyleSheet,
 	Text,
 	View
@@ -15,31 +16,37 @@ import {
 import { IHoursInfo } from '../constants/Types'
 
 // models
-// import { Person } from '../models/Person'
+import { Person } from '../models/Person'
+
+// services
+import { prettifyMoney } from '../services/utils'
 
 // components
 import { HeaderLabel } from './HeaderLabel'
 
 interface ITipBreakdownProps {
 	calculationMethod: string // 'Communist' | 'Hour Weighted' | 'Role-centric'
-	people: IHoursInfo[]
+	collectionHoursInfo: IHoursInfo[]
 	totalTip: number
 }
 
 const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 	let totalPerPerson = 0
 	const willDisplayMultiple = props.calculationMethod !== METHOD_COMMUNIST
-	let peopleDisplays = []
+	let peopleDisplays: {
+		hours: number
+		person: Person
+	}[] = []
 
 	switch (props.calculationMethod) {
 		case METHOD_COMMUNIST:
-			totalPerPerson = props.totalTip / props.people.length
+			totalPerPerson = props.totalTip / props.collectionHoursInfo.length
 			break;
 		case METHOD_HOUR_WEIGHTED:
-			peopleDisplays = props.people.map(person => {
+			peopleDisplays = props.collectionHoursInfo.map(info => {
 				return {
 					hours: 0,
-					person
+					person: info.person
 				}
 			})
 			break;
@@ -51,9 +58,12 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 	return (
 		<View style={styles.container}>
 			<HeaderLabel text={HEADER_BREAKDOWN} />
-			{willDisplayMultiple && <View>
-
-			</View>}
+			{willDisplayMultiple && <ScrollView>
+				{peopleDisplays.map(display => <View>
+					<Text>{display.person.name}</Text>
+					<Text>{prettifyMoney(String(display.hours))}</Text>
+				</View>)}
+			</ScrollView>}
 			{!willDisplayMultiple && <Text style={{}}>Total Per Person: {totalPerPerson}</Text>}
 		</View>
 	)

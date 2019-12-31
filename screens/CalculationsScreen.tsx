@@ -1,5 +1,3 @@
-import Intl from 'intl'
-require('intl/locale-data/jsonp/en.js')
 import React, { FC, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import {
@@ -25,7 +23,10 @@ import { Person } from '../models/Person'
 
 // services
 import { retrievePeopleData } from '../services/PeopleService'
-import { simpleNumberSort } from '../services/utils'
+import {
+	prettifyMoney,
+	simpleNumberSort
+} from '../services/utils'
 
 // constants
 import {
@@ -64,14 +65,8 @@ const METHODS_FOR_CALCULATION = [ METHOD_COMMUNIST, METHOD_HOUR_WEIGHTED, METHOD
 const OS_APPLE = 'ios'
 const REGEX_NUMERIC_IMPERFECT = /[^0-9\.]/gi
 
-const usdFormatter = new Intl.NumberFormat('en-US', { currency: 'USD', style: 'currency' })
 const calcTotalHours = (selectedPeople: IHoursInfo[]) =>
 	selectedPeople.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
-const prettifyMoney = (numStr: string) => {
-	const num = parseFloat(numStr)
-
-	return usdFormatter.format(num)
-}
 
 const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 	const [selectedCalcIndex, setSelectedCalcIndex] = useState(0)
@@ -216,7 +211,7 @@ const CalculationsScreenDC: FC<ICalculationsScreenProps> = (props) => {
 							{shouldShowBreakdown && <View style={styles.breakdownContainer}>
 								<TipBreakdown
 									calculationMethod={METHODS_FOR_CALCULATION[selectedCalcIndex]}
-									people={selectedPeopleInfo}
+									collectionHoursInfo={selectedPeopleInfo}
 									totalTip={parseFloat(totalTip)}
 									/>
 							</View>}
