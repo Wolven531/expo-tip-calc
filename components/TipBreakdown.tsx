@@ -31,21 +31,24 @@ interface ITipBreakdownProps {
 }
 
 const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
-	let totalPerPerson = 0
 	const willDisplayMultiple = props.calculationMethod !== METHOD_COMMUNIST
 	let peopleDisplays: {
-		hours: number
+		earnedTip: number
 		person: Person
 	}[] = []
+	let totalPerPerson = 0
 
 	switch (props.calculationMethod) {
 		case METHOD_COMMUNIST:
 			totalPerPerson = props.totalTip / props.collectionHoursInfo.length
 			break;
 		case METHOD_HOUR_WEIGHTED:
+			const totalHours = props.collectionHoursInfo.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
+
 			peopleDisplays = props.collectionHoursInfo.map(info => {
+				const shareOfTotal = parseFloat(info.hours) / totalHours
 				return {
-					hours: 0,
+					earnedTip: shareOfTotal * props.totalTip,
 					person: info.person
 				}
 			})
@@ -61,7 +64,7 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 			{willDisplayMultiple && <ScrollView>
 				{peopleDisplays.map(display => <View>
 					<Text>{display.person.name}</Text>
-					<Text>{prettifyMoney(String(display.hours))}</Text>
+					<Text>{prettifyMoney(String(display.earnedTip))}</Text>
 				</View>)}
 			</ScrollView>}
 			{!willDisplayMultiple && <View style={styles.padded}>
