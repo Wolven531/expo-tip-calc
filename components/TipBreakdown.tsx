@@ -64,13 +64,18 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 					<Text>{prettifyMoney(String(display.hours))}</Text>
 				</View>)}
 			</ScrollView>}
-			{!willDisplayMultiple && <Text style={{}}>Total Per Person: {totalPerPerson}</Text>}
+			{!willDisplayMultiple && <View style={styles.padded}>
+				<HeaderLabel text={`Total Per Person: ${totalPerPerson}`} />
+			</View>}
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
-	container: {}
+	container: {},
+	padded: {
+		padding: 15
+	}
 })
 
 export { TipBreakdown }
