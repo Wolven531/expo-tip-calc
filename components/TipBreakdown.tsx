@@ -65,7 +65,7 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 				</View>)}
 			</ScrollView>}
 			{!willDisplayMultiple && <View style={styles.padded}>
-				<HeaderLabel text={`Total Per Person: ${totalPerPerson}`} />
+				<HeaderLabel text={`Total Per Person: ${prettifyMoney(String(totalPerPerson))}`} />
 			</View>}
 		</View>
 	)
