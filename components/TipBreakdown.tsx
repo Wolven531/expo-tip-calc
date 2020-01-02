@@ -46,26 +46,14 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 			totalPerPerson = props.totalTip / props.collectionHoursInfo.length
 			break
 		case METHOD_HOUR_WEIGHTED:
-			const totalHours = props.collectionHoursInfo.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
-
-			peopleDisplays = props.collectionHoursInfo.map(info => {
-				const numHours = parseFloat(info.hours)
-				const shareOfTotal = numHours / totalHours
-
-				return {
-					earnedTip: shareOfTotal * props.totalTip,
-					hours: numHours,
-					percentageOfHours: shareOfTotal * 100,
-					person: info.person
-				}
-			})
-			break
 		case METHOD_ROLE_CENTRIC:
-			const totalRoleHours = props.collectionHoursInfo.reduce((accumulator, { hours, person }) => accumulator + (parseFloat(hours) * person.position.points), 0)
+			const usePointModifier = props.calculationMethod === METHOD_ROLE_CENTRIC
+			const totalRoleHours = props.collectionHoursInfo.reduce((accumulator, { hours, person }) =>
+				accumulator + (parseFloat(hours) * (usePointModifier ? person.position.points : 1)), 0)
 
 			peopleDisplays = props.collectionHoursInfo.map(info => {
 				const numHours = parseFloat(info.hours)
-				const shareOfTotal = (numHours * info.person.position.points) / totalRoleHours
+				const shareOfTotal = (numHours * (usePointModifier ? info.person.position.points : 1)) / totalRoleHours
 
 				return {
 					earnedTip: shareOfTotal * props.totalTip,
