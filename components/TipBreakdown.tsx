@@ -71,10 +71,10 @@ const TipBreakdown: FC<ITipBreakdownProps> = ({ calculationMethod, collectionHou
 		<View style={styles.container}>
 			<HeaderLabel text={HEADER_BREAKDOWN} />
 			{willDisplayMultiple && <ScrollView>
-				{peopleDisplays.map(display => <View style={styles.padded}>
-					<HeaderLabel
-						text={`${display.person.name} - ${display.hours} hours ( ${display.percentageOfHours} ) = ${display.earnedTip}`} />
-				</View>)}
+				{peopleDisplays.map(({ earnedTip, hours, percentageOfHours, person }) =>
+					<View style={styles.padded}>
+						<HeaderLabel text={`${person.name} - ${hours} hours (${percentageOfHours}) = ${earnedTip}`} />
+					</View>)}
 			</ScrollView>}
 			{!willDisplayMultiple && <View style={styles.padded}>
 				<HeaderLabel text={`${LBL_TOTAL_PER_PERSON}: ${totalPerPerson}`} />
