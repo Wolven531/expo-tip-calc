@@ -31,35 +31,37 @@ interface ITipBreakdownProps {
 	totalTip: number
 }
 
-const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
-	const willDisplayMultiple = props.calculationMethod !== METHOD_COMMUNIST
-	let peopleDisplays: {
-		earnedTip: string
-		hours: number
-		percentageOfHours: string
-		person: Person
-	}[] = []
+interface ITipDisplayProps {
+	earnedTip: string
+	hours: number
+	percentageOfHours: string
+	person: Person
+}
+
+const TipBreakdown: FC<ITipBreakdownProps> = ({ calculationMethod, collectionHoursInfo, totalTip }) => {
+	const willDisplayMultiple = calculationMethod !== METHOD_COMMUNIST
+	let peopleDisplays: ITipDisplayProps[] = []
 	let totalPerPerson = 0
 
-	switch (props.calculationMethod) {
+	switch (calculationMethod) {
 		case METHOD_COMMUNIST:
-			totalPerPerson = props.totalTip / props.collectionHoursInfo.length
+			totalPerPerson = totalTip / collectionHoursInfo.length
 			break
 		case METHOD_HOUR_WEIGHTED:
 		case METHOD_ROLE_CENTRIC:
-			const usePointModifier = props.calculationMethod === METHOD_ROLE_CENTRIC
-			const totalRoleHours = props.collectionHoursInfo.reduce((accumulator, { hours, person }) =>
+			const usePointModifier = calculationMethod === METHOD_ROLE_CENTRIC
+			const totalRoleHours = collectionHoursInfo.reduce((accumulator, { hours, person }) =>
 				accumulator + (parseFloat(hours) * (usePointModifier ? person.position.points : 1)), 0)
 
-			peopleDisplays = props.collectionHoursInfo.map(info => {
-				const numHours = parseFloat(info.hours)
-				const shareOfTotal = (numHours * (usePointModifier ? info.person.position.points : 1)) / totalRoleHours
+			peopleDisplays = collectionHoursInfo.map(({ hours, person }) => {
+				const numHours = parseFloat(hours)
+				const shareOfTotal = (numHours * (usePointModifier ? person.position.points : 1)) / totalRoleHours
 
 				return {
-					earnedTip: prettifyMoney(String(shareOfTotal * props.totalTip)),
+					earnedTip: prettifyMoney(String(shareOfTotal * totalTip)),
 					hours: numHours,
 					percentageOfHours: `${(shareOfTotal * 100).toFixed(2)}%`,
-					person: info.person
+					person
 				}
 			})
 			break
