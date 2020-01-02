@@ -34,6 +34,8 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 	const willDisplayMultiple = props.calculationMethod !== METHOD_COMMUNIST
 	let peopleDisplays: {
 		earnedTip: number
+		hours: number
+		percentageOfHours: number
 		person: Person
 	}[] = []
 	let totalPerPerson = 0
@@ -41,30 +43,33 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 	switch (props.calculationMethod) {
 		case METHOD_COMMUNIST:
 			totalPerPerson = props.totalTip / props.collectionHoursInfo.length
-			break;
+			break
 		case METHOD_HOUR_WEIGHTED:
 			const totalHours = props.collectionHoursInfo.reduce((accumulator, { hours }) => accumulator + parseFloat(hours), 0)
 
 			peopleDisplays = props.collectionHoursInfo.map(info => {
-				const shareOfTotal = parseFloat(info.hours) / totalHours
+				const numHours = parseFloat(info.hours)
+				const shareOfTotal = numHours / totalHours
 				return {
 					earnedTip: shareOfTotal * props.totalTip,
+					hours: numHours,
+					percentageOfHours: shareOfTotal * 100,
 					person: info.person
 				}
 			})
-			break;
+			break
 		case METHOD_ROLE_CENTRIC:
 
-			break;
+			break
 	}
 
 	return (
 		<View style={styles.container}>
 			<HeaderLabel text={HEADER_BREAKDOWN} />
 			{willDisplayMultiple && <ScrollView>
-				{peopleDisplays.map(display => <View>
-					<Text>{display.person.name}</Text>
-					<Text>{prettifyMoney(String(display.earnedTip))}</Text>
+				{peopleDisplays.map(display => <View style={styles.padded}>
+					<HeaderLabel
+						text={`${display.person.name} - ${display.hours} hours ( ${display.percentageOfHours.toFixed(2)}% ) = ${prettifyMoney(String(display.earnedTip))}`} />
 				</View>)}
 			</ScrollView>}
 			{!willDisplayMultiple && <View style={styles.padded}>
