@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import {
 	ScrollView,
 	StyleSheet,
-	Text,
+	// Text,
 	View
 } from 'react-native'
 
@@ -41,11 +41,11 @@ interface ITipDisplayProps {
 const TipBreakdown: FC<ITipBreakdownProps> = ({ calculationMethod, collectionHoursInfo, totalTip }) => {
 	const willDisplayMultiple = calculationMethod !== METHOD_COMMUNIST
 	let peopleDisplays: ITipDisplayProps[] = []
-	let totalPerPerson = 0
+	let totalPerPerson = ''
 
 	switch (calculationMethod) {
 		case METHOD_COMMUNIST:
-			totalPerPerson = totalTip / collectionHoursInfo.length
+			totalPerPerson = prettifyMoney(String(totalTip / collectionHoursInfo.length))
 			break
 		case METHOD_HOUR_WEIGHTED:
 		case METHOD_ROLE_CENTRIC:
@@ -77,7 +77,7 @@ const TipBreakdown: FC<ITipBreakdownProps> = ({ calculationMethod, collectionHou
 				</View>)}
 			</ScrollView>}
 			{!willDisplayMultiple && <View style={styles.padded}>
-				<HeaderLabel text={`${LBL_TOTAL_PER_PERSON}: ${prettifyMoney(String(totalPerPerson))}`} />
+				<HeaderLabel text={`${LBL_TOTAL_PER_PERSON}: ${totalPerPerson}`} />
 			</View>}
 		</View>
 	)

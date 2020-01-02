@@ -19,7 +19,7 @@ const getPluralizedPoints = (points: number): string => {
 	}
 }
 
-const prettifyMoney = (numStr: string) => {
+const prettifyMoney = (numStr: string): string => {
 	const num = parseFloat(numStr)
 
 	return usdFormatter.format(num)
