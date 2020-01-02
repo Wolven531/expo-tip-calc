@@ -34,9 +34,9 @@ interface ITipBreakdownProps {
 const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 	const willDisplayMultiple = props.calculationMethod !== METHOD_COMMUNIST
 	let peopleDisplays: {
-		earnedTip: number
+		earnedTip: string
 		hours: number
-		percentageOfHours: number
+		percentageOfHours: string
 		person: Person
 	}[] = []
 	let totalPerPerson = 0
@@ -56,9 +56,9 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 				const shareOfTotal = (numHours * (usePointModifier ? info.person.position.points : 1)) / totalRoleHours
 
 				return {
-					earnedTip: shareOfTotal * props.totalTip,
+					earnedTip: prettifyMoney(String(shareOfTotal * props.totalTip)),
 					hours: numHours,
-					percentageOfHours: shareOfTotal * 100,
+					percentageOfHours: `${(shareOfTotal * 100).toFixed(2)}%`,
 					person: info.person
 				}
 			})
@@ -71,7 +71,7 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 			{willDisplayMultiple && <ScrollView>
 				{peopleDisplays.map(display => <View style={styles.padded}>
 					<HeaderLabel
-						text={`${display.person.name} - ${display.hours} hours ( ${display.percentageOfHours.toFixed(2)}% ) = ${prettifyMoney(String(display.earnedTip))}`} />
+						text={`${display.person.name} - ${display.hours} hours ( ${display.percentageOfHours} ) = ${display.earnedTip}`} />
 				</View>)}
 			</ScrollView>}
 			{!willDisplayMultiple && <View style={styles.padded}>
