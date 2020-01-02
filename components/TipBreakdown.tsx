@@ -9,6 +9,7 @@ import {
 // constants
 import {
 	HEADER_BREAKDOWN,
+	LBL_TOTAL_PER_PERSON,
 	METHOD_COMMUNIST,
 	METHOD_HOUR_WEIGHTED,
 	METHOD_ROLE_CENTRIC
@@ -73,7 +74,7 @@ const TipBreakdown: FC<ITipBreakdownProps> = (props) => {
 				</View>)}
 			</ScrollView>}
 			{!willDisplayMultiple && <View style={styles.padded}>
-				<HeaderLabel text={`Total Per Person: ${prettifyMoney(String(totalPerPerson))}`} />
+				<HeaderLabel text={`${LBL_TOTAL_PER_PERSON}: ${prettifyMoney(String(totalPerPerson))}`} />
 			</View>}
 		</View>
 	)

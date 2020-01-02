@@ -11,6 +11,7 @@ export const LBL_DELETE_ROLE = 'Delete'
 export const LBL_POINTS_MULTIPLE = 'pts'
 export const LBL_POINTS_SINGLE = 'pt'
 export const LBL_TOTAL_HOURS = 'Total hours'
+export const LBL_TOTAL_PER_PERSON = 'Total Per Person'
 export const LBL_TOTAL_TIP = 'Total tip'
 
 export const METHOD_COMMUNIST = 'Communist'
